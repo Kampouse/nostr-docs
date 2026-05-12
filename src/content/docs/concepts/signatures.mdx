@@ -1,0 +1,66 @@
+---
+title: Digital Signatures
+description: How Nostr proves who created an event
+---
+
+How do you know that a post really came from the person who claims to have written it? On Twitter, the answer is "because Twitter's servers say so." On Nostr, the answer is math.
+
+Every event on Nostr carries a digital signature — a cryptographic proof that the person holding a specific private key created (or at least approved) that event. Anyone can verify this proof. Nobody can forge it. And it all happens without a central authority.
+
+## The basics: your signature is your authentication
+
+In traditional web apps, you prove who you are by sending a password to a server. The server checks it and decides to trust you.
+
+Nostr doesn't have passwords. Instead, your client signs every event with your private key. The signature is attached to the event. When a relay or another client receives the event, they can verify the signature using your public key — which is also in the event.
+
+If the signature checks out, the event is authentic. If it doesn't, the event is garbage. No server needs to vouch for you. The math does the job.
+
+## The cryptography behind it
+
+Nostr uses **Schnorr signatures** over the **secp256k1** curve. If you've heard of Bitcoin, that's the same curve Bitcoin uses. Schnorr signatures were chosen because they're simple, fast to verify, and produce compact signatures.
+
+Here's the signing process, step by step:
+
+1. **Serialize the event.** Your client takes the event fields — pubkey, created_at, kind, tags, content — and turns them into a specific JSON string with no extra whitespace. The exact serialization format matters, because even a single character difference would produce a different hash.
+
+2. **Hash it.** The client computes a SHA-256 hash of that serialized string. This produces a 32-byte number — the event's ID.
+
+3. **Sign it.** The client uses your private key to create a Schnorr signature over that hash. This produces the `sig` field — another string that gets attached to the event.
+
+4. **Verify it.** Anyone who receives the event can verify it by taking your public key, the serialized event, and the signature, and running a mathematical check. If it passes, the signature is valid. If it fails, something's wrong — the event was tampered with, or it wasn't actually signed by the owner of that public key.
+
+This whole process is defined by NIP-01.
+
+## Why this matters
+
+Digital signatures solve several problems at once:
+
+**Authentication.** You can prove an event came from a specific public key without any central authority.
+
+**Integrity.** If anyone changes even one character in the event content, the signature breaks. You can't tamper with a signed event without getting caught.
+
+**Non-repudiation.** If your private key signed it, you can't convincingly deny it. (This also means you need to protect your private key carefully — anything signed with it is definitively yours.)
+
+**No passwords transmitted.** Your private key never leaves your device. You sign locally and only send the signature. There's nothing to intercept.
+
+## Extensions and special cases
+
+The core signing scheme handles most of what Nostr needs, but a few NIPs add extra capabilities:
+
+**NIP-26 — Delegated signing.** Sometimes you want someone else to sign on your behalf — like a bot that posts weather updates using your identity, but only for a specific kind of event and only for a limited time. NIP-26 lets you create a delegation token that grants restricted signing authority to another key.
+
+**NIP-70 — Protected events.** Some events are marked as "protected," meaning the author must have signed them directly — no delegation allowed. This is useful for cases where personal authorship matters, like certain official announcements.
+
+## Keeping your key safe
+
+Because your signature is your authentication, protecting your private key is the most important thing you can do on Nostr.
+
+Never paste your nsec (private key) into a website. Use a signing extension like NIP-07 (browser extension) or NIP-46 (remote signer) instead. These tools keep your private key in a secure sandbox and only release signatures — not the key itself — when you approve.
+
+Your private key is your identity. Guard it accordingly.
+
+## Further reading
+
+- [NIP-01 — Core protocol](/nips/nip-01) — the formal definition of event signing
+- [NIP-26 — Delegated signing](/nips/nip-26)
+- [NIP-70 — Protected events](/nips/nip-70)

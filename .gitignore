@@ -1,0 +1,24 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# wrangler state
+.wrangler/
+
+# sync cache
+scripts/data/.sync-cache.json
+
+# OS
+.DS_Store
+
+# env
+.env
+.env.*
+
+# IDE
+.vscode/

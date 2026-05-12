@@ -1,0 +1,43 @@
+---
+title: Welcome to Nostr Docs
+description: Everything you need to understand and build on the decentralized social protocol
+template: doc
+---
+
+import { CardGrid, Card, Icon } from '@astrojs/starlight/components';
+
+Nostr is a decentralized protocol for censorship-resistant social media, messaging, and payments. No single company controls it. You own your identity. You pick your servers. You choose your client.
+
+This site explains how it all works — from first principles to the full specification.
+
+<CardGrid stagger>
+  <Card title="New to Nostr?" icon="rocket">
+    Start with [What is Nostr?](/getting-started/what-is-nostr/) — a 5-minute introduction to the protocol, why it exists, and how it differs from Twitter and Mastodon.
+  </Card>
+  <Card title="How does it all connect?" icon="puzzle">
+    Read [How NIPs Fit Together](/concepts/how-nips-fit-together/) — a visual map of the Nostr specification ecosystem, from the base protocol up through encryption, payments, and media.
+  </Card>
+  <Card title="Building a client?" icon="settings">
+    Dive into the [Event Kinds Reference](/reference/event-kinds/) and [NIP Specifications](/nip-01/) — the complete technical reference for implementing Nostr.
+  </Card>
+</CardGrid>
+
+## Quick navigation
+
+### Getting Started
+- [What is Nostr?](/getting-started/what-is-nostr/) — protocol, not app
+- [Keys and Identity](/getting-started/keys-and-identity/) — your keypair is your identity
+- [How Relays Work](/getting-started/how-relays-work/) — the servers that store and forward data
+- [Send Your First Note](/getting-started/your-first-note/) — step-by-step walkthrough
+
+### Concepts
+- [Events](/concepts/events/) — the universal data structure
+- [Digital Signatures](/concepts/signatures/) — how Nostr replaces passwords
+- [Filters and Subscriptions](/concepts/filters-and-subscriptions/) — how clients query relays
+- [How NIPs Fit Together](/concepts/how-nips-fit-together/) — the layer map
+
+### Reference
+- [Event Kinds](/reference/event-kinds/) — every event kind in one table
+- [Standard Tags](/reference/tags/) — every tag name in one table
+- [Message Types](/reference/message-types/) — client↔relay wire protocol
+- [NIP Specifications](/nip-01/) — all 87 NIPs indexed and searchable

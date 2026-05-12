@@ -1,0 +1,60 @@
+/* Nostr Docs custom styles */
+
+:root {
+  --sl-color-accent: #7c3aed;
+  --sl-color-accent-high: #a78bfa;
+  --sl-color-accent-low: #4c1d95;
+}
+
+/* Status badges */
+.nip-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nip-status--final {
+  background: #065f46;
+  color: #6ee7b7;
+}
+
+.nip-status--draft {
+  background: #92400e;
+  color: #fcd34d;
+}
+
+.nip-status--deprecated {
+  background: #991b1b;
+  color: #fca5a5;
+}
+
+.nip-status--optional {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+/* NIP dependency cards */
+.nip-dep {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  margin: 0.15rem;
+}
+
+.nip-dep:hover {
+  border-color: var(--sl-color-accent);
+}
+
+/* Event kind tables */
+.kind-table td:first-child {
+  font-family: monospace;
+  white-space: nowrap;
+}

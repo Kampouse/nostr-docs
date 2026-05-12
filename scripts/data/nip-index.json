@@ -1,0 +1,462 @@
+[
+  {
+    "number": "01",
+    "title": "Basic protocol flow description",
+    "href": "01.md"
+  },
+  {
+    "number": "02",
+    "title": "Follow List",
+    "href": "02.md"
+  },
+  {
+    "number": "03",
+    "title": "OpenTimestamps Attestations for Events",
+    "href": "03.md"
+  },
+  {
+    "number": "04",
+    "title": "Encrypted Direct Message",
+    "href": "04.md",
+    "notes": "**unrecommended**: deprecated in favor of [NIP-17](17.md)"
+  },
+  {
+    "number": "05",
+    "title": "Mapping Nostr keys to DNS-based internet identifiers",
+    "href": "05.md"
+  },
+  {
+    "number": "06",
+    "title": "Basic key derivation from mnemonic seed phrase",
+    "href": "06.md"
+  },
+  {
+    "number": "07",
+    "title": "`window.nostr` capability for web browsers",
+    "href": "07.md"
+  },
+  {
+    "number": "08",
+    "title": "Handling Mentions",
+    "href": "08.md",
+    "notes": "**unrecommended**: deprecated in favor of [NIP-27](27.md)"
+  },
+  {
+    "number": "09",
+    "title": "Event Deletion Request",
+    "href": "09.md"
+  },
+  {
+    "number": "10",
+    "title": "Text Notes and Threads",
+    "href": "10.md"
+  },
+  {
+    "number": "11",
+    "title": "Relay Information Document",
+    "href": "11.md"
+  },
+  {
+    "number": "13",
+    "title": "Proof of Work",
+    "href": "13.md"
+  },
+  {
+    "number": "14",
+    "title": "Subject tag in text events",
+    "href": "14.md"
+  },
+  {
+    "number": "15",
+    "title": "Nostr Marketplace (for resilient marketplaces)",
+    "href": "15.md"
+  },
+  {
+    "number": "17",
+    "title": "Private Direct Messages",
+    "href": "17.md"
+  },
+  {
+    "number": "18",
+    "title": "Reposts",
+    "href": "18.md"
+  },
+  {
+    "number": "19",
+    "title": "bech32-encoded entities",
+    "href": "19.md"
+  },
+  {
+    "number": "21",
+    "title": "`nostr:` URI scheme",
+    "href": "21.md"
+  },
+  {
+    "number": "22",
+    "title": "Comment",
+    "href": "22.md"
+  },
+  {
+    "number": "23",
+    "title": "Long-form Content",
+    "href": "23.md"
+  },
+  {
+    "number": "24",
+    "title": "Extra metadata fields and tags",
+    "href": "24.md"
+  },
+  {
+    "number": "25",
+    "title": "Reactions",
+    "href": "25.md"
+  },
+  {
+    "number": "26",
+    "title": "Delegated Event Signing",
+    "href": "26.md",
+    "notes": "**unrecommended**: adds unnecessary burden for little gain"
+  },
+  {
+    "number": "27",
+    "title": "Text Note References",
+    "href": "27.md"
+  },
+  {
+    "number": "28",
+    "title": "Public Chat",
+    "href": "28.md"
+  },
+  {
+    "number": "29",
+    "title": "Relay-based Groups",
+    "href": "29.md"
+  },
+  {
+    "number": "30",
+    "title": "Custom Emoji",
+    "href": "30.md"
+  },
+  {
+    "number": "31",
+    "title": "Dealing with Unknown Events",
+    "href": "31.md"
+  },
+  {
+    "number": "32",
+    "title": "Labeling",
+    "href": "32.md"
+  },
+  {
+    "number": "34",
+    "title": "`git` stuff",
+    "href": "34.md"
+  },
+  {
+    "number": "35",
+    "title": "Torrents",
+    "href": "35.md"
+  },
+  {
+    "number": "36",
+    "title": "Sensitive Content",
+    "href": "36.md"
+  },
+  {
+    "number": "37",
+    "title": "Draft Events",
+    "href": "37.md"
+  },
+  {
+    "number": "38",
+    "title": "User Statuses",
+    "href": "38.md"
+  },
+  {
+    "number": "39",
+    "title": "External Identities in Profiles",
+    "href": "39.md"
+  },
+  {
+    "number": "40",
+    "title": "Expiration Timestamp",
+    "href": "40.md"
+  },
+  {
+    "number": "42",
+    "title": "Authentication of clients to relays",
+    "href": "42.md"
+  },
+  {
+    "number": "43",
+    "title": "Relay Access Metadata and Requests",
+    "href": "43.md"
+  },
+  {
+    "number": "44",
+    "title": "Encrypted Payloads (Versioned)",
+    "href": "44.md"
+  },
+  {
+    "number": "45",
+    "title": "Counting results",
+    "href": "45.md"
+  },
+  {
+    "number": "46",
+    "title": "Nostr Remote Signing",
+    "href": "46.md"
+  },
+  {
+    "number": "47",
+    "title": "Nostr Wallet Connect",
+    "href": "47.md"
+  },
+  {
+    "number": "48",
+    "title": "Proxy Tags",
+    "href": "48.md"
+  },
+  {
+    "number": "49",
+    "title": "Private Key Encryption",
+    "href": "49.md"
+  },
+  {
+    "number": "50",
+    "title": "Search Capability",
+    "href": "50.md"
+  },
+  {
+    "number": "51",
+    "title": "Lists",
+    "href": "51.md"
+  },
+  {
+    "number": "52",
+    "title": "Calendar Events",
+    "href": "52.md"
+  },
+  {
+    "number": "53",
+    "title": "Live Activities",
+    "href": "53.md"
+  },
+  {
+    "number": "54",
+    "title": "Wiki",
+    "href": "54.md"
+  },
+  {
+    "number": "55",
+    "title": "Android Signer Application",
+    "href": "55.md"
+  },
+  {
+    "number": "56",
+    "title": "Reporting",
+    "href": "56.md"
+  },
+  {
+    "number": "57",
+    "title": "Lightning Zaps",
+    "href": "57.md"
+  },
+  {
+    "number": "58",
+    "title": "Badges",
+    "href": "58.md"
+  },
+  {
+    "number": "59",
+    "title": "Gift Wrap",
+    "href": "59.md"
+  },
+  {
+    "number": "5A",
+    "title": "Static Websites (nsites)",
+    "href": "5A.md"
+  },
+  {
+    "number": "60",
+    "title": "Cashu Wallet",
+    "href": "60.md"
+  },
+  {
+    "number": "61",
+    "title": "Nutzaps",
+    "href": "61.md"
+  },
+  {
+    "number": "62",
+    "title": "Request to Vanish",
+    "href": "62.md"
+  },
+  {
+    "number": "64",
+    "title": "Chess (PGN)",
+    "href": "64.md"
+  },
+  {
+    "number": "65",
+    "title": "Relay List Metadata",
+    "href": "65.md"
+  },
+  {
+    "number": "66",
+    "title": "Relay Discovery and Liveness Monitoring",
+    "href": "66.md"
+  },
+  {
+    "number": "68",
+    "title": "Picture-first feeds",
+    "href": "68.md"
+  },
+  {
+    "number": "69",
+    "title": "Peer-to-peer Order events",
+    "href": "69.md"
+  },
+  {
+    "number": "70",
+    "title": "Protected Events",
+    "href": "70.md"
+  },
+  {
+    "number": "71",
+    "title": "Video Events",
+    "href": "71.md"
+  },
+  {
+    "number": "72",
+    "title": "Moderated Communities",
+    "href": "72.md"
+  },
+  {
+    "number": "73",
+    "title": "External Content IDs",
+    "href": "73.md"
+  },
+  {
+    "number": "75",
+    "title": "Zap Goals",
+    "href": "75.md"
+  },
+  {
+    "number": "77",
+    "title": "Negentropy Syncing",
+    "href": "77.md"
+  },
+  {
+    "number": "78",
+    "title": "Application-specific data",
+    "href": "78.md"
+  },
+  {
+    "number": "7D",
+    "title": "Threads",
+    "href": "7D.md"
+  },
+  {
+    "number": "84",
+    "title": "Highlights",
+    "href": "84.md"
+  },
+  {
+    "number": "85",
+    "title": "Trusted Assertions",
+    "href": "85.md"
+  },
+  {
+    "number": "86",
+    "title": "Relay Management API",
+    "href": "86.md"
+  },
+  {
+    "number": "87",
+    "title": "Ecash Mint Discoverability",
+    "href": "87.md"
+  },
+  {
+    "number": "88",
+    "title": "Polls",
+    "href": "88.md"
+  },
+  {
+    "number": "89",
+    "title": "Recommended Application Handlers",
+    "href": "89.md"
+  },
+  {
+    "number": "90",
+    "title": "Data Vending Machines",
+    "href": "90.md"
+  },
+  {
+    "number": "92",
+    "title": "Media Attachments",
+    "href": "92.md"
+  },
+  {
+    "number": "94",
+    "title": "File Metadata",
+    "href": "94.md"
+  },
+  {
+    "number": "96",
+    "title": "HTTP File Storage Integration",
+    "href": "96.md",
+    "notes": "**unrecommended**: replaced by blossom APIs"
+  },
+  {
+    "number": "98",
+    "title": "HTTP Auth",
+    "href": "98.md"
+  },
+  {
+    "number": "99",
+    "title": "Classified Listings",
+    "href": "99.md"
+  },
+  {
+    "number": "A0",
+    "title": "Voice Messages",
+    "href": "A0.md"
+  },
+  {
+    "number": "A4",
+    "title": "Public Messages",
+    "href": "A4.md"
+  },
+  {
+    "number": "B0",
+    "title": "Web Bookmarks",
+    "href": "B0.md"
+  },
+  {
+    "number": "B7",
+    "title": "Blossom",
+    "href": "B7.md"
+  },
+  {
+    "number": "BE",
+    "title": "Nostr BLE Communications Protocol",
+    "href": "BE.md"
+  },
+  {
+    "number": "C0",
+    "title": "Code Snippets",
+    "href": "C0.md"
+  },
+  {
+    "number": "C7",
+    "title": "Chats",
+    "href": "C7.md"
+  },
+  {
+    "number": "EE",
+    "title": "E2EE Messaging using MLS Protocol",
+    "href": "EE.md",
+    "notes": "**unrecommended**: superseded by the [Marmot Protocol](https://github.com/marmot-protocol/marmot)"
+  }
+]

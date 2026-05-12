@@ -1,0 +1,80 @@
+---
+title: Send Your First Note
+description: A step-by-step walkthrough of posting on Nostr
+---
+
+Let's walk through what it actually looks like to post something on Nostr. Not the theory — the real experience, from installing an app to seeing your words appear on the network.
+
+## Pick a client
+
+First, you need a Nostr client — the app you use to interact with the network. Here are some popular options:
+
+- **Primal** — available on the web, iOS, and Android. A great starting point with a clean interface.
+- **Damus** — a popular iOS client with a Twitter-like feel.
+- **Amethyst** — a well-regarded Android client.
+- **nos.social** — an iOS client focused on discovery and a friendly experience.
+
+All of these speak the same protocol. Your account works in any of them. You can switch anytime — your data follows your keys, not your app.
+
+## Step 1: Generate your keypair
+
+When you open the client for the first time, it will ask you to create a new account or log in with an existing key.
+
+If you're new, choose "create new account." The client generates a fresh keypair for you: a private key (nsec1...) and a public key (npub1...).
+
+Here's the critical part: **write down your private key and keep it safe.** This is your entire identity. If you lose your phone and don't have that key backed up, your account is gone forever. No recovery, no reset button, no customer support to call.
+
+Even better: use a signing extension like Alby (a browser extension that supports NIP-07). This way, your private key lives in the extension, not in the client itself. You approve each signature manually, which is much safer.
+
+## Step 2: Set up your profile
+
+Your client will ask for a display name, a short bio, and maybe a profile picture. When you fill these in and hit save, your client creates a special event — a **kind 0** event — containing that profile information, signs it with your private key, and sends it to your relays.
+
+From now on, when someone looks up your public key, their client finds this kind 0 event and shows your name and picture.
+
+## Step 3: Pick your relays
+
+Your client will have some default relays pre-configured. You can use those to start, or add others. The client connects to each relay via WebSocket and keeps those connections open.
+
+You don't need to think about this too much at first. The defaults will work. As you get comfortable, you might add paid relays or run your own — but that's a later adventure.
+
+## Step 4: Write a note
+
+Type something into the compose box and hit post. Here's what happens behind the scenes:
+
+1. Your client creates a **kind 1** event — the standard type for text notes.
+2. It fills in the content (your text), the timestamp, your public key, and any tags (like mentions of other users).
+3. It serializes this event into a specific JSON format, computes the SHA-256 hash (that becomes the event's ID), and signs it with your private key using a Schnorr signature.
+4. It sends the signed event to all connected relays.
+
+The whole process takes milliseconds. Here's what the event looks like, simplified:
+
+```json
+{
+  "id": "a3f8b2c1d4...",
+  "pubkey": "your-public-key-here",
+  "created_at": 1715512345,
+  "kind": 1,
+  "tags": [],
+  "content": "Hello Nostr! This is my first note.",
+  "sig": "87d2f1a3b5..."
+}
+```
+
+The relay receives this, stores it, and will hand it to anyone who asks for it.
+
+## Step 5: Someone follows you
+
+When someone decides to follow you, their client looks up your relay list (a kind 10002 event you've published), connects to those relays, and subscribes to your events. Their client receives your kind 1 note and displays it in their feed.
+
+They don't need to be on the same relay at the same time you are. The relay stores your note. When their client asks "what does this person have to say?", the relay hands over your stored event.
+
+That's it. You've posted on Nostr. No algorithm decided whether to show your post. No company reviewed it. Your note went from your client to the relays to your follower's client, all through an open protocol.
+
+## What to try next
+
+- Follow some people. Search for npub addresses or NIP-05 identifiers (like `bob@example.com`).
+- Reply to a note. Your client will create a kind 1 event with a tag referencing the original note.
+- Set up a NIP-05 identifier so people can find you by a human-readable name.
+
+→ Next: [Events](/concepts/events)

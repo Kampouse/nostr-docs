@@ -1,0 +1,927 @@
+[
+  {
+    "kind": "`0`",
+    "description": "User Metadata",
+    "NIP": "[01](01.md)"
+  },
+  {
+    "kind": "`1`",
+    "description": "Short Text Note",
+    "NIP": "[10](10.md)"
+  },
+  {
+    "kind": "`2`",
+    "description": "Recommend Relay",
+    "NIP": "01 (deprecated)"
+  },
+  {
+    "kind": "`3`",
+    "description": "Follows",
+    "NIP": "[02](02.md)"
+  },
+  {
+    "kind": "`4`",
+    "description": "Encrypted Direct Messages",
+    "NIP": "[04](04.md)"
+  },
+  {
+    "kind": "`5`",
+    "description": "Event Deletion Request",
+    "NIP": "[09](09.md)"
+  },
+  {
+    "kind": "`6`",
+    "description": "Repost",
+    "NIP": "[18](18.md)"
+  },
+  {
+    "kind": "`7`",
+    "description": "Reaction",
+    "NIP": "[25](25.md)"
+  },
+  {
+    "kind": "`8`",
+    "description": "Badge Award",
+    "NIP": "[58](58.md)"
+  },
+  {
+    "kind": "`9`",
+    "description": "Chat Message",
+    "NIP": "[C7](C7.md)"
+  },
+  {
+    "kind": "`10`",
+    "description": "Group Chat Threaded Reply",
+    "NIP": "29 (deprecated)"
+  },
+  {
+    "kind": "`11`",
+    "description": "Thread",
+    "NIP": "[7D](7D.md)"
+  },
+  {
+    "kind": "`12`",
+    "description": "Group Thread Reply",
+    "NIP": "29 (deprecated)"
+  },
+  {
+    "kind": "`13`",
+    "description": "Seal",
+    "NIP": "[59](59.md)"
+  },
+  {
+    "kind": "`14`",
+    "description": "Direct Message",
+    "NIP": "[17](17.md)"
+  },
+  {
+    "kind": "`15`",
+    "description": "File Message",
+    "NIP": "[17](17.md)"
+  },
+  {
+    "kind": "`16`",
+    "description": "Generic Repost",
+    "NIP": "[18](18.md)"
+  },
+  {
+    "kind": "`17`",
+    "description": "Reaction to a website",
+    "NIP": "[25](25.md)"
+  },
+  {
+    "kind": "`20`",
+    "description": "Picture",
+    "NIP": "[68](68.md)"
+  },
+  {
+    "kind": "`21`",
+    "description": "Video Event",
+    "NIP": "[71](71.md)"
+  },
+  {
+    "kind": "`22`",
+    "description": "Short-form Portrait Video Event",
+    "NIP": "[71](71.md)"
+  },
+  {
+    "kind": "`24`",
+    "description": "Public Message",
+    "NIP": "[A4](A4.md)"
+  },
+  {
+    "kind": "`30`",
+    "description": "internal reference",
+    "NIP": "[NKBIP-03]"
+  },
+  {
+    "kind": "`31`",
+    "description": "external web reference",
+    "NIP": "[NKBIP-03]"
+  },
+  {
+    "kind": "`32`",
+    "description": "hardcopy reference",
+    "NIP": "[NKBIP-03]"
+  },
+  {
+    "kind": "`33`",
+    "description": "prompt reference",
+    "NIP": "[NKBIP-03]"
+  },
+  {
+    "kind": "`40`",
+    "description": "Channel Creation",
+    "NIP": "[28](28.md)"
+  },
+  {
+    "kind": "`41`",
+    "description": "Channel Metadata",
+    "NIP": "[28](28.md)"
+  },
+  {
+    "kind": "`42`",
+    "description": "Channel Message",
+    "NIP": "[28](28.md)"
+  },
+  {
+    "kind": "`43`",
+    "description": "Channel Hide Message",
+    "NIP": "[28](28.md)"
+  },
+  {
+    "kind": "`44`",
+    "description": "Channel Mute User",
+    "NIP": "[28](28.md)"
+  },
+  {
+    "kind": "`62`",
+    "description": "Request to Vanish",
+    "NIP": "[62](62.md)"
+  },
+  {
+    "kind": "`64`",
+    "description": "Chess (PGN)",
+    "NIP": "[64](64.md)"
+  },
+  {
+    "kind": "`443`",
+    "description": "KeyPackage",
+    "NIP": "[Marmot][marmot]"
+  },
+  {
+    "kind": "`444`",
+    "description": "Welcome Message",
+    "NIP": "[Marmot][marmot]"
+  },
+  {
+    "kind": "`445`",
+    "description": "Group Event",
+    "NIP": "[Marmot][marmot]"
+  },
+  {
+    "kind": "`818`",
+    "description": "Merge Requests",
+    "NIP": "[54](54.md)"
+  },
+  {
+    "kind": "`1018`",
+    "description": "Poll Response",
+    "NIP": "[88](88.md)"
+  },
+  {
+    "kind": "`1021`",
+    "description": "Bid",
+    "NIP": "[15](15.md)"
+  },
+  {
+    "kind": "`1022`",
+    "description": "Bid confirmation",
+    "NIP": "[15](15.md)"
+  },
+  {
+    "kind": "`1040`",
+    "description": "OpenTimestamps",
+    "NIP": "[03](03.md)"
+  },
+  {
+    "kind": "`1059`",
+    "description": "Gift Wrap",
+    "NIP": "[59](59.md)"
+  },
+  {
+    "kind": "`1063`",
+    "description": "File Metadata",
+    "NIP": "[94](94.md)"
+  },
+  {
+    "kind": "`1068`",
+    "description": "Poll",
+    "NIP": "[88](88.md)"
+  },
+  {
+    "kind": "`1111`",
+    "description": "Comment",
+    "NIP": "[22](22.md)"
+  },
+  {
+    "kind": "`1222`",
+    "description": "Voice Message",
+    "NIP": "[A0](A0.md)"
+  },
+  {
+    "kind": "`1244`",
+    "description": "Voice Message Comment",
+    "NIP": "[A0](A0.md)"
+  },
+  {
+    "kind": "`1311`",
+    "description": "Live Chat Message",
+    "NIP": "[53](53.md)"
+  },
+  {
+    "kind": "`1337`",
+    "description": "Code Snippet",
+    "NIP": "[C0](C0.md)"
+  },
+  {
+    "kind": "`1617`",
+    "description": "Patches",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`1618`",
+    "description": "Pull Requests",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`1619`",
+    "description": "Pull Request Updates",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`1621`",
+    "description": "Issues",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`1622`",
+    "description": "Git Replies (deprecated)",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`1630`-`1633`",
+    "description": "Status",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`1971`",
+    "description": "Problem Tracker",
+    "NIP": "[nostrocket][nostrocket]"
+  },
+  {
+    "kind": "`1984`",
+    "description": "Reporting",
+    "NIP": "[56](56.md)"
+  },
+  {
+    "kind": "`1985`",
+    "description": "Label",
+    "NIP": "[32](32.md)"
+  },
+  {
+    "kind": "`1986`",
+    "description": "Relay reviews",
+    "NIP": ""
+  },
+  {
+    "kind": "`1987`",
+    "description": "AI Embeddings / Vector lists",
+    "NIP": "[NKBIP-02]"
+  },
+  {
+    "kind": "`2003`",
+    "description": "Torrent",
+    "NIP": "[35](35.md)"
+  },
+  {
+    "kind": "`2004`",
+    "description": "Torrent Comment",
+    "NIP": "[35](35.md)"
+  },
+  {
+    "kind": "`2022`",
+    "description": "Coinjoin Pool",
+    "NIP": "[joinstr][joinstr]"
+  },
+  {
+    "kind": "`4550`",
+    "description": "Community Post Approval",
+    "NIP": "[72](72.md)"
+  },
+  {
+    "kind": "`5000`-`5999`",
+    "description": "Job Request",
+    "NIP": "[90](90.md)"
+  },
+  {
+    "kind": "`6000`-`6999`",
+    "description": "Job Result",
+    "NIP": "[90](90.md)"
+  },
+  {
+    "kind": "`7000`",
+    "description": "Job Feedback",
+    "NIP": "[90](90.md)"
+  },
+  {
+    "kind": "`7374`",
+    "description": "Reserved Cashu Wallet Tokens",
+    "NIP": "[60](60.md)"
+  },
+  {
+    "kind": "`7375`",
+    "description": "Cashu Wallet Tokens",
+    "NIP": "[60](60.md)"
+  },
+  {
+    "kind": "`7376`",
+    "description": "Cashu Wallet History",
+    "NIP": "[60](60.md)"
+  },
+  {
+    "kind": "`7516`",
+    "description": "Geocache log",
+    "NIP": "[geocaching][geocaching]"
+  },
+  {
+    "kind": "`7517`",
+    "description": "Geocache proof of find",
+    "NIP": "[geocaching][geocaching]"
+  },
+  {
+    "kind": "`8000`",
+    "description": "Add User",
+    "NIP": "[43](43.md)"
+  },
+  {
+    "kind": "`8001`",
+    "description": "Remove User",
+    "NIP": "[43](43.md)"
+  },
+  {
+    "kind": "`9000`-`9030`",
+    "description": "Group Control Events",
+    "NIP": "[29](29.md)"
+  },
+  {
+    "kind": "`9041`",
+    "description": "Zap Goal",
+    "NIP": "[75](75.md)"
+  },
+  {
+    "kind": "`9321`",
+    "description": "Nutzap",
+    "NIP": "[61](61.md)"
+  },
+  {
+    "kind": "`9467`",
+    "description": "Tidal login",
+    "NIP": "[Tidal-nostr]"
+  },
+  {
+    "kind": "`9734`",
+    "description": "Zap Request",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "kind": "`9735`",
+    "description": "Zap",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "kind": "`9802`",
+    "description": "Highlights",
+    "NIP": "[84](84.md)"
+  },
+  {
+    "kind": "`10000`",
+    "description": "Mute list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10001`",
+    "description": "Pin list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10002`",
+    "description": "Relay List Metadata",
+    "NIP": "[65](65.md), [51](51.md)"
+  },
+  {
+    "kind": "`10003`",
+    "description": "Bookmark list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10004`",
+    "description": "Communities list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10005`",
+    "description": "Public chats list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10006`",
+    "description": "Blocked relays list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10007`",
+    "description": "Search relays list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10008`",
+    "description": "Profile Badges",
+    "NIP": "[51](51.md), [58](58.md)"
+  },
+  {
+    "kind": "`10009`",
+    "description": "User groups",
+    "NIP": "[51](51.md), [29](29.md)"
+  },
+  {
+    "kind": "`10011`",
+    "description": "External Identities",
+    "NIP": "[39](39.md)"
+  },
+  {
+    "kind": "`10012`",
+    "description": "Favorite relays list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10013`",
+    "description": "Private event relay list",
+    "NIP": "[37](37.md)"
+  },
+  {
+    "kind": "`10015`",
+    "description": "Interests list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10019`",
+    "description": "Nutzap Mint Recommendation",
+    "NIP": "[61](61.md)"
+  },
+  {
+    "kind": "`10020`",
+    "description": "Media follows",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10030`",
+    "description": "User emoji list",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`10050`",
+    "description": "Relay list to receive DMs",
+    "NIP": "[51](51.md), [17](17.md)"
+  },
+  {
+    "kind": "`10051`",
+    "description": "KeyPackage Relays List",
+    "NIP": "[Marmot][marmot]"
+  },
+  {
+    "kind": "`10063`",
+    "description": "User server list",
+    "NIP": "[Blossom][blossom]"
+  },
+  {
+    "kind": "`10096`",
+    "description": "File storage server list",
+    "NIP": "[96](96.md) (deprecated)"
+  },
+  {
+    "kind": "`10166`",
+    "description": "Relay Monitor Announcement",
+    "NIP": "[66](66.md)"
+  },
+  {
+    "kind": "`10312`",
+    "description": "Room Presence",
+    "NIP": "[53](53.md)"
+  },
+  {
+    "kind": "`10377`",
+    "description": "Proxy Announcement",
+    "NIP": "[Nostr Epoxy][nostr-epoxy]"
+  },
+  {
+    "kind": "`11111`",
+    "description": "Transport Method Announcement",
+    "NIP": "[Nostr Epoxy][nostr-epoxy]"
+  },
+  {
+    "kind": "`13194`",
+    "description": "Wallet Info",
+    "NIP": "[47](47.md)"
+  },
+  {
+    "kind": "`13534`",
+    "description": "Membership Lists",
+    "NIP": "[43](43.md)"
+  },
+  {
+    "kind": "`14388`",
+    "description": "User Sound Effect Lists",
+    "NIP": "[Corny Chat][cornychat-usersoundlist]"
+  },
+  {
+    "kind": "`15128`",
+    "description": "Root nsite manifest",
+    "NIP": "[5A](5A.md)"
+  },
+  {
+    "kind": "`17375`",
+    "description": "Cashu Wallet Event",
+    "NIP": "[60](60.md)"
+  },
+  {
+    "kind": "`21000`",
+    "description": "Lightning Pub RPC",
+    "NIP": "[Lightning.Pub][lnpub]"
+  },
+  {
+    "kind": "`22242`",
+    "description": "Client Authentication",
+    "NIP": "[42](42.md)"
+  },
+  {
+    "kind": "`23194`",
+    "description": "Wallet Request",
+    "NIP": "[47](47.md)"
+  },
+  {
+    "kind": "`23195`",
+    "description": "Wallet Response",
+    "NIP": "[47](47.md)"
+  },
+  {
+    "kind": "`24133`",
+    "description": "Nostr Connect",
+    "NIP": "[46](46.md)"
+  },
+  {
+    "kind": "`24242`",
+    "description": "Blobs stored on mediaservers",
+    "NIP": "[Blossom][blossom]"
+  },
+  {
+    "kind": "`27235`",
+    "description": "HTTP Auth",
+    "NIP": "[98](98.md)"
+  },
+  {
+    "kind": "`28934`",
+    "description": "Join Request",
+    "NIP": "[43](43.md)"
+  },
+  {
+    "kind": "`28935`",
+    "description": "Invite Request",
+    "NIP": "[43](43.md)"
+  },
+  {
+    "kind": "`28936`",
+    "description": "Leave Request",
+    "NIP": "[43](43.md)"
+  },
+  {
+    "kind": "`30000`",
+    "description": "Follow sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30001`",
+    "description": "Generic lists",
+    "NIP": "51 (deprecated)"
+  },
+  {
+    "kind": "`30002`",
+    "description": "Relay sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30003`",
+    "description": "Bookmark sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30004`",
+    "description": "Curation sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30005`",
+    "description": "Video sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30006`",
+    "description": "Picture sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30007`",
+    "description": "Kind mute sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30008`",
+    "description": "Badge sets",
+    "NIP": "[51](51.md), [58](58.md)"
+  },
+  {
+    "kind": "`30009`",
+    "description": "Badge Definition",
+    "NIP": "[58](58.md)"
+  },
+  {
+    "kind": "`30015`",
+    "description": "Interest sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30017`",
+    "description": "Create or update a stall",
+    "NIP": "[15](15.md)"
+  },
+  {
+    "kind": "`30018`",
+    "description": "Create or update a product",
+    "NIP": "[15](15.md)"
+  },
+  {
+    "kind": "`30019`",
+    "description": "Marketplace UI/UX",
+    "NIP": "[15](15.md)"
+  },
+  {
+    "kind": "`30020`",
+    "description": "Product sold as an auction",
+    "NIP": "[15](15.md)"
+  },
+  {
+    "kind": "`30023`",
+    "description": "Long-form Content",
+    "NIP": "[23](23.md)"
+  },
+  {
+    "kind": "`30024`",
+    "description": "Draft Long-form Content",
+    "NIP": "[23](23.md)"
+  },
+  {
+    "kind": "`30030`",
+    "description": "Emoji sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30040`",
+    "description": "Curated Publication Index",
+    "NIP": "[NKBIP-01]"
+  },
+  {
+    "kind": "`30041`",
+    "description": "Curated Publication Content",
+    "NIP": "[NKBIP-01]"
+  },
+  {
+    "kind": "`30063`",
+    "description": "Release artifact sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30078`",
+    "description": "Application-specific Data",
+    "NIP": "[78](78.md)"
+  },
+  {
+    "kind": "`30166`",
+    "description": "Relay Discovery",
+    "NIP": "[66](66.md)"
+  },
+  {
+    "kind": "`30267`",
+    "description": "App curation sets",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`30311`",
+    "description": "Live Event",
+    "NIP": "[53](53.md)"
+  },
+  {
+    "kind": "`30312`",
+    "description": "Interactive Room",
+    "NIP": "[53](53.md)"
+  },
+  {
+    "kind": "`30313`",
+    "description": "Conference Event",
+    "NIP": "[53](53.md)"
+  },
+  {
+    "kind": "`30315`",
+    "description": "User Statuses",
+    "NIP": "[38](38.md)"
+  },
+  {
+    "kind": "`30382`",
+    "description": "User Trusted Assertion",
+    "NIP": "[85](85.md)"
+  },
+  {
+    "kind": "`30383`",
+    "description": "Event Trusted Assertion",
+    "NIP": "[85](85.md)"
+  },
+  {
+    "kind": "`30384`",
+    "description": "Addressable Trusted Assertion",
+    "NIP": "[85](85.md)"
+  },
+  {
+    "kind": "`30388`",
+    "description": "Slide Set",
+    "NIP": "[Corny Chat][cornychat-slideset]"
+  },
+  {
+    "kind": "`30402`",
+    "description": "Classified Listing",
+    "NIP": "[99](99.md)"
+  },
+  {
+    "kind": "`30403`",
+    "description": "Draft Classified Listing",
+    "NIP": "[99](99.md)"
+  },
+  {
+    "kind": "`30617`",
+    "description": "Repository announcements",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`30618`",
+    "description": "Repository state announcements",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "kind": "`30818`",
+    "description": "Wiki article",
+    "NIP": "[54](54.md)"
+  },
+  {
+    "kind": "`30819`",
+    "description": "Redirects",
+    "NIP": "[54](54.md)"
+  },
+  {
+    "kind": "`31234`",
+    "description": "Draft Event",
+    "NIP": "[37](37.md)"
+  },
+  {
+    "kind": "`31388`",
+    "description": "Link Set",
+    "NIP": "[Corny Chat][cornychat-linkset]"
+  },
+  {
+    "kind": "`31890`",
+    "description": "Feed",
+    "NIP": "[NUD: Custom Feeds][NUD: Custom Feeds]"
+  },
+  {
+    "kind": "`31922`",
+    "description": "Date-Based Calendar Event",
+    "NIP": "[52](52.md)"
+  },
+  {
+    "kind": "`31923`",
+    "description": "Time-Based Calendar Event",
+    "NIP": "[52](52.md)"
+  },
+  {
+    "kind": "`31924`",
+    "description": "Calendar",
+    "NIP": "[52](52.md)"
+  },
+  {
+    "kind": "`31925`",
+    "description": "Calendar Event RSVP",
+    "NIP": "[52](52.md)"
+  },
+  {
+    "kind": "`31989`",
+    "description": "Handler recommendation",
+    "NIP": "[89](89.md)"
+  },
+  {
+    "kind": "`31990`",
+    "description": "Handler information",
+    "NIP": "[89](89.md)"
+  },
+  {
+    "kind": "`32267`",
+    "description": "Software Application",
+    "NIP": ""
+  },
+  {
+    "kind": "`32388`",
+    "description": "User Room Favorites",
+    "NIP": "[Corny Chat][cornychat-roomfavorites]"
+  },
+  {
+    "kind": "`33388`",
+    "description": "High Scores",
+    "NIP": "[Corny Chat][cornychat-highscores]"
+  },
+  {
+    "kind": "`34235`",
+    "description": "Addressable Video Event",
+    "NIP": "[71](71.md)"
+  },
+  {
+    "kind": "`34236`",
+    "description": "Addressable Short Video Event",
+    "NIP": "[71](71.md)"
+  },
+  {
+    "kind": "`34388`",
+    "description": "Sound Effects",
+    "NIP": "[Corny Chat][cornychat-soundeffects]"
+  },
+  {
+    "kind": "`34550`",
+    "description": "Community Definition",
+    "NIP": "[72](72.md)"
+  },
+  {
+    "kind": "`34128`",
+    "description": "Legacy nsite manifest",
+    "NIP": "[5A](5A.md) (deprecated)"
+  },
+  {
+    "kind": "`35128`",
+    "description": "Named nsite manifest",
+    "NIP": "[5A](5A.md)"
+  },
+  {
+    "kind": "`38172`",
+    "description": "Cashu Mint Announcement",
+    "NIP": "[87](87.md)"
+  },
+  {
+    "kind": "`38173`",
+    "description": "Fedimint Announcement",
+    "NIP": "[87](87.md)"
+  },
+  {
+    "kind": "`37516`",
+    "description": "Geocache listing",
+    "NIP": "[geocaching][geocaching]"
+  },
+  {
+    "kind": "`38383`",
+    "description": "Peer-to-peer Order events",
+    "NIP": "[69](69.md)"
+  },
+  {
+    "kind": "`39000-9`",
+    "description": "Group metadata events",
+    "NIP": "[29](29.md)"
+  },
+  {
+    "kind": "`39089`",
+    "description": "Starter packs",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`39092`",
+    "description": "Media starter packs",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "kind": "`39701`",
+    "description": "Web bookmarks",
+    "NIP": "[B0](B0.md)"
+  }
+]

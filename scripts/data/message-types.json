@@ -1,0 +1,66 @@
+{
+  "clientMessages": [
+    {
+      "type": "`EVENT`",
+      "description": "used to publish events",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`REQ`",
+      "description": "used to request events and subscribe to new updates",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`CLOSE`",
+      "description": "used to stop previous subscriptions",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`AUTH`",
+      "description": "used to send authentication events",
+      "NIP": "[42](42.md)"
+    },
+    {
+      "type": "`COUNT`",
+      "description": "used to request event counts",
+      "NIP": "[45](45.md)"
+    }
+  ],
+  "relayMessages": [
+    {
+      "type": "`EOSE`",
+      "description": "used to notify clients all stored events have been sent",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`EVENT`",
+      "description": "used to send events requested to clients",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`NOTICE`",
+      "description": "used to send human-readable messages to clients",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`OK`",
+      "description": "used to notify clients if an EVENT was successful",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`CLOSED`",
+      "description": "used to notify clients that a REQ was ended and why",
+      "NIP": "[01](01.md)"
+    },
+    {
+      "type": "`AUTH`",
+      "description": "used to send authentication challenges",
+      "NIP": "[42](42.md)"
+    },
+    {
+      "type": "`COUNT`",
+      "description": "used to send requested event counts to clients",
+      "NIP": "[45](45.md)"
+    }
+  ]
+}

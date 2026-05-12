@@ -1,0 +1,35 @@
+---
+title: Message Types Reference
+description: Complete reference of all Nostr client-relay protocol messages.
+---
+
+Nostr clients and relays communicate over WebSocket connections using
+JSON-arrays.  Each message is identified by its type string.  The tables
+below list every standardised message type.
+
+## Client → Relay Messages
+
+These messages are sent from clients to relays.
+
+| Type | Description | Defined In |
+| ---- | ----------- | ---------- |
+| EVENT | used to publish events | [NIP-01](/nips/01) |
+| REQ | used to request events and subscribe to new updates | [NIP-01](/nips/01) |
+| CLOSE | used to stop previous subscriptions | [NIP-01](/nips/01) |
+| AUTH | used to send authentication events | [NIP-42](/nips/42) |
+| COUNT | used to request event counts | [NIP-45](/nips/45) |
+
+## Relay → Client Messages
+
+These messages are sent from relays to clients.
+
+| Type | Description | Defined In |
+| ---- | ----------- | ---------- |
+| EOSE | used to notify clients all stored events have been sent | [NIP-01](/nips/01) |
+| EVENT | used to send events requested to clients | [NIP-01](/nips/01) |
+| NOTICE | used to send human-readable messages to clients | [NIP-01](/nips/01) |
+| OK | used to notify clients if an EVENT was successful | [NIP-01](/nips/01) |
+| CLOSED | used to notify clients that a REQ was ended and why | [NIP-01](/nips/01) |
+| AUTH | used to send authentication challenges | [NIP-42](/nips/42) |
+| COUNT | used to send requested event counts to clients | [NIP-45](/nips/45) |
+

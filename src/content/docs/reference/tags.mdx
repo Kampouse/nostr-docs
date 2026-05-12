@@ -1,0 +1,86 @@
+---
+title: Standard Tags Reference
+description: Complete reference of all standard Nostr event tags.
+---
+
+Nostr events carry structured data in their **tags** array. Each tag is a
+JSON array where the first element is the tag name and subsequent elements
+are tag-specific values.
+
+The table below lists all standardised tags defined across NIPs.
+
+| Tag Name | Value Description | Defined In |
+| -------- | ---------------- | ---------- |
+| - | -- | [NIP-70](/nips/70) |
+| a | coordinates to an event | [NIP-01](/nips/01) |
+| A | root address | [NIP-22](/nips/22) |
+| alt | summary | [NIP-31](/nips/31) |
+| amount | millisatoshis, stringified | [NIP-57](/nips/57) |
+| bolt11 | `bolt11` invoice | [NIP-57](/nips/57) |
+| branch-name | branch name suggestion | [NIP-34](/nips/34) |
+| c | commit id | [NIP-34](/nips/34) |
+| challenge | challenge string | [NIP-42](/nips/42) |
+| client | name, address | [NIP-89](/nips/89) |
+| clone | git clone URL | [NIP-34](/nips/34) |
+| content-warning | reason | [NIP-36](/nips/36) |
+| d | identifier | [NIP-01](/nips/01) |
+| D | day | [NIP-52](/nips/52) |
+| delegation | pubkey, conditions, delegation token | [NIP-26](/nips/26) |
+| dep | Required dependency | [NIP-C0](/nips/C0) |
+| description | description | [NIP-34](/nips/34), [NIP-57](/nips/57), [NIP-58](/nips/58), [NIP-C0](/nips/C0) |
+| e | event id (hex) | [NIP-01](/nips/01), [NIP-10](/nips/10) |
+| E | root event id | [NIP-22](/nips/22) |
+| emoji | shortcode, image URL | [NIP-30](/nips/30) |
+| encrypted | -- | [NIP-90](/nips/90) |
+| expiration | unix timestamp (string) | [NIP-40](/nips/40) |
+| extension | File extension | [NIP-C0](/nips/C0) |
+| f | currency code | [NIP-69](/nips/69) |
+| file | full path (string) | [NIP-35](/nips/35) |
+| g | geohash | [NIP-52](/nips/52) |
+| goal | event id (hex) | [NIP-75](/nips/75) |
+| h | group id | [NIP-29](/nips/29) |
+| HEAD | `ref: refs/heads/<branch-name>` | [NIP-34](/nips/34) |
+| i | external identity | [NIP-35](/nips/35), [NIP-39](/nips/39), [NIP-73](/nips/73) |
+| I | root external identity | [NIP-22](/nips/22) |
+| image | image URL | [NIP-23](/nips/23), [NIP-52](/nips/52), [NIP-58](/nips/58) |
+| imeta | inline metadata | [NIP-92](/nips/92) |
+| k | kind | [NIP-18](/nips/18), [NIP-25](/nips/25), [NIP-72](/nips/72), [NIP-73](/nips/73) |
+| K | root scope | [NIP-22](/nips/22) |
+| l | label, label namespace, language name | [NIP-32](/nips/32), [NIP-C0](/nips/C0) |
+| L | label namespace | [NIP-32](/nips/32) |
+| license | License of the shared content | [NIP-C0](/nips/C0) |
+| lnurl | `bech32` encoded `lnurl` | [NIP-57](/nips/57) |
+| location | location string | [NIP-52](/nips/52), [NIP-99](/nips/99) |
+| m | MIME type | [NIP-94](/nips/94) |
+| merge-base | commit id | [NIP-34](/nips/34) |
+| name | name | [NIP-34](/nips/34), [NIP-58](/nips/58), [NIP-72](/nips/72), [NIP-C0](/nips/C0) |
+| nonce | random | [NIP-13](/nips/13) |
+| p | pubkey (hex) | [NIP-01](/nips/01), [NIP-02](/nips/02), [NIP-22](/nips/22) |
+| P | pubkey (hex) | [NIP-22](/nips/22), [NIP-57](/nips/57) |
+| preimage | hash of `bolt11` invoice | [NIP-57](/nips/57) |
+| price | price | [NIP-99](/nips/99) |
+| proxy | external ID | [NIP-48](/nips/48) |
+| published_at | unix timestamp (string) | [NIP-23](/nips/23), [NIP-B0](/nips/B0) |
+| q | event id (hex) | [NIP-18](/nips/18) |
+| r | a reference (URL, etc) | [NIP-24](/nips/24), [NIP-25](/nips/25) |
+| r | relay url | [NIP-65](/nips/65) |
+| relay | relay url | [NIP-42](/nips/42), [NIP-17](/nips/17) |
+| relays | relay list | [NIP-57](/nips/57) |
+| repo | Reference to the origin repository | [NIP-C0](/nips/C0) |
+| runtime | Runtime or environment specification | [NIP-C0](/nips/C0) |
+| s | status | [NIP-69](/nips/69) |
+| server | file storage server url | [NIP-96](/nips/96) |
+| sound | shortcode, sound url, image url | [NIP-51](/nips/51) |
+| subject | subject | [NIP-14](/nips/14), [NIP-17](/nips/17), [NIP-34](/nips/34) |
+| summary | summary | [NIP-23](/nips/23), [NIP-52](/nips/52) |
+| t | hashtag | [NIP-24](/nips/24), [NIP-34](/nips/34), [NIP-35](/nips/35) |
+| thumb | badge thumbnail | [NIP-58](/nips/58) |
+| title | title | [NIP-23](/nips/23), [NIP-B0](/nips/B0) |
+| tracker | torrent tracker URL | [NIP-35](/nips/35) |
+| u | url | [NIP-61](/nips/61), [NIP-98](/nips/98) |
+| web | webpage URL | [NIP-34](/nips/34) |
+| x | hash | [NIP-35](/nips/35), [NIP-56](/nips/56) |
+| y | platform | [NIP-69](/nips/69) |
+| z | order number | [NIP-69](/nips/69) |
+| zap | pubkey (hex), relay URL | [NIP-57](/nips/57) |
+

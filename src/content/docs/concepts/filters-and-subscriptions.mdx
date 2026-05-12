@@ -1,0 +1,97 @@
+---
+title: Filters and Subscriptions
+description: How clients ask relays for the data they want
+---
+
+When you open a social app, you expect to see posts from people you follow. But how does that actually work in Nostr, where there's no central database to query?
+
+The answer is filters and subscriptions. Instead of requesting data like you would from a website ("give me this page"), your client *subscribes* to a pattern, and the relay sends everything that matches — including new stuff that arrives after you subscribe.
+
+It's the difference between asking a librarian "give me everything you have on gardening" (a one-time fetch) and saying "whenever a new book about gardening comes in, hand me a copy" (a subscription). Nostr uses the subscription model.
+
+## What a filter looks like
+
+A filter is a JSON object that describes what you're looking for. Here's an example:
+
+```json
+{
+  "kinds": [1],
+  "authors": ["a1b2c3...", "d4e5f6..."],
+  "since": 1715500000,
+  "limit": 50
+}
+```
+
+This filter says: "give me kind 1 events (text notes) from either of these two authors, created after this timestamp, up to 50 results."
+
+The filter fields work like this:
+
+- **kinds** — only events of these types
+- **authors** — only events signed by these public keys
+- **since** — only events newer than this timestamp
+- **until** — only events older than this timestamp
+- **limit** — at most this many results
+- **ids** — specific event IDs you're looking for
+- Any **tag filter** — like `{"#e": ["event-id"]}` to find events that reference a specific event, or `{"#p": ["pubkey"]}` to find events mentioning a specific person
+
+## How AND and OR work
+
+Multiple fields in a filter are combined with AND — every condition must be true. So `{"kinds": [1], "authors": ["abc"]}` means "kind 1 AND author abc."
+
+But multiple values within a single field are OR. So `{"kinds": [1, 7]}` means "kind 1 OR kind 7."
+
+This gives you a lot of expressive power. "Give me notes or reactions from Alice or Bob, since yesterday, up to 100 results" — that's one filter.
+
+## The REQ message
+
+When your client wants data, it sends a `REQ` message to the relay:
+
+```json
+["REQ", "my-subscription-123", {"kinds": [1], "authors": ["abc..."], "limit": 20}]
+```
+
+This has three parts:
+
+1. The string `"REQ"` — tells the relay this is a subscription request.
+2. A subscription ID — a short string your client makes up, used to identify this subscription.
+3. One or more filters. If you pass multiple filters, a relay sends events matching *any* of them (the filters are OR'd together).
+
+## What the relay sends back
+
+Once the relay receives your REQ, it does two things:
+
+First, it searches its stored events for anything matching your filter and sends them all to you, one at a time. Each arrives as an `EVENT` message.
+
+When it's done sending stored events, it sends an `EOSE` message — End Of Stored Events. This tells your client: "that's everything I have from the past, but I'm keeping the subscription open."
+
+From that point on, whenever a *new* event arrives at the relay that matches your filter, the relay pushes it to you immediately. This is what makes Nostr feel real-time. You subscribe once, and new content streams to you as it's posted.
+
+## Closing a subscription
+
+When your client is done — say, you navigated away from a timeline — it sends a `CLOSE` message:
+
+```json
+["CLOSE", "my-subscription-123"]
+```
+
+The relay stops sending events for that subscription. Simple as that.
+
+## Practical examples
+
+Let's translate some real-world requests into filters:
+
+**"Get the last 20 notes from people I follow"**
+Your client takes the list of public keys from your follow list and sends:
+`{"kinds": [1], "authors": ["alice-pubkey", "bob-pubkey", ...], "limit": 20}`
+
+**"Get all replies to this specific note"**
+`{"kinds": [1], "#e": ["the-note-id"]}` — finds kind 1 events that have an `e` tag referencing that note.
+
+**"Get my DMs"**
+`{"kinds": [1059], "#p": ["my-pubkey"]}` — finds gift-wrapped messages addressed to you.
+
+The beauty of this system is its flexibility. Any combination of filters lets clients express exactly what they need, and relays only need to understand one query format.
+
+## Further reading
+
+- [NIP-01 — Core protocol](/nips/nip-01) — the formal specification of filters and subscriptions

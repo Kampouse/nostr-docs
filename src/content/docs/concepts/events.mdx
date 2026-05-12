@@ -1,0 +1,95 @@
+---
+title: Events
+description: The universal data structure that powers everything in Nostr
+---
+
+If you understand events, you understand Nostr. Everything — every post, reaction, profile update, direct message, follow, payment receipt — is an event. One data structure rules them all.
+
+This is a deliberate design choice. Instead of having different systems for different types of data, Nostr uses a single format and distinguishes between them using a field called "kind." It's simple, it's flexible, and it means every tool in the ecosystem knows how to handle every piece of data, even types it doesn't specifically understand.
+
+## The anatomy of an event
+
+An event is a JSON object with these fields:
+
+- **id** — a SHA-256 hash of the event's contents. This is the event's unique fingerprint.
+- **pubkey** — the public key of the person who created it. This tells you *who* signed it.
+- **created_at** — a Unix timestamp (seconds since January 1, 1970). When the event was created.
+- **kind** — a number that says what type of event this is. This is the big one — it determines how clients interpret everything else.
+- **tags** — an array of metadata arrays. Tags link events to each other, mention users, reference other events, and carry all kinds of auxiliary data.
+- **content** — the actual payload. For a text note, this is the text. For a profile update, this is a JSON string with name, bio, and picture URL. For some events, it might be empty.
+- **sig** — a Schnorr signature. This is the cryptographic proof that the person holding the private key corresponding to `pubkey` actually created this event.
+
+Here's a real example — a kind 1 (text note) event:
+
+```json
+{
+  "id": "4376c65d2f232afbe9b882a35baa4f6fe8667c4e684749af565f981833ed6a65",
+  "pubkey": "6e468422dfb74a573ab7046617e969cd85dd8a5b0af47e8d2fe7f8f9ecad292e",
+  "created_at": 1715512345,
+  "kind": 1,
+  "tags": [
+    ["p", "91cf9...4a5f"],
+    ["e", "a6b8c...3d7e", "", "reply"]
+  ],
+  "content": "Just discovered Nostr and it feels like the early internet again.",
+  "sig": "87f324a6e9b...c8d2"
+}
+```
+
+This event has two tags: a `p` tag mentioning another user (by their public key), and an `e` tag referencing another event — in this case, the note being replied to.
+
+## Event kinds — the namespace
+
+The `kind` field is how Nostr categorizes events. Here are some of the most common ones:
+
+- **0** — Profile metadata (your name, bio, profile picture)
+- **1** — Short text notes (the basic post)
+- **4** — Encrypted direct messages (older style)
+- **7** — Reactions (likes, emoji reactions)
+- **40** — Channel creation (public group channels)
+- **9735** — Zap receipts (proof that a Lightning payment was made)
+
+And there are many more — long-form articles, live events, file uploads, marketplace listings, and so on.
+
+### Kind ranges matter
+
+Not all events are treated the same by relays. The kind number tells relays how to store them:
+
+- **0–9999: Regular events.** Stored forever (or until the relay decides to prune). Every event is kept.
+- **10000–19999: Replaceable events.** Only the latest one from each author is kept. Post a new one, and the old one disappears. Profile metadata (kind 0) actually works this way too, even though it's in the regular range.
+- **20000–29999: Ephemeral events.** Not stored at all. The relay sends them to current subscribers and then drops them. Good for things like typing indicators or live presence.
+- **30000–39999: Addressable events.** Like replaceable events, but parameterized — you can have multiple per author, identified by a `d` tag. Think of them as named slots: "my follow list," "my reading list," "my relay settings."
+
+Understanding these ranges helps you know what to expect. A text note (kind 1) sticks around. A contact list (kind 3, in practice treated as replaceable) gets overwritten with each update. A live event update (kind 30311) can coexist with other events by the same author because it has a unique `d` tag.
+
+## Tags — the connective tissue
+
+Tags are how events relate to each other and to the wider world. A tag is an array where the first element is the tag type, and the rest are values:
+
+- `["p", "<pubkey>"]` — references a user. Used for mentions, follows, and replies.
+- `["e", "<event_id>"]` — references another event. Used for replies, reactions, and quotes.
+- `["a", "<address>"]` — references an addressable event (kind 30000+ events, identified by kind + pubkey + d-tag).
+- `["d", "<identifier>"]` — the unique identifier for addressable events. This is what makes "parameterized replaceable" work.
+- `["t", "<hashtag>"]` — a hashtag.
+- `["r", "<relay_url>"]` — a relay URL, often used alongside other tags to tell clients where to find the referenced event.
+
+Tags are incredibly flexible. NIPs define new tag types as needed, and clients that don't understand a particular tag just ignore it. This keeps the system extensible without breaking anything.
+
+## How events flow through the network
+
+The life cycle of an event looks like this:
+
+1. **Create.** Your client builds the event JSON (everything except `id` and `sig`).
+2. **Hash.** The client serializes the event in a specific format and computes the SHA-256 hash. This becomes the `id`.
+3. **Sign.** The client signs the serialized event with your private key, producing the `sig`.
+4. **Send.** The client sends the completed event to all connected relays.
+5. **Store.** Each relay verifies the signature, checks the event is valid, and stores it.
+6. **Forward.** When another client subscribes with a filter that matches this event, the relay sends it to them.
+
+Every step is defined by NIP-01, the foundation of the whole protocol.
+
+## Further reading
+
+- [Event kinds reference](/reference/event-kinds) — a complete list of all defined event kinds
+- [Tags reference](/reference/tags) — all standard tag types
+- [NIP-01 — Core protocol](/nips/nip-01) — the formal specification of events

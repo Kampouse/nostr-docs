@@ -1,0 +1,130 @@
+---
+title: How NIPs Fit Together
+description: A map of the Nostr ecosystem and how its specifications connect
+---
+
+Nostr Improvement Proposals — NIPs — are the building blocks of the protocol. Each NIP defines one piece of functionality: how to format an event, how to encrypt a message, how to handle reactions, how to send payments.
+
+But NIPs aren't a random pile of specs. They form a layered system, with clear dependencies between them. Some NIPs stand alone, some build on others, and a few are the foundation everything else rests on.
+
+This page maps out how they all connect.
+
+## The foundation: NIP-01
+
+Everything starts with NIP-01. It defines:
+
+- The event data structure
+- How events are signed and verified
+- How clients communicate with relays (the REQ, EVENT, CLOSE messages)
+- The basic filter system for subscriptions
+
+Every other NIP builds on top of NIP-01. If you're building anything on Nostr, you implement NIP-01 first. It's the bedrock.
+
+## The layer cake
+
+Think of the NIP ecosystem as a layer cake. Each layer depends on the one below it.
+
+### Base layer — NIP-01
+
+Events, signatures, and the relay protocol. Everything depends on this.
+
+### Identity layer
+
+These NIPs make your cryptographic identity usable and human-friendly:
+
+- **NIP-19** — bech32 encoding (npub, nsec, note, nprofile). Turns raw hex keys and event IDs into readable strings with error detection.
+- **NIP-05** — DNS-based verification. Maps your public key to a name like `satoshi@nostr.land`.
+- **NIP-06** — Mnemonic seed phrases for key backup, like a crypto wallet.
+- **NIP-07** — Browser extension signing. Lets web apps sign things without touching your private key.
+- **NIP-39** — External identity verification. Proves you own a Twitter, GitHub, or Mastodon account.
+
+### Social layer
+
+These NIPs make Nostr feel like a social network:
+
+- **NIP-02** — Contact lists and follow lists. Your social graph.
+- **NIP-10** — Threading. How replies reference the note they're replying to.
+- **NIP-18** — Reposts. Sharing someone else's note with your followers.
+- **NIP-25** — Reactions. Likes, emoji, and other reactions to events.
+- **NIP-23** — Long-form content. Blog posts and articles.
+- **NIP-30** — Custom emoji.
+
+### Messaging layer
+
+Private and group communication, built with layers of encryption:
+
+- **NIP-17** — Private direct messages (the modern approach). Uses gift-wrapped sealed sender design.
+- **NIP-44** — Encryption scheme for message content. NIP-17 depends on this.
+- **NIP-59** — Gift wrap. Wraps encrypted messages in an anonymizing layer so even the relay can't tell who's talking to whom. NIP-17 is built on NIP-59, which uses NIP-44, which depends on NIP-01.
+- **NIP-28** — Public channels. Group chat rooms that anyone can see.
+- **NIP-29** — Relay-based groups. Groups defined by relay membership and permissions.
+
+### Payments layer
+
+Nostr has deep integration with Bitcoin's Lightning Network:
+
+- **NIP-57** — Zaps. The system for sending Lightning payments as reactions or tips on Nostr posts.
+- **NIP-47** — Wallet connect. Lets Nostr clients talk to your Lightning wallet so they can initiate zaps on your behalf.
+- **NIP-60** and **NIP-61** — Ecash wallet integration. Cashu-based tokens stored as events.
+
+### Media layer
+
+Handling files and rich media:
+
+- **NIP-92** — Media attachments in events. References to images and files.
+- **NIP-94** — File metadata events. Describes uploaded files with hashes and URLs.
+- **NIP-96** and **B7** — File storage server integration. How clients upload and retrieve files.
+
+### Infrastructure layer
+
+The behind-the-scenes plumbing that keeps everything running:
+
+- **NIP-11** — Relay Information Document. Relays describe their capabilities, limits, and fees.
+- **NIP-42** — Relay authentication. Proves your identity to a relay for access control.
+- **NIP-65** — Relay list metadata. Clients publish which relays they use, so others can find their data.
+- **NIP-77** — Negentropy syncing. Efficient synchronization of events between clients and relays.
+- **NIP-90** — Data Vending Machines. Relays that perform computation (like generating AI summaries) for a fee.
+
+## Key dependency chains
+
+Sometimes the easiest way to understand the system is to trace a path from "I want to do X" to "here are the NIPs I need":
+
+**"I want to send a private message"**
+You need NIP-17 (private DMs). NIP-17 uses NIP-59 (gift wrap) for anonymized delivery. NIP-59 uses NIP-44 (encryption) for the actual message encryption. And NIP-44 depends on NIP-01 (events and signing).
+
+**"I want to tip someone with a zap"**
+You need NIP-57 (zaps). NIP-57 uses Lightning invoices under the hood. If you want your client to initiate the payment automatically, you also need NIP-47 (wallet connect) so the client can talk to your Lightning wallet. Both depend on NIP-01.
+
+**"I want to build a Twitter-like client"**
+Start with NIP-01 (core protocol). Then add NIP-02 (follow lists), NIP-10 (threading for replies), NIP-18 (reposts), NIP-25 (reactions), and NIP-65 (relay lists so users find each other). That gives you a solid basic client. Add NIP-05 for friendly usernames and NIP-19 for readable links, and you're in good shape.
+
+**"I want end-to-end encrypted group chat"**
+NIP-59 (gift wrap) wraps NIP-44 (encryption) wraps NIP-17 (private DMs, extended to groups). It's layers all the way down.
+
+## Core vs. optional NIPs
+
+Not every client implements every NIP. Here's a rough classification:
+
+**Core NIPs** — implemented by most clients: NIP-01, NIP-02, NIP-05, NIP-10, NIP-11, NIP-19, NIP-25, NIP-65. If you're building a client, start here.
+
+**Common NIPs** — implemented by many clients: NIP-07, NIP-17, NIP-23, NIP-28, NIP-42, NIP-57.
+
+**Specialized NIPs** — for specific use cases: NIP-15 (marketplace listings), NIP-34 (git repository events), NIP-35 (torrents), NIP-64 (chess games), NIP-90 (data vending machines), and many others.
+
+## NIP status: a word of caution
+
+NIPs have statuses:
+
+- **Final** — stable, unlikely to change. Safe to build on. NIP-01 is final.
+- **Draft** — still being worked out. May change. Implement if you're interested, but expect adjustments.
+- **Deprecated** — replaced by something better. Don't build new things with these.
+
+When you're picking NIPs to implement, check their status. A draft NIP might be exciting but could shift under you. A deprecated NIP should be avoided — there's a better way now.
+
+## The big picture
+
+Nostr's modularity is its superpower. Nobody needs to implement everything. You build what you need, using the NIPs that make sense for your use case. A lightweight mobile client might implement just the core social NIPs. A full-featured desktop client might go deep into payments, media, and messaging. A specialized tool might only implement a handful of NIPs for a very specific purpose.
+
+They all interoperate, because they all start from the same foundation: NIP-01, events, and relays.
+
+→ Next: [Filters and Subscriptions](/concepts/filters-and-subscriptions)

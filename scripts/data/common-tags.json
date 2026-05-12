@@ -1,0 +1,434 @@
+[
+  {
+    "name": "`a`",
+    "value": "coordinates to an event",
+    "other parameters": "relay URL",
+    "NIP": "[01](01.md)"
+  },
+  {
+    "name": "`A`",
+    "value": "root address",
+    "other parameters": "relay URL",
+    "NIP": "[22](22.md)"
+  },
+  {
+    "name": "`c`",
+    "value": "commit id",
+    "other parameters": "",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "name": "`d`",
+    "value": "identifier",
+    "other parameters": "--",
+    "NIP": "[01](01.md)"
+  },
+  {
+    "name": "`D`",
+    "value": "day",
+    "other parameters": "--",
+    "NIP": "[52](52.md)"
+  },
+  {
+    "name": "`e`",
+    "value": "event id (hex)",
+    "other parameters": "relay URL, marker, pubkey (hex)",
+    "NIP": "[01](01.md), [10](10.md)"
+  },
+  {
+    "name": "`E`",
+    "value": "root event id",
+    "other parameters": "relay URL",
+    "NIP": "[22](22.md)"
+  },
+  {
+    "name": "`f`",
+    "value": "currency code",
+    "other parameters": "--",
+    "NIP": "[69](69.md)"
+  },
+  {
+    "name": "`g`",
+    "value": "geohash",
+    "other parameters": "--",
+    "NIP": "[52](52.md)"
+  },
+  {
+    "name": "`h`",
+    "value": "group id",
+    "other parameters": "--",
+    "NIP": "[29](29.md)"
+  },
+  {
+    "name": "`i`",
+    "value": "external identity",
+    "other parameters": "proof, url hint",
+    "NIP": "[35](35.md), [39](39.md), [73](73.md)"
+  },
+  {
+    "name": "`I`",
+    "value": "root external identity",
+    "other parameters": "--",
+    "NIP": "[22](22.md)"
+  },
+  {
+    "name": "`k`",
+    "value": "kind",
+    "other parameters": "--",
+    "NIP": "[18](18.md), [25](25.md), [72](72.md), [73](73.md)"
+  },
+  {
+    "name": "`K`",
+    "value": "root scope",
+    "other parameters": "--",
+    "NIP": "[22](22.md)"
+  },
+  {
+    "name": "`l`",
+    "value": "label, label namespace, language name",
+    "other parameters": "--",
+    "NIP": "[32](32.md), [C0](C0.md)"
+  },
+  {
+    "name": "`L`",
+    "value": "label namespace",
+    "other parameters": "--",
+    "NIP": "[32](32.md)"
+  },
+  {
+    "name": "`m`",
+    "value": "MIME type",
+    "other parameters": "--",
+    "NIP": "[94](94.md)"
+  },
+  {
+    "name": "`p`",
+    "value": "pubkey (hex)",
+    "other parameters": "relay URL, petname",
+    "NIP": "[01](01.md), [02](02.md), [22](22.md)"
+  },
+  {
+    "name": "`P`",
+    "value": "pubkey (hex)",
+    "other parameters": "--",
+    "NIP": "[22](22.md), [57](57.md)"
+  },
+  {
+    "name": "`q`",
+    "value": "event id (hex)",
+    "other parameters": "relay URL, pubkey (hex)",
+    "NIP": "[18](18.md)"
+  },
+  {
+    "name": "`r`",
+    "value": "a reference (URL, etc)",
+    "other parameters": "--",
+    "NIP": "[24](24.md), [25](25.md)"
+  },
+  {
+    "name": "`r`",
+    "value": "relay url",
+    "other parameters": "marker",
+    "NIP": "[65](65.md)"
+  },
+  {
+    "name": "`s`",
+    "value": "status",
+    "other parameters": "--",
+    "NIP": "[69](69.md)"
+  },
+  {
+    "name": "`t`",
+    "value": "hashtag",
+    "other parameters": "--",
+    "NIP": "[24](24.md), [34](34.md), [35](35.md)"
+  },
+  {
+    "name": "`u`",
+    "value": "url",
+    "other parameters": "--",
+    "NIP": "[61](61.md), [98](98.md)"
+  },
+  {
+    "name": "`x`",
+    "value": "hash",
+    "other parameters": "--",
+    "NIP": "[35](35.md), [56](56.md)"
+  },
+  {
+    "name": "`y`",
+    "value": "platform",
+    "other parameters": "--",
+    "NIP": "[69](69.md)"
+  },
+  {
+    "name": "`z`",
+    "value": "order number",
+    "other parameters": "--",
+    "NIP": "[69](69.md)"
+  },
+  {
+    "name": "`-`",
+    "value": "--",
+    "other parameters": "--",
+    "NIP": "[70](70.md)"
+  },
+  {
+    "name": "`alt`",
+    "value": "summary",
+    "other parameters": "--",
+    "NIP": "[31](31.md)"
+  },
+  {
+    "name": "`amount`",
+    "value": "millisatoshis, stringified",
+    "other parameters": "--",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "name": "`bolt11`",
+    "value": "`bolt11` invoice",
+    "other parameters": "--",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "name": "`branch-name`",
+    "value": "branch name suggestion",
+    "other parameters": "--",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "name": "`challenge`",
+    "value": "challenge string",
+    "other parameters": "--",
+    "NIP": "[42](42.md)"
+  },
+  {
+    "name": "`client`",
+    "value": "name, address",
+    "other parameters": "relay URL",
+    "NIP": "[89](89.md)"
+  },
+  {
+    "name": "`clone`",
+    "value": "git clone URL",
+    "other parameters": "--",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "name": "`content-warning`",
+    "value": "reason",
+    "other parameters": "--",
+    "NIP": "[36](36.md)"
+  },
+  {
+    "name": "`delegation`",
+    "value": "pubkey, conditions, delegation token",
+    "other parameters": "--",
+    "NIP": "[26](26.md)"
+  },
+  {
+    "name": "`dep`",
+    "value": "Required dependency",
+    "other parameters": "--",
+    "NIP": "[C0](C0.md)"
+  },
+  {
+    "name": "`description`",
+    "value": "description",
+    "other parameters": "--",
+    "NIP": "[34](34.md), [57](57.md), [58](58.md), [C0](C0.md)"
+  },
+  {
+    "name": "`emoji`",
+    "value": "shortcode, image URL",
+    "other parameters": "--",
+    "NIP": "[30](30.md)"
+  },
+  {
+    "name": "`encrypted`",
+    "value": "--",
+    "other parameters": "--",
+    "NIP": "[90](90.md)"
+  },
+  {
+    "name": "`extension`",
+    "value": "File extension",
+    "other parameters": "--",
+    "NIP": "[C0](C0.md)"
+  },
+  {
+    "name": "`expiration`",
+    "value": "unix timestamp (string)",
+    "other parameters": "--",
+    "NIP": "[40](40.md)"
+  },
+  {
+    "name": "`file`",
+    "value": "full path (string)",
+    "other parameters": "--",
+    "NIP": "[35](35.md)"
+  },
+  {
+    "name": "`goal`",
+    "value": "event id (hex)",
+    "other parameters": "relay URL",
+    "NIP": "[75](75.md)"
+  },
+  {
+    "name": "`merge-base`",
+    "value": "commit id",
+    "other parameters": "",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "name": "`HEAD`",
+    "value": "`ref: refs/heads/<branch-name>`",
+    "other parameters": "",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "name": "`image`",
+    "value": "image URL",
+    "other parameters": "dimensions in pixels",
+    "NIP": "[23](23.md), [52](52.md), [58](58.md)"
+  },
+  {
+    "name": "`imeta`",
+    "value": "inline metadata",
+    "other parameters": "--",
+    "NIP": "[92](92.md)"
+  },
+  {
+    "name": "`license`",
+    "value": "License of the shared content",
+    "other parameters": "--",
+    "NIP": "[C0](C0.md)"
+  },
+  {
+    "name": "`lnurl`",
+    "value": "`bech32` encoded `lnurl`",
+    "other parameters": "--",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "name": "`location`",
+    "value": "location string",
+    "other parameters": "--",
+    "NIP": "[52](52.md), [99](99.md)"
+  },
+  {
+    "name": "`name`",
+    "value": "name",
+    "other parameters": "--",
+    "NIP": "[34](34.md), [58](58.md), [72](72.md), [C0](C0.md)"
+  },
+  {
+    "name": "`nonce`",
+    "value": "random",
+    "other parameters": "difficulty",
+    "NIP": "[13](13.md)"
+  },
+  {
+    "name": "`preimage`",
+    "value": "hash of `bolt11` invoice",
+    "other parameters": "--",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "name": "`price`",
+    "value": "price",
+    "other parameters": "currency, frequency",
+    "NIP": "[99](99.md)"
+  },
+  {
+    "name": "`proxy`",
+    "value": "external ID",
+    "other parameters": "protocol",
+    "NIP": "[48](48.md)"
+  },
+  {
+    "name": "`published_at`",
+    "value": "unix timestamp (string)",
+    "other parameters": "--",
+    "NIP": "[23](23.md), [B0](B0.md)"
+  },
+  {
+    "name": "`relay`",
+    "value": "relay url",
+    "other parameters": "--",
+    "NIP": "[42](42.md), [17](17.md)"
+  },
+  {
+    "name": "`relays`",
+    "value": "relay list",
+    "other parameters": "--",
+    "NIP": "[57](57.md)"
+  },
+  {
+    "name": "`repo`",
+    "value": "Reference to the origin repository",
+    "other parameters": "--",
+    "NIP": "[C0](C0.md)"
+  },
+  {
+    "name": "`runtime`",
+    "value": "Runtime or environment specification",
+    "other parameters": "--",
+    "NIP": "[C0](C0.md)"
+  },
+  {
+    "name": "`server`",
+    "value": "file storage server url",
+    "other parameters": "--",
+    "NIP": "[96](96.md)"
+  },
+  {
+    "name": "`sound`",
+    "value": "shortcode, sound url, image url",
+    "other parameters": "--",
+    "NIP": "[51](51.md)"
+  },
+  {
+    "name": "`subject`",
+    "value": "subject",
+    "other parameters": "--",
+    "NIP": "[14](14.md), [17](17.md), [34](34.md)"
+  },
+  {
+    "name": "`summary`",
+    "value": "summary",
+    "other parameters": "--",
+    "NIP": "[23](23.md), [52](52.md)"
+  },
+  {
+    "name": "`thumb`",
+    "value": "badge thumbnail",
+    "other parameters": "dimensions in pixels",
+    "NIP": "[58](58.md)"
+  },
+  {
+    "name": "`title`",
+    "value": "title",
+    "other parameters": "--",
+    "NIP": "[23](23.md), [B0](B0.md)"
+  },
+  {
+    "name": "`tracker`",
+    "value": "torrent tracker URL",
+    "other parameters": "--",
+    "NIP": "[35](35.md)"
+  },
+  {
+    "name": "`web`",
+    "value": "webpage URL",
+    "other parameters": "--",
+    "NIP": "[34](34.md)"
+  },
+  {
+    "name": "`zap`",
+    "value": "pubkey (hex), relay URL",
+    "other parameters": "weight",
+    "NIP": "[57](57.md)"
+  }
+]

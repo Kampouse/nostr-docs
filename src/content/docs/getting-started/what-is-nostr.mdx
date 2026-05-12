@@ -1,0 +1,44 @@
+---
+title: What is Nostr?
+description: A gentle introduction to the decentralized social protocol
+---
+
+Nostr stands for "Notes and Other Stuff Transmitted by Relays." But forget the acronym for a second — what matters is what it *is*.
+
+Nostr is a **protocol**, not an app. Think about email. You can use Gmail, Outlook, Apple Mail, or a dozen other apps to read and send email. They all work together because they speak the same protocol — SMTP. Nostr is like that, but for social media. You pick your client, and it talks to the network using the same open protocol as everyone else's client.
+
+No central company owns Nostr. No CEO can wake up grumpy and ban you. No algorithm decides what you see — your client does, and you can change your client anytime.
+
+## The three pillars
+
+Everything in Nostr rests on three ideas:
+
+**Cryptographic keys are your identity.** You don't have a username and password. Instead, you have a keypair: a private key (a secret you guard with your life) and a public key (your handle, visible to everyone). Your private key proves who you are by signing things. If someone else gets your private key, they become you. If you lose it, you're gone. It's a tradeoff — more responsibility, but also more ownership.
+
+**Events are your data.** Every post, reaction, profile update, direct message, and payment receipt in Nostr is an "event" — a small bundle of JSON with a signature attached. Events are the one universal data format. If it happens on Nostr, it's an event.
+
+**Relays are the network.** Relays are simple servers that store events and hand them out to anyone who asks. Anyone can run a relay. You connect to several of them, and they don't need to talk to each other. Think of them as bulletin boards in different cities — you pin your message to several boards, and people check the boards they trust.
+
+## Why does this matter?
+
+On Twitter (now X), one company controls the servers, the algorithm, the rules, and your account. They can suspend you, change the timeline, or shut down entirely. You have no recourse.
+
+On Mastodon, servers are run by different people, which is better. But each server is still a mini-kingdom. The admin of your server can ban you, block other servers, or just shut down one day. Your identity is tied to that server.
+
+Nostr goes further. Your identity lives in your keys, not on any server. You broadcast your events to whatever relays you choose. If a relay bans you or goes offline, you just use different ones. Your followers find you through your public key, not through any particular server. Nobody can take your identity away from you — as long as you hold your private key.
+
+## A roadmap for this guide
+
+Here's the path ahead, if you're reading these pages in order:
+
+1. **Keys and identity** — how cryptographic keypairs replace usernames and passwords
+2. **How relays work** — the servers that store and forward your data
+3. **Your first note** — a step-by-step walkthrough of posting on Nostr
+4. **Events** — the universal data structure behind everything
+5. **How NIPs fit together** — a map of the whole ecosystem
+6. **Filters and subscriptions** — how clients ask relays for data
+7. **Digital signatures** — how Nostr proves who created what
+
+Ready? Let's start with how your identity works.
+
+→ Next: [Keys and Identity](/getting-started/keys-and-identity)

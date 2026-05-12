@@ -1,0 +1,72 @@
+---
+title: How Relays Work
+description: Understanding the servers that store and forward your data
+---
+
+Relays are the backbone of Nostr's network. But don't let the technical name fool you — a relay is actually a pretty simple thing.
+
+A relay is a server that stores events and forwards them to anyone who asks. That's it. It's like a bulletin board in a community center: people pin messages to it, and anyone walking by can read them. You can pin your message to several bulletin boards around town, and people check whichever ones they know about.
+
+## How relays work under the hood
+
+Relays communicate over WebSockets — a type of persistent connection that stays open, allowing data to flow in both directions in real time.
+
+Here's the basic flow:
+
+1. Your client opens a WebSocket connection to a relay.
+2. Your client sends a subscription — a description of what kind of events it wants.
+3. The relay searches its stored events and sends any that match.
+4. The relay then keeps the connection open. When new matching events arrive, it pushes them to your client immediately.
+
+This is different from how the web normally works. With a website, your browser asks for a page and gets a response. With a relay, your client says "I want this kind of stuff" and then the relay streams matching content to you as it arrives. It's more like tuning into a radio station than loading a webpage.
+
+## Anyone can run a relay
+
+This is crucial. There is no "main" Nostr relay. No central authority decides which relays exist. Anyone with a server and a little technical know-how can run one.
+
+You connect to several relays simultaneously — typically somewhere between 3 and 10. Your client sends your events to all of them, and subscribes to events from all of them. This creates a web of redundancy.
+
+## Types of relays
+
+Not all relays are the same:
+
+- **Public relays** — open to everyone, free to read and write. Great for getting started. Examples include well-known community relays.
+- **Paid relays** — require a small payment (usually via Bitcoin's Lightning Network) to post. These tend to have higher-quality content and less spam, because there's a cost to posting.
+- **Authenticated relays** — use NIP-42 to verify that you are who you say you are before letting you read or write. Some paid relays use this.
+- **Private relays** — run by individuals or groups for their own use. You might run one just for yourself, or a company might run one for internal communication.
+
+## How do people find your posts?
+
+Here's a question people often ask: if there's no central server, how does someone find my posts?
+
+The answer involves relay lists. NIP-65 defines a standard way for you to publish which relays you write to and read from. When someone follows you, their client looks up your relay list (which is itself an event stored on relays), connects to those relays, and subscribes to your events.
+
+So if you post to relays A, B, and C, and someone follows you, their client connects to A, B, and C to find your posts. The relays themselves don't need to talk to each other. The client does the coordination.
+
+NIP-66 adds another layer: relay discovery and liveness monitoring. It helps clients find new relays and know which ones are actually up and running.
+
+## Why use multiple relays?
+
+There are three big reasons:
+
+**Redundancy.** If one relay goes offline, your data is still available on the others. Your posts don't vanish just because someone's server crashed.
+
+**Reach.** Your followers might not all check the same relays you do. By posting to several, you increase the chances that people find your content.
+
+**Censorship resistance.** No single relay operator can silence you. If one relay refuses to carry your events, you just use others. Your followers will still find you.
+
+## The mental model
+
+Think of relays like mail servers, but with a twist. With email, you have one mail server (like Gmail) and it talks to other mail servers to deliver your messages. With Nostr, you can have as many relays as you want, and they *don't* need to talk to each other at all. Your client handles the distribution.
+
+Or think of it like this: you're standing in a room with several bulletin boards. You pin a copy of your note to each one. Your friends know which boards you pin to, so they walk by those boards and read your note. If someone removes your note from one board, it's still on the others.
+
+## Further reading
+
+- [NIP-01 — Core protocol](/nips/nip-01) — defines the basic relay protocol
+- [NIP-11 — Relay Information Document](/nips/nip-11) — how relays describe themselves
+- [NIP-42 — Relay authentication](/nips/nip-42)
+- [NIP-65 — Relay List Metadata](/nips/nip-65)
+- [NIP-66 — Relay discovery](/nips/nip-66)
+
+→ Next: [Send Your First Note](/getting-started/your-first-note)

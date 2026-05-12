@@ -1,0 +1,78 @@
+---
+title: Keys and Identity
+description: How cryptographic keypairs replace usernames and passwords
+---
+
+In most apps, your identity is a username and a password. You tell the server who you are, and the server believes you because it has your password on file. The server is the authority.
+
+Nostr flips this around. **Your identity is a cryptographic keypair.** You prove who you are with math, not by asking a server to vouch for you.
+
+## Your keypair, explained
+
+A keypair is two connected numbers:
+
+- **Private key** (also called a secret key). This is the one you never, ever share with anyone. It's your power to sign things — to prove "I said this" or "I did this." Think of it like the physical key to your house. You don't make copies for strangers.
+- **Public key.** This is your identity in the network. You share it freely. It's like your phone number — anyone can have it, and it lets them verify that something was signed by you.
+
+When you sign up for a Nostr client, it generates this keypair for you. The private key stays on your device (or in a signing extension — more on that below). The public key becomes your handle — it's how people find you and follow you.
+
+## npub and nsec: making keys readable
+
+Raw public and private keys are long hex strings like `a1b2c3d4...` — not fun to read, copy, or share.
+
+NIP-19 solves this by encoding keys into "bech32" format, which gives them a human-readable prefix and a built-in error-detection checksum:
+
+- **npub1...** — your public key in shareable form. You can put this on your website, hand it to a friend, or post it anywhere.
+- **nsec1...** — your private key. The "nsec" prefix is a red flag: "secret — do not share." The checksum also means if you accidentally mistype one character, tools can catch the error.
+
+These aren't different keys — they're the same key, just encoded differently. Your npub is safe to share. Your nsec is not.
+
+## There's no "forgot password" button
+
+This is the part that takes getting used to. If you lose your private key, **you lose your identity.** Period. There's no server that can email you a reset link, because there's no server that holds your identity. Your keys *are* your identity.
+
+This sounds scary, and it is a real tradeoff. But it's also the source of Nostr's power: nobody can take your identity from you, either. No server can suspend your account. No admin can lock you out. You hold the keys, literally.
+
+So back up your private key. Write it down somewhere safe. Or better yet, use a mnemonic seed phrase.
+
+## Mnemonic seed phrases (NIP-06)
+
+NIP-06 lets you represent your private key as a list of 12 or 24 ordinary words — something like `abandon ability able about above absent absorb abstract absurd abuse access accident`. This is the same approach used by crypto wallets. It's easier to write down on paper and store in a safe place than a long string of random characters.
+
+If you lose your device, you can type those words into any compatible client and recover your keypair.
+
+## Signing extensions: keep your key even safer
+
+Pasting your nsec into a website is risky. If the site is malicious — or gets compromised — your key is stolen and your identity is gone.
+
+Signing extensions solve this. Instead of giving your key to the client, you keep it in a separate tool that only signs things when *you* approve:
+
+- **NIP-07** — browser extensions (like Alby or nos2x) that sit in your browser. When a website wants to sign something, the extension pops up and asks you to approve.
+- **NIP-46** — remote signing, where your key lives on a separate device (like a phone or server) and signs things via a secure connection.
+- **NIP-55** — Android's native signer, so apps can request signatures through the operating system instead of handling your key directly.
+
+The rule of thumb: **never paste your nsec into a website.** Use a signing extension instead.
+
+## Making your identity friendlier
+
+A public key is a lousy handle for humans. Nobody wants to tell their friend "follow me at npub1x7a3k9dg0..." over dinner. A few NIPs make this better:
+
+- **NIP-05** maps your public key to a human-readable name like `bob@example.com`. It works by placing a small JSON file at a web address, similar to how websites verify domain ownership. Your client looks up `bob@example.com`, finds the associated public key, and confirms the match. Now you can tell people "I'm bob@example.com on Nostr."
+
+- **NIP-39** lets you prove you own accounts on other platforms — Twitter, GitHub, Mastodon, and others. You add a special event to your profile linking to those accounts, and the other platforms display a verification code. It's a way to say "this Nostr account is the same person as @bob on Twitter."
+
+## Summary
+
+Your identity on Nostr is a keypair, not an account on a server. This gives you real ownership — nobody can take it from you — but also real responsibility. Back up your key, use a signing extension when you can, and never share your nsec with anyone.
+
+## Further reading
+
+- [NIP-01 — Core protocol](/nips/nip-01) — the foundation that defines keys and signing
+- [NIP-05 — DNS-based identity](/nips/nip-05)
+- [NIP-06 — Mnemonic seed phrases](/nips/nip-06)
+- [NIP-07 — Browser extension signing](/nips/nip-07)
+- [NIP-19 — bech32 encoding](/nips/nip-19)
+- [NIP-39 — External identity verification](/nips/nip-39)
+- [NIP-46 — Remote signing](/nips/nip-46)
+
+→ Next: [How Relays Work](/getting-started/how-relays-work)

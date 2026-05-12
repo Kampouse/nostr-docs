@@ -1,0 +1,26 @@
+---
+title: Reference
+description: Quick-reference documentation for Nostr event kinds, tags, and protocol messages.
+template: splash
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+The reference section provides structured, look-up-friendly tables of the core
+Nostr protocol primitives: event kinds, standard tags, and the client-relay
+message protocol.
+
+<CardGrid>
+  <Card title="Event Kinds" href="/reference/event-kinds">
+    All known event kinds grouped by category — regular, replaceable,
+    ephemeral, and addressable.
+  </Card>
+  <Card title="Standard Tags" href="/reference/tags">
+    Every standardised tag name, what its value represents, and which
+    NIP defines it.
+  </Card>
+  <Card title="Message Types" href="/reference/message-types">
+    Client-to-relay and relay-to-client WebSocket messages that make
+    up the Nostr protocol.
+  </Card>
+</CardGrid>
