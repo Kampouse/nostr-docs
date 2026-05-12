@@ -1,0 +1,146 @@
+---
+title: Replaceable & Addressable Events
+description: How Nostr handles updates and mutability in an append-only system
+---
+
+Events on Nostr are immutable. Once published, an event's ID and signature are fixed — you can't go back and edit a post, change your mind in a message, or update a profile without creating a brand new event.
+
+But that creates a problem. What about things that *need* to change? Your profile bio. Your follow list. Your relay preferences. These aren't one-and-done data — they evolve over time. If every update created a permanent record, relays would drown in old versions and clients wouldn't know which one to trust.
+
+Replaceable and addressable events solve this. They give Nostr a controlled form of mutability — not by editing old events, but by telling relays to keep only the latest version.
+
+## The problem with append-only
+
+Imagine you publish your profile metadata (kind 0) every time you update your bio. Without any special handling, every relay would store every version you ever published. A client querying your profile would get dozens of results and have to guess which one is current.
+
+That's wasteful and confusing. Replaceable events fix it with a simple rule: for a given author and event kind, the relay keeps only the latest one.
+
+## Replaceable events
+
+A replaceable event is one where the relay stores only the most recent version per author. When you publish a new one, the old one gets discarded (or simply ignored).
+
+The kind number determines whether an event is replaceable:
+
+- **Kinds 10000–19999** are replaceable by convention. Each author can have only one event of each kind stored at a time.
+- **Kind 0** (profile metadata) and **kind 3** (contact list) are also treated as replaceable, even though they fall outside the 10000 range. This is a special case defined by NIP-01.
+
+Here's how it works in practice:
+
+1. You publish a kind 10002 event (your relay list) with `created_at: 1700000000`.
+2. Later, you update your relay list and publish a new kind 10002 event with `created_at: 1700050000`.
+3. The relay sees both events from the same pubkey, same kind. It keeps the one with the higher `created_at` and discards the old one.
+
+When a client queries `{\"kinds\": [10002], \"authors\": [\"your-pubkey\"]}`, the relay returns just the latest version — even if it somehow still has older copies stored.
+
+### What if timestamps tie?
+
+If two replaceable events from the same author have the same `created_at` timestamp, the relay keeps the one with the lower event ID (in lexical order). This tiebreaker ensures deterministic behavior — every relay makes the same choice.
+
+### Common replaceable events
+
+| Kind | Purpose |
+|------|---------|
+| 0 | Profile metadata (name, bio, picture) |
+| 3 | Contact/follow list |
+| 10002 | Relay list (NIP-65) — where you read and write |
+| 10096 | File server preference (NIP-96) |
+| 13194 | Wallet service info (NIP-47) |
+
+Each of these represents data that naturally changes over time. You don't want old profile bios cluttering relays — you want the current one.
+
+## Addressable events (parameterized replaceable)
+
+Replaceable events give you one slot per kind per author. But sometimes you need more than one. You might have multiple bookmark lists, multiple long-form drafts, or multiple live event definitions — all of the same kind, but each logically distinct.
+
+Addressable events (also called parameterized replaceable events) solve this by adding a `d` tag as a second dimension. Instead of being identified by just (pubkey, kind), they're identified by (pubkey, kind, d-tag).
+
+These live in the **kind 30000–39999** range.
+
+The `d` tag acts as a name or identifier for the slot. Here's what that looks like:
+
+```json
+{
+  "kind": 30000,
+  "pubkey": "your-pubkey",
+  "tags": [
+    ["d", "follow"],
+    ["p", "alice-pubkey"],
+    ["p", "bob-pubkey"]
+  ],
+  "content": "...",
+  "created_at": 1700050000
+}
+```
+
+And a second event with a different `d` tag:
+
+```json
+{
+  "kind": 30000,
+  "pubkey": "your-pubkey",
+  "tags": [
+    ["d", "bookmark"],
+    ["e", "some-event-id"],
+    ["e", "another-event-id"]
+  ],
+  "content": "...",
+  "created_at": 1700050000
+}
+```
+
+Both are kind 30000 events from the same author, but they're treated as completely separate entries because their `d` tags differ. Publishing a new event with the same (kind, pubkey, d-tag) combination replaces the old one, just like regular replaceable events.
+
+The `d` tag can be any string. It's your identifier — use something meaningful like \"follow,\" \"bookmark,\" \"relay-settings,\" or a UUID for unique items like individual blog posts.
+
+### Common addressable events
+
+| Kind | Purpose |
+|------|---------|
+| 30000–30009 | Application-specific data (follow lists, pin lists, etc.) |
+| 30023 | Long-form content (blog posts, articles) |
+| 30311 | Live events |
+| 34550 | Communities |
+
+## How relays handle them
+
+The relay's job is straightforward:
+
+**For replaceable events (10000–19999, 0, 3):** When storing a new event, check if an event with the same (pubkey, kind) already exists. If so, compare `created_at` timestamps. Keep the newer one.
+
+**For addressable events (30000–39999):** When storing a new event, check if an event with the same (pubkey, kind, d-tag) already exists. If so, keep the newer one.
+
+**When querying:** If a client asks for `{\"kinds\": [0], \"authors\": [\"some-pubkey\"]}`, the relay should return only the latest version, even if older copies are still in storage.
+
+This behavior is defined in NIP-01.
+
+## How clients reference them
+
+Since replaceable events get overwritten, you can't reference them by event ID — the ID changes with every update. Instead, clients use `a` tags that reference the event by its address:
+
+- **For a replaceable event:** `[\"a\", \"<kind>:<pubkey>:\"]` — note the trailing colon and empty d-tag.
+- **For an addressable event:** `[\"a\", \"<kind>:<pubkey>:<d-tag>\"]`
+
+This is how you link to a user's profile (kind 0), a blog post (kind 30023), or a community definition (kind 34550) in a way that always resolves to the latest version, even as the underlying event gets replaced.
+
+When an `a` tag is used in a repost (NIP-18) or a reaction (NIP-25), clients know to look up the current version of that replaceable or addressable event rather than a specific (now possibly deleted) event ID.
+
+## Deletion
+
+NIP-09 (event deletion) works with replaceable and addressable events too. When you publish a deletion request with an `a` tag, the relay should delete all versions of the addressed event up to the `created_at` timestamp of the deletion request. This is useful when you want to completely remove an addressable event rather than just replace it.
+
+## A practical mental model
+
+Think of it this way:
+
+- **Regular events** are like posts on a wall. Every one stays. You can't take them down.
+- **Replaceable events** are like a whiteboard. Each author gets one per kind. Writing a new message erases the old one.
+- **Addressable events** are like a wall of named whiteboards. Each author gets as many as they want, each identified by a `d` tag. Writing on a named board erases what was there before, but the other boards are untouched.
+
+This gives Nostr the right balance: permanent records for things that matter (posts, reactions, zap receipts) and up-to-date state for things that change (profiles, lists, preferences).
+
+## Further reading
+
+- [Events](/concepts/events/) — the universal data structure
+- [NIP-01 — Core protocol](/nips/nip-01) — the formal specification of replaceable and addressable events
+- [NIP-09 — Event deletion](/nips/nip-09) — how deletion interacts with replaceable events
+- [Event Kinds reference](/reference/event-kinds/) — a complete table of all event kinds and their categories

@@ -1,0 +1,150 @@
+---
+title: Nostr Ecosystem
+description: A curated directory of clients, relays, libraries, and tools that make up the Nostr ecosystem.
+---
+
+The Nostr ecosystem is built around a simple protocol with many interchangeable
+parts. Because clients, relays, and tools all speak the same protocol, you can
+mix and match freely. This page catalogs the major projects in each category.
+
+## Clients
+
+Clients are the apps people use to interact with the Nostr network. Because the
+protocol is open, anyone can build one — and users can switch at any time
+without losing their identity or data.
+
+### Social Clients
+
+| Client | Platforms | Description |
+| ------ | --------- | ----------- |
+| [Damus](https://damus.io/) | iOS | The first native iOS Nostr client. Full-featured social experience with zaps, threads, and media. |
+| [Amethyst](https://github.com/vitorpamplona/amethyst) | Android | Feature-rich Android client with support for zaps, communities, live streams, and classifieds. |
+| [Primal](https://primal.net/) | Web, iOS, Android | Fast social client with a polished UI, built-in media feed, and premium relay infrastructure. |
+| [Nostrudel](https://nostrudel.ninja/) | Web | Lightweight web client focused on performance and clean design. |
+| [Coracle](https://github.com/nicoschmitt/coracle) | Web | Web client with advanced relay management and social graph exploration. |
+| [Snort](https://snort.social/) | Web | Fast, feature-complete web client with a familiar social media layout. |
+| [Florisboard](https://florisboard.org/) | Android | Keyboard app with integrated Nostr signing support. |
+| [YakiHonne](https://yakihonne.com/) | Web | Web client with a focus on long-form content, articles, and community features. |
+
+### Messaging Clients
+
+| Client | Platforms | Description |
+| ------ | --------- | ----------- |
+| [Nostros](https://github.com/nostrostech/nostros-app) | Android | Messaging-focused Android client supporting NIP-04 and NIP-17 DMs. |
+| [Jumble](https://github.com/CodyTseng/jumble) | Web | Web client focused on group chats and community messaging via NIP-28 channels. |
+
+### Long-Form Content
+
+| Client | Platforms | Description |
+| ------ | --------- | ----------- |
+| [Habla](https://habla.news/) | Web | Blogging and long-form content platform built on NIP-23. |
+| [Blogstack](https://blogstack.nostrapps.org/) | Web | Long-form publishing client with Markdown support. |
+
+## Relays
+
+Relays are the servers that store and forward Nostr events. They do not need to
+talk to each other. Anyone can run one, and clients connect to multiple relays
+simultaneously for resilience.
+
+### Popular Relay Implementations
+
+| Relay | Language | Description |
+| ----- | -------- | ----------- |
+| [nostr-rs-relay](https://github.com/scsibug/nostr-rs-relay) | Rust | Mature, production-ready relay with SQLite storage and configurable policies. |
+| [strfry](https://github.com/hoytech/strfry) | C++ | High-performance relay optimized for throughput with a write-once data model. |
+| [nak](https://github.com/fiatjaf/nak) | Go | Lightweight relay implementation in Go by fiatjaf. |
+| [Nostr Relay (Python)](https://github.com/uviejie/nostr_relay) | Python | Simple relay implementation useful for learning and prototyping. |
+| [Kodo](https://github.com/nicobao/kodo) | Rust | Relay with PostgreSQL backend and advanced query support. |
+| [søstr](https://git.qvch unstable/sostr) | Rust | Minimal relay focused on simplicity and correctness. |
+
+### Relay Lists
+
+Relay lists (NIP-65) let users advertise which relays they post to and read from.
+This is critical for discovery — if someone wants to find your events, they need
+to know which relays to query.
+
+You can discover public relays through:
+
+- **Relay monitor events** (NIP-66) — automated relay health monitoring
+- **Community-curated lists** — such as [nostr.watch](https://nostr.watch/) and [relay.nostr.band](https://relay.nostr.band/)
+- **User relay lists** — kind 10002 events published by individual users
+
+### Paid Relays
+
+Some relays charge sats for posting or subscribing. This can improve signal-to-noise
+ratio and help fund relay infrastructure. Notable paid relays include:
+
+| Relay | Cost Model | Notes |
+| ----- | ---------- | ----- |
+| `wss://relay.nostr.band/paid/` | Per-event or subscription | High-quality index with spam filtering |
+| `wss://nos.lol/` | Optional donation | Open relay with suggested donations |
+| `wss://relay.primal.net/` | Freemium | Primal's relay infrastructure |
+
+## Libraries
+
+Libraries implement the Nostr protocol so developers do not have to start from
+scratch. Most languages have at least one mature option.
+
+| Library | Language | Description |
+| ------- | -------- | ----------- |
+| [nostr-tools](https://github.com/nbd-wtf/nostr-tools) | TypeScript/JS | The most widely used JS/TS library. Event creation, signing, NIP-01 through NIP-47 and beyond. |
+| [nostr-sdk](https://github.com/rust-nostr/nostr-sdk) | Rust, Swift, Kotlin, Python, JS | Multi-language SDK backed by a Rust core. High-level API with NIP support. |
+| [go-nostr](https://github.com/nbd-wtf/go-nostr) | Go | Full-featured Go library for building clients, relays, and bots. |
+| [nostr-php](https://github.com/swentel/nostr-php) | PHP | PHP library for Nostr event creation and verification. |
+| [python-nostr](https://github.com/jeffthibault/python-nostr) | Python | Python library for Nostr event handling and relay communication. |
+| [NostrKit](https://github.com/nickvdyck/NostrKit) | Swift | Swift library for iOS/macOS Nostr development. |
+| [dnbr](https://github.com/dibr-lab/dnbr) | Dart | Dart/Flutter library for building cross-platform Nostr clients. |
+| [nostr](https://github.com/0xtrr/nostr) | C# | C# / .NET library for the Nostr protocol. |
+
+## Identity & Key Management
+
+| Tool | Description |
+| ---- | ----------- |
+| [nostr-connect](https://github.com/nostr-connect/) | NIP-46 Nostr Connect — sign events from a remote key vault without exposing keys to the client. |
+| [Amber](https://github.com/greenart7c3/Amber) | Android signer app that keeps your nsec private while allowing other apps to request signatures. |
+| [nsecBunker](https://github.com/kindbadger/nsecbunker) | Server-side key management for automated bots and services. |
+
+## Media & File Storage
+
+| Tool | Description |
+| ---- | ----------- |
+| [Blossom](https://github.com/hzrd149/blossom) | Blob storage protocol (NIP-96 compatible) for Nostr media. |
+| [nostr-build](https://nostr.build/) | Popular media hosting service integrated with most Nostr clients. |
+| [void.cat](https://void.cat/) | File hosting service with Nostr integration. |
+
+## Payments
+
+| Tool | Description |
+| ---- | ----------- |
+| [Alby](https://getalby.com/) | Browser extension and wallet with native Nostr support and NIP-47 Wallet Connect. |
+| [Mutiny Wallet](https://mutinywallet.com/) | Lightning wallet with Nostr integration and Cashu ecash support. |
+| [LNbits](https://github.com/lnbits/lnbits) | Self-hosted Lightning wallet system with Nostr extensions. |
+| [Cashu mint](https://github.com/cashubtc/cashu) | Ecash mint implementation for private, Chaumian tokens on Nostr (NIP-60/61). |
+
+## Development Tools
+
+| Tool | Description |
+| ---- | ----------- |
+| [nak](https://github.com/fiatjaf/nak) | Command-line "swiss army knife" for Nostr — generate keys, create events, query relays, and more. |
+| [nostr-debug](https://nostr-debug.github.io/) | Web tool for inspecting events, verifying signatures, and debugging relay connections. |
+| [nos2x](https://github.com/fiatjaf/nos2x) | Browser extension that provides a Nostr keypair to web apps via the `window.nostr` API. |
+| [nostr-sdk CLI](https://github.com/rust-nostr/nostr-sdk) | CLI tools bundled with the Rust Nostr SDK for testing and scripting. |
+
+## Bots & Automation
+
+The Nostr protocol makes it straightforward to build automated agents that post,
+react to events, and interact with users — all using the same event format.
+
+Common patterns include:
+
+- **Zap-triggered actions** — bots that respond when they receive a Lightning payment
+- **Scheduled posting** — automated content publishing using replaceable events
+- **Moderation bots** — community management via NIP-72 events
+- **AI agents** — using NIP-90 Data Vending Machines for distributed compute tasks
+
+## Adding Your Project
+
+The Nostr ecosystem grows fast. If you have built a client, relay, library, or
+tool that you would like listed here, open an issue or pull request on the
+documentation repository. The only requirement is that your project genuinely
+implements the Nostr protocol and is actively maintained.

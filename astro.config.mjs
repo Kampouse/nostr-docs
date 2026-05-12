@@ -34,6 +34,7 @@ export default defineConfig({
             'concepts/signatures',
             'concepts/filters-and-subscriptions',
             'concepts/how-nips-fit-together',
+            'concepts/replaceable-events',
           ],
         },
         {
@@ -76,6 +77,8 @@ export default defineConfig({
           label: 'Reference',
           items: [
             { label: '🗺️ NIP Dependency Graph', link: '/nip-graph/' },
+            'reference/glossary',
+            'reference/ecosystem',
             'reference/event-kinds',
             'reference/tags',
             'reference/message-types',

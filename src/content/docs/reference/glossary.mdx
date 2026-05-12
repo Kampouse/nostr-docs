@@ -1,0 +1,244 @@
+---
+title: Glossary
+description: Every Nostr term explained in plain language — from events and relays to zaps and gift wraps.
+---
+
+A plain-language guide to every term you will encounter in the Nostr ecosystem.
+Terms are listed alphabetically.
+
+## A
+
+**Address (naddr / nevent / nprofile / note)**
+A shareable, bech32-encoded identifier that points to a specific Nostr resource. NIP-19 defines several address types: `naddr` for addressable events, `nevent` for any event, `nprofile` for a profile, and `note` for a kind 1 text note. Each one bundles enough information (event ID, pubkey, kind, relay hints) for a client to locate the resource without ambiguity.
+
+**Addressable event**
+An event in the kind range 30000–39999. Addressable events are replaceable per unique combination of kind, pubkey, and `d` tag value. This means the same author can maintain many addressable events of the same kind — each identified by a different `d` tag. Think of them as named, updatable slots. See [NIP-01](/nips/01).
+
+**AUTH**
+A WebSocket message type used in NIP-42 relay authentication. The client sends a signed event to prove its identity to a relay, and the relay may send an AUTH challenge to request this proof. See [NIP-42](/nips/42).
+
+## B
+
+**Bech32**
+A human-friendly encoding format (used in Bitcoin and Nostr) that produces strings with a prefix (like `npub1…`, `nsec1…`, `note1…`), a checksum for error detection, and no ambiguous characters. NIP-19 uses bech32 to encode keys and event references.
+
+**Blossom**
+An open protocol for file storage on Nostr. Blossom defines how clients upload, manage, and reference blobs (binary files) on storage servers, using kind 24242 ephemeral events for authorization. See [NIP-96](/nips/96).
+
+## C
+
+**Client**
+A Nostr application — the software you actually use to read and write events. Clients connect to relays over WebSockets, send events, open subscriptions, and display content to the user. Because Nostr is an open protocol, many independent clients exist and they all interoperate.
+
+**CLOSE**
+A client-to-relay message that ends an active subscription. The client sends `["CLOSE", "<subscription-id>"]` and the relay stops sending events for that subscription. Defined in [NIP-01](/nips/01).
+
+**CLOSED**
+A relay-to-client message indicating that a REQ subscription was terminated by the relay (usually with a reason string). Defined in [NIP-01](/nips/01).
+
+**Content**
+The `content` field of an event — the actual payload. For a text note it is the post text; for a profile update it is a JSON string; for some event kinds it may be empty.
+
+**COUNT**
+A message type defined in NIP-45 that lets clients request the number of events matching a filter, without receiving the events themselves. Both a client-to-relay request and a relay-to-client response.
+
+**Created_at**
+The Unix timestamp (seconds since epoch) on an event, set by the client at the time of creation. Used for ordering events and as a filter parameter (`since`, `until`).
+
+## D
+
+**d tag**
+The identifier tag used in addressable events (kind 30000–39999). Together with the kind and pubkey, the `d` tag value forms the unique coordinate for a parameterized replaceable event. Defined in [NIP-01](/nips/01).
+
+**Delegation (NIP-26)**
+A mechanism that allows one keypair to sign events on behalf of another, within constraints (specific kinds, time range). The delegator creates a delegation token that the delegatee includes in their events. See [NIP-26](/nips/26).
+
+## E
+
+**e tag**
+An event tag that references another event by its hex ID. Commonly used in replies, reactions, reposts, and any context where one event points to another. Often includes a relay URL hint and a marker (e.g., `root`, `reply`). See [NIP-01](/nips/01), [NIP-10](/nips/10).
+
+**EOSE (End Of Stored Events)**
+A relay-to-client message sent after the relay has delivered all stored events matching a subscription filter. After EOSE, the relay continues to forward new matching events in real time. Defined in [NIP-01](/nips/01).
+
+**Ephemeral event**
+An event in the kind range 20000–29999. Relays do not store ephemeral events — they forward them to current subscribers and then discard them. Useful for real-time signals like typing indicators, authentication, and remote procedure calls. See [NIP-01](/nips/01).
+
+**Event**
+The fundamental data structure in Nostr. Everything on the network — posts, reactions, profile updates, direct messages, payment receipts — is an event. An event is a JSON object containing `id`, `pubkey`, `created_at`, `kind`, `tags`, `content`, and `sig`. Defined in [NIP-01](/nips/01).
+
+**EVENT (client → relay)**
+A message sent from a client to a relay to publish a new event. Format: `["EVENT", {event object}]`. The relay verifies the signature before storing and forwarding it. Defined in [NIP-01](/nips/01).
+
+**EVENT (relay → client)**
+A message sent from a relay to a client delivering an event that matches one of the client's active subscriptions. Format: `["EVENT", "<subscription-id>", {event object}]`. Defined in [NIP-01](/nips/01).
+
+## F
+
+**Filter**
+A JSON object describing a set of events a client wants. Filters are sent inside REQ messages and support fields like `kinds`, `authors`, `since`, `until`, `limit`, `ids`, and tag-based filters (e.g., `#e`, `#p`). Multiple fields are ANDed; multiple values within a field are ORed. Defined in [NIP-01](/nips/01).
+
+**Follow list**
+A kind 3 event containing `p` tags for every pubkey the author follows. It also doubles as the author's relay list (each `p` tag may carry a relay URL). See [NIP-02](/nips/02).
+
+## G
+
+**Gift Wrap (NIP-59)**
+A technique for sending private messages without revealing the sender or recipient to anyone except the intended reader. The sender wraps a sealed payload (kind 13) inside a kind 1059 event encrypted for the recipient's public key. See [NIP-59](/nips/59).
+
+## H
+
+**Hashtag**
+A topic tag attached to an event using the `t` tag (e.g., `["t", "nostr"]`). Defined in [NIP-24](/nips/24).
+
+## I
+
+**Id**
+The unique identifier of an event — a 64-character hex string produced by SHA-256 hashing the serialized event data (pubkey, created_at, kind, tags, content).
+
+## K
+
+**Key (Keypair)**
+A pair of cryptographically linked numbers used for identity in Nostr. The private key (secret key, encoded as `nsec1…`) signs events; the public key (encoded as `npub1…`) identifies you and lets others verify your signatures. Key management is described in [NIP-01](/nips/01) and [NIP-19](/nips/19).
+
+**Kind**
+A number field on every event that indicates its type (e.g., 1 = text note, 0 = profile metadata, 7 = reaction). The kind also determines how relays store the event: regular (0–9999), replaceable (10000–19999), ephemeral (20000–29999), or addressable (30000–39999). See the full [Event Kinds Reference](/reference/event-kinds).
+
+## L
+
+**Label (NIP-32)**
+A tag-based system for attaching arbitrary labels to events. Labels use `l` and `L` tags and can be namespaced (e.g., `#topic/crypto`). Defined in [NIP-32](/nips/32).
+
+**Lightning Network**
+A Layer 2 payment protocol on Bitcoin that enables fast, low-cost transactions. Nostr integrates Lightning through zaps (NIP-57), wallet connections (NIP-47), and ecash (NIP-60/61).
+
+## M
+
+**Message Types**
+The set of JSON-array messages exchanged between clients and relays over WebSocket connections. Client-to-relay types include EVENT, REQ, CLOSE, AUTH, and COUNT. Relay-to-client types include EVENT, EOSE, NOTICE, OK, CLOSED, AUTH, and COUNT. See the [Message Types Reference](/reference/message-types).
+
+**Mnemonic seed phrase (NIP-06)**
+A list of 12 or 24 words that encodes a private key, making it easier to back up and recover. Compatible clients can regenerate the full keypair from the word list. Defined in [NIP-06](/nips/06).
+
+## N
+
+**NIP (Nostr Implementation Possibility)**
+A standards document describing a feature or extension to the Nostr protocol. NIPs are the specification layer — everything from the core protocol (NIP-01) to zaps (NIP-57), encryption (NIP-44), and relay discovery (NIP-66). NIPs are numbered and may be in draft, recommended, or final status.
+
+**NIP-01**
+The foundational NIP that defines the core protocol: events, event IDs, signatures, relays, subscriptions (REQ, CLOSE), and relay responses (EVENT, EOSE, NOTICE, OK).
+
+**NIP-05**
+DNS-based identity verification. Maps a public key to a human-readable identifier like `alice@example.com` by placing a `.well-known/nostr.json` file on a web domain. See [NIP-05](/nips/05).
+
+**NIP-07**
+Browser extension signing API. Defines `window.nostr` methods (getPublicKey, signEvent, etc.) so web clients can request signatures from a browser extension without ever handling the private key directly. See [NIP-07](/nips/07).
+
+**NIP-19**
+Bech32 encoding for Nostr entities. Defines human-readable, error-checked identifiers: `npub` (public key), `nsec` (private key), `note` (kind 1 event), `nprofile` (profile with relay hints), `nevent` (event with relay hints), `naddr` (addressable event coordinate). See [NIP-19](/nips/19).
+
+**NIP-46**
+Remote signing. Allows a client (nprofile bunker) to request signatures from a signing device over Nostr, keeping the private key off the client entirely. See [NIP-46](/nips/46).
+
+**NOTE**
+A kind 1 event — a short text note, the most basic content type on Nostr. Informally, "note" is also used to describe any text post.
+
+**npub / nsec**
+The bech32-encoded forms of a public key (`npub1…`) and private key (`nsec1…`). Defined in [NIP-19](/nips/19).
+
+**NOTICE**
+A relay-to-client message carrying a human-readable informational string (e.g., rate-limit warnings, policy notices). Not machine-parseable. Defined in [NIP-01](/nips/01).
+
+## O
+
+**OK**
+A relay-to-client message acknowledging whether an EVENT was accepted or rejected, along with a reason string. Format: `["OK", "<event-id>", <success-bool>, "<message>"]`. Defined in [NIP-01](/nips/01).
+
+**OpenTimestamps (NIP-03)**
+A kind 1040 event that anchors a Nostr event to the Bitcoin blockchain using OpenTimestamps, providing proof that the event existed at a specific point in time. See [NIP-03](/nips/03).
+
+## P
+
+**p tag**
+A pubkey tag that references a user by their hex public key. Used in mentions, follows, encrypted messages, zap receipts, and anywhere an event needs to point to a person. See [NIP-01](/nips/01).
+
+**Poll (NIP-88)**
+A kind 1068 event that defines a poll question with options. Responses are kind 1018 events referencing the poll. Defined in [NIP-88](/nips/88).
+
+**Private key**
+The secret half of your Nostr keypair. Encoded as `nsec1…` in bech32. You must never share it — anyone with your private key can sign events as you. If you lose it, you lose your identity permanently. See [Keys and Identity](/getting-started/keys-and-identity).
+
+**Profile metadata**
+A kind 0 event containing a JSON object with user profile information: name, display name, about, picture, banner, nip05, and other fields. Only the latest kind 0 event from a given pubkey is used. Defined in [NIP-01](/nips/01).
+
+**Protected event (NIP-70)**
+An event marked with the `-` tag, indicating it must be directly signed by the author — delegation (NIP-26) is not allowed. Useful when personal authorship must be guaranteed. See [NIP-70](/nips/70).
+
+**Pubkey**
+The public half of a Nostr keypair — a 64-character hex string that serves as your identity on the network. Encoded as `npub1…` in bech32 for sharing. See [NIP-19](/nips/19).
+
+## R
+
+**Reaction (NIP-25)**
+A kind 7 event expressing a reaction (like, emoji, dislike) to another event or URL. The reacted-to event is referenced with an `e` tag. Defined in [NIP-25](/nips/25).
+
+**Relay**
+A server that stores Nostr events and forwards them to connected clients. Relays communicate over WebSocket connections and support subscription-based event delivery. Anyone can run a relay; clients typically connect to several simultaneously for redundancy. See [How Relays Work](/getting-started/how-relays-work).
+
+**Relay List Metadata (NIP-65)**
+A kind 10002 event listing the relays an author reads from and writes to. Other clients look up this event to discover where to find a user's events. See [NIP-65](/nips/65).
+
+**REQ**
+A client-to-relay message that opens a subscription. Format: `["REQ", "<subscription-id>", <filter1>, <filter2>, ...]`. The relay responds with stored events, then EOSE, then streams new matching events in real time. Defined in [NIP-01](/nips/01).
+
+**Replaceable event**
+An event in the kind range 10000–19999. Only the latest event from a given author and kind is retained by the relay — publishing a new one replaces the previous. Defined in [NIP-01](/nips/01).
+
+**Repost (NIP-18)**
+A kind 6 event that shares another user's event with your followers. The original event is referenced by an `e` tag. Kind 16 is used for generic reposts of any event kind. Defined in [NIP-18](/nips/18).
+
+## S
+
+**Schnorr signature**
+The signature algorithm used by Nostr (and Bitcoin). Schnorr signatures over the secp256k1 elliptic curve are compact, fast to verify, and support advanced features like batch verification and multi-signatures.
+
+**Seal (NIP-59)**
+A kind 13 event — the inner, encrypted layer of a gift-wrapped message. The seal contains the actual message content and the sender's pubkey, encrypted with a shared secret derived from both parties' keys. See [NIP-59](/nips/59).
+
+**sig**
+The signature field on an event — a Schnorr signature proving the event was approved by the holder of the corresponding private key. See [Digital Signatures](/concepts/signatures).
+
+**Signing extension**
+A tool that holds your private key in a secure sandbox and only releases signatures when you approve. NIP-07 covers browser extensions, NIP-46 covers remote signing, and NIP-55 covers Android native signing. The rule: never paste your nsec into a website — use a signing extension instead. See [Keys and Identity](/getting-started/keys-and-identity).
+
+**Subscription**
+An open request from a client to a relay, created with a REQ message and identified by a subscription ID. The relay sends all stored events that match the filter, then continues to push new matching events until the client sends CLOSE or the connection drops.
+
+## T
+
+**Tag**
+A metadata element in an event's `tags` array. Each tag is a JSON array where the first element is the tag name (e.g., `e`, `p`, `d`, `t`, `a`) and subsequent elements are values. Tags link events to each other, reference users, carry relay hints, and hold all auxiliary data. See the [Standard Tags Reference](/reference/tags).
+
+**Thread**
+A conversational chain of events linked by `e` tags with markers (`root`, `reply`). NIP-10 defines the threading convention. NIP-7D introduces a dedicated kind 11 Thread event. See [NIP-10](/nips/10).
+
+## U
+
+**Unix timestamp**
+The number of seconds since January 1, 1970 (UTC). Used for the `created_at` field on events and for `since`/`until` filter boundaries.
+
+## W
+
+**WebSocket**
+The transport protocol used for all client-relay communication in Nostr. WebSockets provide a persistent, bidirectional connection — the client sends messages and the relay streams responses in real time, without repeated HTTP handshakes.
+
+**Wallet (NIP-47 / NIP-60)**
+Nostr supports multiple wallet integration patterns. NIP-47 (Nostr Wallet Connect) lets clients send Lightning payment commands to a wallet service via ephemeral events. NIP-60 defines wallet events for managing Cashu ecash tokens on Nostr. See [NIP-47](/nips/47), [NIP-60](/nips/60).
+
+## Z
+
+**Zap (NIP-57)**
+A Lightning payment sent over Nostr. Zaps use kind 9734 (zap request) and kind 9735 (zap receipt) events. A zap request is signed by the sender and sent to a Lightning wallet; the wallet pays the invoice and publishes a zap receipt, which relays and clients display as proof of payment. See [NIP-57](/nips/57).
+
+**Nutzap (NIP-61)**
+An ecash-based alternative to Lightning zaps, using Cashu tokens instead of Lightning invoices. Kind 9321 events carry nutzaps. See [NIP-61](/nips/61).
