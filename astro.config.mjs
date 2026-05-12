@@ -39,6 +39,7 @@ export default defineConfig({
         {
           label: 'Reference',
           items: [
+            { label: '🗺️ NIP Dependency Graph', link: '/nip-graph/' },
             'reference/event-kinds',
             'reference/tags',
             'reference/message-types',

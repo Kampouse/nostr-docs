@@ -14,6 +14,8 @@
     "@astrojs/mdx": "^5.0.4",
     "@astrojs/starlight": "^0.39.2",
     "astro": "^6.3.1",
+    "cytoscape": "^3.33.3",
+    "cytoscape-cose-bilkent": "^4.1.0",
     "sharp": "^0.34.5"
   },
   "overrides": {
