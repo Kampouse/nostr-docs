@@ -1,156 +1,171 @@
 ---
-// src/pages/nip-graph.astro
 import graphData from '../data/nip-graph-data.json';
+const dataJson = JSON.stringify(graphData);
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>NIP Dependency Graph — Nostr Docs</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; background: #1b1b1f; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    html, body { height: 100%; background: #1b1b1f; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow: hidden; }
 
     #app-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 20px; background: #141417; border-bottom: 1px solid #2a2a30;
+      padding: 10px 16px; background: #141417; border-bottom: 1px solid #2a2a30;
+      height: 48px; flex-shrink: 0;
     }
-    #app-header a { color: #a855f7; text-decoration: none; font-weight: 600; font-size: 14px; }
+    #app-header a { color: #a855f7; text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap; }
     #app-header a:hover { text-decoration: underline; }
-    #app-header h1 { font-size: 18px; font-weight: 600; color: #fff; }
+    #app-header h1 { font-size: 16px; font-weight: 600; color: #fff; white-space: nowrap; }
+    #header-hint { font-size: 11px; color: #666; white-space: nowrap; }
+    #menu-btn {
+      display: none; background: none; border: 1px solid #333; border-radius: 6px;
+      color: #ccc; font-size: 20px; cursor: pointer; padding: 2px 8px; line-height: 1;
+    }
 
-    #main-container { display: flex; height: calc(100vh - 49px); }
+    #main-container { display: flex; height: calc(100vh - 48px); position: relative; }
 
     #sidebar {
-      width: 280px; min-width: 280px; background: #141417; border-right: 1px solid #2a2a30;
-      overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px;
+      width: 240px; min-width: 240px; background: #141417; border-right: 1px solid #2a2a30;
+      overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 12px;
+      flex-shrink: 0; z-index: 60;
     }
 
-    .sidebar-section { }
     .sidebar-section h3 {
-      font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
-      color: #888; margin-bottom: 8px; font-weight: 600;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px;
+      color: #888; margin-bottom: 6px; font-weight: 600;
     }
 
     #search-input {
-      width: 100%; padding: 8px 12px; background: #1b1b1f; border: 1px solid #333;
+      width: 100%; padding: 7px 10px; background: #1b1b1f; border: 1px solid #333;
       border-radius: 6px; color: #e0e0e0; font-size: 13px; outline: none;
     }
     #search-input:focus { border-color: #a855f7; }
     #search-input::placeholder { color: #666; }
 
-    .layer-checkbox { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; font-size: 13px; }
+    .layer-checkbox { display: flex; align-items: center; gap: 6px; padding: 3px 0; cursor: pointer; font-size: 12px; }
     .layer-checkbox input[type="checkbox"] { accent-color: #a855f7; cursor: pointer; }
-    .layer-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .layer-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 
-    #toggle-kinds {
-      padding: 7px 12px; background: #222228; border: 1px solid #333; border-radius: 6px;
-      color: #ccc; font-size: 12px; cursor: pointer; text-align: left; width: 100%;
+    .ctrl-btn {
+      padding: 6px 10px; background: #222228; border: 1px solid #333; border-radius: 6px;
+      color: #ccc; font-size: 12px; cursor: pointer; text-align: center; width: 100%;
     }
-    #toggle-kinds:hover { background: #2a2a30; }
-    #toggle-kinds.active { border-color: #a855f7; color: #a855f7; }
-
-    #reset-zoom {
-      padding: 7px 12px; background: #222228; border: 1px solid #333; border-radius: 6px;
-      color: #ccc; font-size: 12px; cursor: pointer; width: 100%;
-    }
-    #reset-zoom:hover { background: #2a2a30; }
+    .ctrl-btn:hover { background: #2a2a30; }
+    .ctrl-btn.active { border-color: #a855f7; color: #a855f7; }
 
     #graph-container { flex: 1; position: relative; overflow: hidden; }
     #cy { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
 
     #tooltip {
       position: absolute; display: none; background: #222228; border: 1px solid #444;
-      border-radius: 8px; padding: 10px 14px; max-width: 300px; z-index: 100;
+      border-radius: 8px; padding: 10px 14px; max-width: 260px; z-index: 100;
       pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
-    #tooltip .tt-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
-    #tooltip .tt-status { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
-    #tooltip .tt-desc { font-size: 12px; color: #aaa; margin-top: 6px; line-height: 1.4; }
+    #tooltip .tt-title { font-weight: 600; color: #fff; margin-bottom: 3px; font-size: 13px; }
+    #tooltip .tt-status { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+    #tooltip .tt-desc { font-size: 11px; color: #aaa; margin-top: 4px; line-height: 1.4; }
 
     #detail-panel {
-      position: absolute; top: 0; right: 0; width: 340px; height: 100%;
-      background: #141417; border-left: 1px solid #2a2a30; padding: 20px;
+      position: absolute; top: 0; right: 0; width: 300px; height: 100%;
+      background: #141417; border-left: 1px solid #2a2a30; padding: 16px;
       overflow-y: auto; display: none; z-index: 50;
       box-shadow: -4px 0 20px rgba(0,0,0,0.3);
     }
     #detail-panel.open { display: block; }
     #detail-close {
-      position: absolute; top: 12px; right: 12px; background: none; border: none;
+      position: absolute; top: 10px; right: 10px; background: none; border: none;
       color: #888; font-size: 20px; cursor: pointer; line-height: 1;
     }
     #detail-close:hover { color: #fff; }
-    .detail-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; padding-right: 30px; }
-    .detail-status { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 4px; margin-bottom: 12px; }
+    .detail-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; padding-right: 30px; }
+    .detail-status { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; }
     .detail-status.final { background: #1a3a1a; color: #4ade80; }
     .detail-status.draft { background: #3a2a1a; color: #fbbf24; }
-    .detail-desc { font-size: 13px; color: #bbb; line-height: 1.5; margin-bottom: 16px; }
-    .detail-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 6px; }
-    .detail-section { margin-bottom: 14px; }
+    .detail-desc { font-size: 12px; color: #bbb; line-height: 1.5; margin-bottom: 14px; }
+    .detail-section h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 4px; }
+    .detail-section { margin-bottom: 12px; }
     .detail-section ul { list-style: none; padding: 0; }
-    .detail-section li { font-size: 12px; color: #ccc; padding: 3px 0; }
+    .detail-section li { font-size: 12px; color: #ccc; padding: 2px 0; }
     .detail-section li a { color: #a855f7; text-decoration: none; }
     .detail-section li a:hover { text-decoration: underline; }
     .detail-section .kind-badge {
       display: inline-block; background: #222228; border: 1px solid #333;
-      border-radius: 4px; padding: 1px 6px; font-size: 11px; color: #aaa;
-      font-family: monospace; margin-right: 6px;
+      border-radius: 4px; padding: 1px 6px; font-size: 10px; color: #aaa;
+      font-family: monospace; margin-right: 4px;
     }
-    .detail-link { display: inline-block; color: #a855f7; font-size: 13px; text-decoration: none; margin-top: 8px; }
+    .detail-link { display: inline-block; color: #a855f7; font-size: 12px; text-decoration: none; margin-top: 6px; }
     .detail-link:hover { text-decoration: underline; }
 
-    .legend { display: flex; flex-direction: column; gap: 4px; }
-    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #aaa; }
-    .legend-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #aaa; }
+    .legend-swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      #menu-btn { display: block; }
+      #header-hint { display: none; }
+      #app-header h1 { font-size: 14px; }
+
+      #sidebar {
+        position: absolute; top: 0; left: 0; height: 100%;
+        width: 220px; min-width: 220px;
+        transform: translateX(-100%); transition: transform 0.2s ease;
+      }
+      #sidebar.open { transform: translateX(0); }
+
+      #detail-panel { width: 100%; }
+
+      #sidebar-overlay {
+        display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5); z-index: 55;
+      }
+      #sidebar-overlay.open { display: block; }
+    }
   </style>
 </head>
 <body>
   <div id="app-header">
-    <div style="display:flex;align-items:center;gap:16px;">
-      <a href="/">&larr; Nostr Docs</a>
-      <h1>NIP Dependency Graph</h1>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="menu-btn">&#9776;</button>
+      <a href="/">&#8592; Docs</a>
+      <h1>NIP Graph</h1>
     </div>
-    <span style="font-size:12px;color:#666;">Click a node for details. Drag to pan. Scroll to zoom.</span>
+    <span id="header-hint">Click node for details. Drag to pan. Scroll to zoom.</span>
   </div>
 
   <div id="main-container">
+    <div id="sidebar-overlay"></div>
     <div id="sidebar">
       <div class="sidebar-section">
         <h3>Search</h3>
-        <input type="text" id="search-input" placeholder="Find NIP (e.g. nip-17)..." />
+        <input type="text" id="search-input" placeholder="e.g. nip-17" />
       </div>
-
       <div class="sidebar-section">
         <h3>Layers</h3>
         <div id="layer-filters"></div>
       </div>
-
       <div class="sidebar-section">
-        <button id="toggle-kinds">Show Event Kinds</button>
+        <button class="ctrl-btn" id="toggle-kinds">Show Event Kinds</button>
       </div>
-
       <div class="sidebar-section">
-        <button id="reset-zoom">Reset Zoom</button>
+        <button class="ctrl-btn" id="reset-zoom">Reset Zoom</button>
       </div>
-
       <div class="sidebar-section">
         <h3>Legend</h3>
         <div class="legend">
-          <div class="legend-item"><div class="legend-swatch" style="background:#a855f7;"></div> Base</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6;"></div> Identity</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#22c55e;"></div> Social</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#f97316;"></div> Messaging</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#eab308;"></div> Payments</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#ec4899;"></div> Media</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#6b7280;"></div> Infrastructure</div>
-          <div class="legend-item"><div class="legend-swatch" style="background:#475569;border-radius:2px;transform:rotate(45deg);width:10px;height:10px;margin:2px;"></div> Event Kind</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#a855f7;"></div>Base</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6;"></div>Identity</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#22c55e;"></div>Social</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#f97316;"></div>Msg</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#eab308;"></div>Pay</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#ec4899;"></div>Media</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#6b7280;"></div>Infra</div>
         </div>
-      </div>
-
-      <div class="sidebar-section" style="margin-top:auto;">
-        <span style="font-size:11px;color:#555;">Arrows show dependency direction.</span>
       </div>
     </div>
 
@@ -168,7 +183,8 @@ import graphData from '../data/nip-graph-data.json';
     </div>
   </div>
 
-  <script id="graph-data" type="application/json">{JSON.stringify(graphData)}</script>
+  <!-- Pass data from Astro server to client -->
+  <div id="graph-data" style="display:none" set:html={dataJson} />
 
   <script>
     import cytoscape from 'cytoscape';
@@ -187,94 +203,57 @@ import graphData from '../data/nip-graph-data.json';
       infrastructure: '#6b7280',
     };
     const EVENT_KIND_COLOR = '#475569';
-    const BG = '#1b1b1f';
 
-    // Build cytoscape elements
+    // Build elements
     const elements = [];
+    const nipIds = new Set(graphData.nips.map(n => n.id));
 
-    // NIP nodes
     for (const nip of graphData.nips) {
       const color = LAYER_COLORS[nip.layer] || '#6b7280';
       elements.push({
         data: {
-          id: nip.id,
-          label: nip.label,
-          nodeType: 'nip',
-          layer: nip.layer,
-          title: nip.title,
-          status: nip.status,
-          description: nip.description,
-          color: color,
+          id: nip.id, label: nip.label, nodeType: 'nip', layer: nip.layer,
+          title: nip.title, status: nip.status, description: nip.description, color,
         }
       });
     }
 
-    // Event kind nodes - only for NIPs in our graph
-    const nipIds = new Set(graphData.nips.map(n => n.id));
     for (const ek of graphData.eventKinds) {
       if (!nipIds.has(ek.nip)) continue;
       elements.push({
         data: {
-          id: 'kind-' + ek.kind,
-          label: 'k' + ek.kind,
-          nodeType: 'eventKind',
-          kind: ek.kind,
-          kindName: ek.name,
-          nip: ek.nip,
-          color: EVENT_KIND_COLOR,
+          id: 'kind-' + ek.kind, label: 'k' + ek.kind, nodeType: 'eventKind',
+          kind: ek.kind, kindName: ek.name, nip: ek.nip, color: EVENT_KIND_COLOR,
         }
       });
     }
 
-    // Dependency edges (NIP -> dependency)
     for (const edge of graphData.edges) {
       elements.push({
-        data: {
-          id: edge.source + '->' + edge.target,
-          source: edge.source,
-          target: edge.target,
-          edgeType: 'depends',
-        }
+        data: { id: edge.source + '->' + edge.target, source: edge.source, target: edge.target, edgeType: 'depends' }
       });
     }
 
-    // "Defines" edges (NIP -> event kind)
     for (const ek of graphData.eventKinds) {
       if (!nipIds.has(ek.nip)) continue;
       elements.push({
-        data: {
-          id: ek.nip + '-defines-' + ek.kind,
-          source: ek.nip,
-          target: 'kind-' + ek.kind,
-          edgeType: 'defines',
-        }
+        data: { id: ek.nip + '-defines-' + ek.kind, source: ek.nip, target: 'kind-' + ek.kind, edgeType: 'defines' }
       });
     }
 
     const cy = cytoscape({
       container: document.getElementById('cy'),
-      elements: elements,
+      elements,
       style: [
         {
           selector: 'node[nodeType="nip"]',
           style: {
-            'background-color': 'data(color)',
-            'label': 'data(label)',
-            'text-valign': 'center',
-            'text-halign': 'center',
-            'font-size': '10px',
-            'color': '#fff',
-            'text-outline-width': 2,
-            'text-outline-color': 'data(color)',
-            'width': 50,
-            'height': 50,
-            'shape': 'ellipse',
-            'border-width': 2,
-            'border-color': 'data(color)',
-            'border-opacity': 0.6,
-            'text-wrap': 'wrap',
-            'text-max-width': '60px',
-            'overlay-opacity': 0,
+            'background-color': 'data(color)', 'label': 'data(label)',
+            'text-valign': 'center', 'text-halign': 'center', 'font-size': '10px',
+            'color': '#fff', 'text-outline-width': 2, 'text-outline-color': 'data(color)',
+            'width': 50, 'height': 50, 'shape': 'ellipse', 'border-width': 2,
+            'border-color': 'data(color)', 'border-opacity': 0.6,
+            'text-wrap': 'wrap', 'text-max-width': '60px', 'overlay-opacity': 0,
           }
         },
         {
@@ -284,95 +263,68 @@ import graphData from '../data/nip-graph-data.json';
         {
           selector: 'node[nodeType="eventKind"]',
           style: {
-            'background-color': 'data(color)',
-            'label': 'data(label)',
-            'text-valign': 'center',
-            'text-halign': 'center',
-            'font-size': '8px',
-            'color': '#ccc',
-            'text-outline-width': 1,
-            'text-outline-color': '#333',
-            'width': 24,
-            'height': 24,
-            'shape': 'diamond',
-            'border-width': 1,
-            'border-color': '#555',
-            'border-opacity': 0.5,
-            'text-wrap': 'wrap',
-            'text-max-width': '40px',
-            'overlay-opacity': 0,
+            'background-color': 'data(color)', 'label': 'data(label)',
+            'text-valign': 'center', 'text-halign': 'center', 'font-size': '8px',
+            'color': '#ccc', 'text-outline-width': 1, 'text-outline-color': '#333',
+            'width': 24, 'height': 24, 'shape': 'diamond', 'border-width': 1,
+            'border-color': '#555', 'border-opacity': 0.5,
+            'text-wrap': 'wrap', 'text-max-width': '40px', 'overlay-opacity': 0,
           }
         },
         {
           selector: 'edge[edgeType="depends"]',
           style: {
-            'width': 1.5,
-            'line-color': '#444',
-            'target-arrow-color': '#555',
-            'target-arrow-shape': 'triangle',
-            'arrow-scale': 0.7,
-            'curve-style': 'bezier',
-            'opacity': 0.5,
+            'width': 1.5, 'line-color': '#444', 'target-arrow-color': '#555',
+            'target-arrow-shape': 'triangle', 'arrow-scale': 0.7,
+            'curve-style': 'bezier', 'opacity': 0.5,
           }
         },
         {
           selector: 'edge[edgeType="defines"]',
           style: {
-            'width': 0.8,
-            'line-color': '#333',
-            'line-style': 'dashed',
-            'target-arrow-color': '#444',
-            'target-arrow-shape': 'triangle',
-            'arrow-scale': 0.5,
-            'curve-style': 'bezier',
-            'opacity': 0.35,
+            'width': 0.8, 'line-color': '#333', 'line-style': 'dashed',
+            'target-arrow-color': '#444', 'target-arrow-shape': 'triangle',
+            'arrow-scale': 0.5, 'curve-style': 'bezier', 'opacity': 0.35,
           }
         },
-        // Hover / highlight states
         {
           selector: 'node.highlighted',
-          style: {
-            'border-width': 4,
-            'border-color': '#fff',
-            'border-opacity': 1,
-            'z-index': 999,
-          }
+          style: { 'border-width': 4, 'border-color': '#fff', 'border-opacity': 1, 'z-index': 999 }
         },
         {
-          selector: 'node.dimmed',
-          style: { 'opacity': 0.15 }
+          selector: 'node.dimmed', style: { 'opacity': 0.15 }
         },
         {
-          selector: 'edge.dimmed',
-          style: { 'opacity': 0.05 }
+          selector: 'edge.dimmed', style: { 'opacity': 0.05 }
         },
         {
           selector: 'edge.highlighted-edge',
           style: { 'opacity': 1, 'width': 3, 'line-color': '#a855f7', 'target-arrow-color': '#a855f7', 'z-index': 998 }
         },
-        {
-          selector: '.faded', style: { 'opacity': 0.08 } }
       ],
       layout: {
-        name: 'cose-bilkent',
-        animateEnd: false,
-        nodeRepulsion: 80000,
-        idealEdgeLength: 120,
-        edgeElasticity: 0.05,
-        nestingFactor: 1.2,
-        gravity: 0.6,
-        numIter: 4000,
-        tile: true,
+        name: 'cose-bilkent', animateEnd: false, nodeRepulsion: 80000,
+        idealEdgeLength: 120, edgeElasticity: 0.05, nestingFactor: 1.2,
+        gravity: 0.6, numIter: 4000, tile: true,
       },
-      userZoomingEnabled: true,
-      userPanningEnabled: true,
-      boxSelectionEnabled: false,
+      userZoomingEnabled: true, userPanningEnabled: true, boxSelectionEnabled: false,
     });
 
-    // Fit after layout
-    cy.ready(() => { cy.fit(undefined, 40); });
+    cy.ready(() => { cy.fit(undefined, 30); });
 
-    // ---- LAYER FILTERS ----
+    // Mobile menu
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+
+    // Layer filters
     const layerFiltersEl = document.getElementById('layer-filters');
     const layers = Object.keys(LAYER_COLORS);
     const activeLayers = new Set(layers);
@@ -380,23 +332,19 @@ import graphData from '../data/nip-graph-data.json';
       const label = document.createElement('label');
       label.className = 'layer-checkbox';
       const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.checked = true;
-      cb.dataset.layer = layer;
+      cb.type = 'checkbox'; cb.checked = true; cb.dataset.layer = layer;
       cb.addEventListener('change', () => {
         if (cb.checked) activeLayers.add(layer); else activeLayers.delete(layer);
         applyFilters();
       });
       const dot = document.createElement('span');
-      dot.className = 'layer-dot';
-      dot.style.background = LAYER_COLORS[layer];
-      label.appendChild(cb);
-      label.appendChild(dot);
+      dot.className = 'layer-dot'; dot.style.background = LAYER_COLORS[layer];
+      label.appendChild(cb); label.appendChild(dot);
       label.appendChild(document.createTextNode(layer.charAt(0).toUpperCase() + layer.slice(1)));
       layerFiltersEl.appendChild(label);
     }
 
-    // ---- EVENT KIND TOGGLE ----
+    // Event kind toggle
     let showEventKinds = false;
     const toggleBtn = document.getElementById('toggle-kinds');
     toggleBtn.addEventListener('click', () => {
@@ -406,13 +354,12 @@ import graphData from '../data/nip-graph-data.json';
       applyFilters();
     });
 
-    // ---- RESET ZOOM ----
+    // Reset zoom
     document.getElementById('reset-zoom').addEventListener('click', () => {
-      cy.fit(undefined, 40);
-      clearHighlight();
+      cy.fit(undefined, 30); clearHighlight();
     });
 
-    // ---- FILTER LOGIC ----
+    // Filter logic
     function applyFilters() {
       cy.nodes().forEach(node => {
         const nType = node.data('nodeType');
@@ -420,96 +367,82 @@ import graphData from '../data/nip-graph-data.json';
           node.style('display', showEventKinds ? 'element' : 'none');
           return;
         }
-        const layer = node.data('layer');
-        node.style('display', activeLayers.has(layer) ? 'element' : 'none');
+        node.style('display', activeLayers.has(node.data('layer')) ? 'element' : 'none');
       });
-      // Also show/hide edges
       cy.edges().forEach(edge => {
-        const src = cy.getElementById(edge.data('source'));
-        const tgt = cy.getElementById(edge.data('target'));
-        const srcVisible = src.style('display') !== 'none';
-        const tgtVisible = tgt.style('display') !== 'none';
-        edge.style('display', (srcVisible && tgtVisible) ? 'element' : 'none');
+        const srcVis = cy.getElementById(edge.data('source')).style('display') !== 'none';
+        const tgtVis = cy.getElementById(edge.data('target')).style('display') !== 'none';
+        edge.style('display', (srcVis && tgtVis) ? 'element' : 'none');
       });
     }
     applyFilters();
 
-    // ---- SEARCH ----
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('input', () => {
-      const q = searchInput.value.trim().toLowerCase();
+    // Search
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
       if (!q) { clearHighlight(); return; }
       const match = cy.nodes().filter(n => {
         if (n.data('nodeType') !== 'nip') return false;
         return n.data('id').includes(q) || n.data('title').toLowerCase().includes(q) || n.data('label').toLowerCase().includes(q);
       });
-      if (match.length > 0) {
-        highlightNode(match.first());
-      }
+      if (match.length > 0) highlightNode(match.first());
     });
 
-    // ---- TOOLTIP ----
+    // Tooltip
     const tooltip = document.getElementById('tooltip');
+    const graphContainer = document.getElementById('graph-container');
     cy.on('mouseover', 'node', (evt) => {
       const node = evt.target;
-      const nType = node.data('nodeType');
-      const containerRect = document.getElementById('graph-container').getBoundingClientRect();
+      const cr = graphContainer.getBoundingClientRect();
       const pos = node.renderedPosition();
       let html = '';
-      if (nType === 'nip') {
+      if (node.data('nodeType') === 'nip') {
         html = `<div class="tt-title">${node.data('label')}: ${node.data('title')}</div>`;
         html += `<div class="tt-status">${node.data('status')}</div>`;
         html += `<div class="tt-desc">${node.data('description')}</div>`;
       } else {
         html = `<div class="tt-title">Kind ${node.data('kind')}: ${node.data('kindName')}</div>`;
-        html += `<div class="tt-desc">Defined in ${node.data('nip').toUpperCase().replace('NIP-', 'NIP-')}</div>`;
+        html += `<div class="tt-desc">Defined in ${node.data('nip')}</div>`;
       }
       tooltip.innerHTML = html;
       tooltip.style.display = 'block';
-      let left = pos.x + 15;
-      let top = pos.y - 10;
-      if (left + 310 > containerRect.width) left = pos.x - 315;
-      if (top + 100 > containerRect.height) top = pos.y - 110;
+      let left = pos.x + 15, top = pos.y - 10;
+      if (left + 270 > cr.width) left = pos.x - 275;
+      if (top + 100 > cr.height) top = pos.y - 110;
       tooltip.style.left = left + 'px';
       tooltip.style.top = top + 'px';
     });
     cy.on('mouseout', 'node', () => { tooltip.style.display = 'none'; });
 
-    // ---- CLICK -> DETAIL PANEL ----
+    // Click -> detail panel
     const detailPanel = document.getElementById('detail-panel');
     const detailContent = document.getElementById('detail-content');
     document.getElementById('detail-close').addEventListener('click', () => {
-      detailPanel.classList.remove('open');
-      clearHighlight();
+      detailPanel.classList.remove('open'); clearHighlight();
     });
 
     cy.on('tap', 'node', (evt) => {
-      const node = evt.target;
-      highlightNode(node);
-      showDetail(node);
+      highlightNode(evt.target);
+      showDetail(evt.target);
     });
 
     function highlightNode(node) {
-      cy.elements().removeClass('highlighted highlighted-edge dimmed faded');
+      cy.elements().removeClass('highlighted highlighted-edge dimmed');
       node.addClass('highlighted');
       const connected = node.connectedEdges().connectedNodes();
       node.connectedEdges().addClass('highlighted-edge');
       connected.addClass('highlighted');
       cy.elements().not(node).not(connected).not(node.connectedEdges()).addClass('dimmed');
-      cy.animate({
-        fit: { eles: node.union(node.connectedEdges()).union(connected), padding: 80 },
-        duration: 300,
-      });
+      cy.animate({ fit: { eles: node.union(node.connectedEdges()).union(connected), padding: 80 }, duration: 300 });
     }
 
     function clearHighlight() {
-      cy.elements().removeClass('highlighted highlighted-edge dimmed faded');
+      cy.elements().removeClass('highlighted highlighted-edge dimmed');
     }
 
     function showDetail(node) {
-      const nType = node.data('nodeType');
       let html = '';
-      if (nType === 'nip') {
+      if (node.data('nodeType') === 'nip') {
         const nipId = node.data('id');
         const nipNum = nipId.replace('nip-', '');
         const status = node.data('status');
@@ -517,52 +450,44 @@ import graphData from '../data/nip-graph-data.json';
         html += `<span class="detail-status ${status}">${status}</span>`;
         html += `<div class="detail-desc">${node.data('description')}</div>`;
 
-        // Dependencies (what this NIP depends on)
         const deps = graphData.edges.filter(e => e.source === nipId && e.type === 'depends');
         if (deps.length > 0) {
           html += `<div class="detail-section"><h4>Depends On</h4><ul>`;
           for (const d of deps) {
-            const depNip = graphData.nips.find(n => n.id === d.target);
-            html += `<li><a href="/nips/${depNip ? depNip.id.replace('nip-','') : ''}">${d.target.toUpperCase().replace('NIP-','NIP-')}</a>${depNip ? ' — ' + depNip.title : ''}</li>`;
+            const dep = graphData.nips.find(n => n.id === d.target);
+            html += `<li><a href="/${d.target}/">${d.target.toUpperCase().replace('NIP-','NIP-')}</a>${dep ? ' — ' + dep.title : ''}</li>`;
           }
           html += `</ul></div>`;
         }
 
-        // Dependents (what depends on this NIP)
         const dependents = graphData.edges.filter(e => e.target === nipId && e.type === 'depends');
         if (dependents.length > 0) {
           html += `<div class="detail-section"><h4>Depended By</h4><ul>`;
           for (const d of dependents) {
-            const depNip = graphData.nips.find(n => n.id === d.source);
-            html += `<li><a href="/nips/${depNip ? depNip.id.replace('nip-','') : ''}">${d.source.toUpperCase().replace('NIP-','NIP-')}</a>${depNip ? ' — ' + depNip.title : ''}</li>`;
+            const dep = graphData.nips.find(n => n.id === d.source);
+            html += `<li><a href="/${d.source}/">${d.source.toUpperCase().replace('NIP-','NIP-')}</a>${dep ? ' — ' + dep.title : ''}</li>`;
           }
           html += `</ul></div>`;
         }
 
-        // Event kinds defined by this NIP
         const kinds = graphData.eventKinds.filter(ek => ek.nip === nipId);
         if (kinds.length > 0) {
-          html += `<div class="detail-section"><h4>Event Kinds Defined</h4><ul>`;
+          html += `<div class="detail-section"><h4>Event Kinds</h4><ul>`;
           for (const k of kinds) {
             html += `<li><span class="kind-badge">${k.kind}</span>${k.name}</li>`;
           }
           html += `</ul></div>`;
         }
 
-        html += `<a class="detail-link" href="/nips/${nipNum}">View Full NIP-${nipNum} Spec &rarr;</a>`;
-
+        html += `<a class="detail-link" href="/${nipId}/">View Full NIP-${nipNum} Spec &#8594;</a>`;
       } else {
-        // Event kind
-        const kind = node.data('kind');
-        const kindName = node.data('kindName');
         const nipRef = node.data('nip');
         const nipNum = nipRef.replace('nip-', '');
-        html += `<div class="detail-title">Kind ${kind}</div>`;
-        html += `<div class="detail-desc">${kindName}</div>`;
+        html += `<div class="detail-title">Kind ${node.data('kind')}</div>`;
+        html += `<div class="detail-desc">${node.data('kindName')}</div>`;
         html += `<div class="detail-section"><h4>Defined In</h4>`;
-        html += `<ul><li><a href="/nips/${nipNum}">NIP-${nipNum}</a></li></ul></div>`;
+        html += `<ul><li><a href="/${nipRef}/">NIP-${nipNum}</a></li></ul></div>`;
       }
-
       detailContent.innerHTML = html;
       detailPanel.classList.add('open');
     }
