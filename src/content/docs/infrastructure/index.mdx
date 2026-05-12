@@ -1,0 +1,50 @@
+---
+title: Infrastructure
+description: "Relays, authentication, discovery, and network resilience"
+---
+
+Relays are the backbone of Nostr. They're the servers that receive, store, and broadcast events. Understanding how relays work — and how to find, authenticate to, and manage them — is essential to understanding the network itself.
+
+This page covers the key infrastructure NIPs that keep Nostr running smoothly.
+
+## Getting to Know a Relay
+
+Before you connect to a relay, it's helpful to know what it supports. [NIP-11](/nip-11/) defines a standard way for relays to advertise their capabilities. When you hit a relay's HTTP endpoint, it returns a JSON document describing what it can do: which NIPs it supports, any upload limits, fees, and contact info for the operator. It's the relay's way of telling clients "here's what I offer" before any WebSocket connection is opened.
+
+## Authenticating to Relays
+
+Some relays are private or paid. [NIP-42](/nip-42/) defines how clients authenticate to relays using Nostr's signature model. The relay sends a challenge, the client responds with a signed event proving they control their key, and the relay grants access based on whatever policy it enforces. This is what makes paid relays and private relay communities possible — access control built right into the protocol.
+
+## Telling People Where You Post
+
+[NIP-65](/nip-65/) is one of the most important infrastructure NIPs. It defines kind 10002 events where you list your read and write relays. When someone wants to find your notes, their client looks up your NIP-65 relay list and queries those relays. Without this, nobody would know where to find your data. It's the Nostr equivalent of DNS — not for names, but for data location.
+
+## Discovering and Monitoring Relays
+
+[NIP-66](/nip-66/) handles relay discovery and liveness monitoring. It defines how to track which relays are online, what their uptime looks like, and how to discover new relays you might want to use. This is especially useful for client developers who want to present users with a curated list of healthy relays.
+
+## Smarter Event Distribution
+
+[NIP-77](/nip-77/) introduces the outbox model, which improves how events get distributed across the network. Instead of blindly broadcasting everything everywhere, the outbox model routes events more intelligently — making sure your posts end up on the relays where your followers are actually listening. Better routing means less wasted bandwidth and faster feed updates.
+
+## Protected Events
+
+Sometimes you want to make sure an event is published through a specific relay — maybe it's a paid relay that gates access, or you want to control where your content lands. [NIP-70](/nip-70/) defines protected events that relays must handle specially, ensuring they're only available through the author's designated relay.
+
+## Data Vending Machines
+
+[NIP-90](/nip-90/) is one of the more creative infrastructure NIPs. It defines Data Vending Machines — a decentralized job marketplace built on Nostr relays. Need text-to-speech for a note? Translation? Summarization? A DVM worker watches for job requests on relays, processes them, and posts the results back. It's an early but fascinating example of decentralized compute on Nostr.
+
+## Running Your Own Relay
+
+One of Nostr's strengths is that anyone can run a relay. There are several implementations available, ranging from lightweight SQLite-based relays for personal use to high-performance setups for public communities. Running your own relay means you control your data and don't depend on anyone else's infrastructure.
+
+## Related NIPs
+
+- [NIP-11](/nip-11/) — Relay information document
+- [NIP-42](/nip-42/) — Relay authentication
+- [NIP-65](/nip-65/) — Relay list metadata (kind 10002)
+- [NIP-66](/nip-66/) — Relay discovery and monitoring
+- [NIP-70](/nip-70/) — Protected events
+- [NIP-77](/nip-77/) — Outbox model
+- [NIP-90](/nip-90/) — Data Vending Machines

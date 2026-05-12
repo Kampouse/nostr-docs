@@ -1,0 +1,41 @@
+---
+title: Messaging
+description: "Private DMs, encrypted channels, and group communication"
+---
+
+Nostr supports two broad messaging paradigms: private one-to-one or small-group DMs, and public channels that work more like group chats or chat rooms. Let's break them both down.
+
+## Private Direct Messages
+
+Modern private messaging on Nostr uses [NIP-17](/nip-17/), which is built on top of a layered encryption stack. It uses gift wrapping and sealed sender patterns to protect both the message content and the metadata — who's talking to whom.
+
+The encryption chain works like this: NIP-17 wraps NIP-59, which wraps NIP-44. [NIP-59](/nip-59/) provides the gift wrap layer that hides metadata like the sender and recipient. [NIP-44](/nip-44/) handles the actual encryption of the message payload with versioned encryption that supports larger messages and better security than older approaches.
+
+If you're coming from an older client, you might have seen [NIP-04](/nip-04/) mentioned. That was the original DM spec. It works, but it has some real downsides: there's no forward secrecy, and the metadata (who sent a message to whom) is visible to anyone watching the relays. It's deprecated in favor of NIP-17, but some clients still support it for backwards compatibility. If you have a choice, use NIP-17.
+
+## Public Channels
+
+For group conversations that are visible to anyone, [NIP-28](/nip-28/) defines public channels. There are three key event types here: kind 40 creates a channel, kind 41 updates channel metadata (name, description, image), and kind 42 is a channel message. Channel creators can also set up moderation by defining who's allowed to post.
+
+Channels are public by design — anyone who knows the channel ID can read the messages. Think of them like IRC channels or public Discord channels.
+
+## Relay-Based Groups
+
+[NIP-29](/nip-29/) takes a different approach to groups. Instead of public channels on open relays, NIP-29 defines groups where membership and permissions are managed by a specific relay. The relay acts as the group server — it controls who's in the group, who can post, and who has admin privileges.
+
+This model is more centralized than public channels, but it gives group administrators real control over membership and moderation. The relay enforces the rules, rather than relying on client-side filtering.
+
+## Which Should You Use?
+
+- **Private conversation?** Use NIP-17 with a client that supports it.
+- **Public chat room?** Use NIP-28 channels.
+- **Managed group with access control?** Use NIP-29 relay-based groups.
+
+## Related NIPs
+
+- [NIP-04](/nip-04/) — Legacy direct messages (deprecated)
+- [NIP-17](/nip-17/) — Modern private messaging
+- [NIP-28](/nip-28/) — Public channels
+- [NIP-29](/nip-29/) — Relay-based groups
+- [NIP-44](/nip-44/) — Versioned encryption
+- [NIP-59](/nip-59/) — Gift wrap

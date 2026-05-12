@@ -1,0 +1,46 @@
+---
+title: Social Features
+description: "Notes, reactions, reposts, threading, and the social graph"
+---
+
+At its core, Nostr is a social protocol. Everything starts with the humble text note — kind 1 events defined in [NIP-01](/nip-01/). You write a note, sign it with your key, and broadcast it to relays. That's the whole basics of it.
+
+But Nostr's social layer goes way beyond just posting text. Let's walk through what's available.
+
+## Your Feed and the Social Graph
+
+Your social graph lives in your follow list — a kind 3 event defined in [NIP-02](/nip-02/). When you follow someone, your client stores their pubkey in your kind 3 event. To build your timeline, your client reads your follow list, looks up [NIP-65](/nip-65/) relay lists for each person you follow, then queries those relays for their notes. It's a bit like building your own RSS feed from scratch, but the protocol handles the plumbing.
+
+## Threading
+
+Nostr uses a tagging model for conversations, defined in [NIP-10](/nip-10/). When you reply to a note, you add tags pointing to the root event (the top-level post) and the reply event (the one you're directly responding to). This lets clients reconstruct full conversation trees without any centralized thread database. The root tag anchors the thread, and the reply tag provides the immediate context.
+
+## Reactions
+
+Want to react to a note? [NIP-25](/nip-25/) defines how reactions work. You create a kind 7 event that references the note you're reacting to and includes the emoji — usually a 👍 or ❤️, but it can be any Unicode character. For something more expressive, [NIP-30](/nip-30/) adds custom emoji support, so you can define and use your own emoji in reactions.
+
+## Reposts
+
+Sharing someone else's note is handled by [NIP-18](/nip-18/). A kind 6 event is a simple repost — it just references the original note. For reposting things that aren't standard text notes (like long-form articles or channel messages), there's kind 16, the generic repost, which includes the full content of the original event.
+
+## Long-Form Content
+
+If you want to write something longer than a note, [NIP-23](/nip-23/) defines kind 30023 events for blog posts and articles. These support titles, summaries, published dates, and Markdown formatting. Think of them as Nostr's answer to Medium or Substack — but without the platform lock-in.
+
+## Content Warnings and Labeling
+
+For sensitive content, [NIP-36](/nip-36/) lets you tag events with content warnings. Clients can then blur or hide content until the user opts in. This is especially useful for images or text that some readers might not want to see unexpectedly.
+
+For more general categorization and moderation, [NIP-32](/nip-32/) defines a labeling system. Labels can be used for everything from topic tagging to content moderation, giving communities and clients a shared vocabulary for organizing events.
+
+## Related NIPs
+
+- [NIP-01](/nip-01/) — Basic protocol (kind 1 text notes)
+- [NIP-02](/nip-02/) — Follow lists (kind 3)
+- [NIP-10](/nip-10/) — Threading (root and reply tags)
+- [NIP-18](/nip-18/) — Reposts (kind 6 and kind 16)
+- [NIP-25](/nip-25/) — Reactions (kind 7)
+- [NIP-23](/nip-23/) — Long-form content (kind 30023)
+- [NIP-30](/nip-30/) — Custom emoji
+- [NIP-32](/nip-32/) — Labeling
+- [NIP-36](/nip-36/) — Content warnings

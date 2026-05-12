@@ -1,0 +1,51 @@
+---
+title: Identity
+description: "Key management, verification, and signing"
+---
+
+Here's the thing about Nostr identity that throws people off at first: your identity is a keypair. That's it. No username, no password, no email verification, no corporate identity provider. Your public key is your identity, and your private key proves you own it.
+
+It's simple and powerful, but it does mean that key management matters a lot. Let's walk through how it all works.
+
+## Key Formats and Sharing
+
+Raw hex keys are hard to read and easy to mess up. [NIP-19](/nip-19/) fixes this with bech32 encoding, which gives you human-readable keys:
+
+- **npub1...** — your public key, safe to share with anyone
+- **nsec1...** — your private key, keep this secret (seriously, never share it)
+- **note1...** — a reference to a specific event
+- **nprofile1... / nevent1...** — extended references that include relay hints, making it easier for clients to find the data
+
+When someone asks for your Nostr handle, you give them your npub. When you're setting up a new client, you'll need your nsec (or, ideally, use a signing extension — more on that below).
+
+## Backing Up Your Key
+
+Lose your nsec and you lose your identity. There's no password reset. [NIP-06](/nip-06/) provides a safety net: it lets you derive your Nostr key from a BIP-39 seed phrase — the same kind of 12 or 24-word phrase used in Bitcoin wallets. Write down the words, put them somewhere safe, and you can always recover your key.
+
+## Signing Without Exposing Your Key
+
+Pasting your nsec into every website and client is a bad idea. There are better ways.
+
+[NIP-07](/nip-07/) defines a `window.nostr` browser API that extensions like Alby and nos2x implement. When a website wants you to sign something, the extension pops up and asks for your approval. Your private key never touches the website's code. This is the recommended way to use Nostr in a browser.
+
+For signing from a separate device or app entirely, [NIP-46](/nip-46/) (Nostr Connect) lets you set up a remote signer. Your client sends a signing request to your signer app, you approve it there, and the signed event goes back. Great for keeping your key on your phone while using a desktop client.
+
+On Android, [NIP-55](/nip-55/) provides an intent-based signing mechanism. Apps can request signatures through the Android system, routing the request to whatever app holds your key.
+
+## Human-Readable Names
+
+Public keys aren't exactly friendly for sharing. [NIP-05](/nip-05/) lets you map your key to a human-readable identifier like `you@domain.com`. It works by putting a small JSON file on a web server — clients look it up and verify that the key matches. It's like a decentralized, minimal version of verified handles.
+
+## Linking External Identities
+
+[NIP-39](/nip-39/) lets you prove that you own accounts on other platforms — Twitter, GitHub, Telegram, and so on. You create a kind 0 event with references to those accounts, and the external identity verification is done through the respective platform's own mechanisms. This is how you show people "yes, this Nostr account is really me."
+
+## Related NIPs
+
+- [NIP-05](/nip-05/) — DNS-based identity verification
+- [NIP-06](/nip-06/) — Seed phrase key derivation
+- [NIP-07](/nip-07/) — Browser signing (window.nostr)
+- [NIP-19](/nip-19/) — Bech32 encoding (npub, nsec, note)
+- [NIP-39](/nip-39/) — External identity linking
+- [NIP-46](/nip-46/) — Nostr Connect (remote signing)
+- [NIP-55](/nip-55/) — Android intent-based signing

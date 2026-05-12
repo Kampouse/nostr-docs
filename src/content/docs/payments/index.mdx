@@ -1,0 +1,35 @@
+---
+title: Payments
+description: "Zaps, wallet integration, and ecash on Nostr"
+---
+
+One of the most powerful things about Nostr is that payments are built right into the protocol — not as a bolted-on feature, but as a first-class citizen. And the best part? It's all built on Bitcoin's Lightning Network. No need for a native Nostr token or any weird crypto gymnastics.
+
+## Zaps — Sending Sats as Reactions
+
+[Zaps](/nip-57/) are the backbone of Nostr payments. A zap lets you send satoshis (the smallest unit of Bitcoin) to another Nostr user as a kind of super-reaction. When you zap someone's note, two events get created: a kind 9734 zap request and a kind 9735 zap receipt. The zap request goes to a Lightning wallet via LNURL, an invoice gets generated, and once it's paid, the zap receipt gets published to relays. Everyone can see that someone zapped a note — and how much — but the actual Lightning payment happens off-chain.
+
+The neat thing is that zaps integrate with the social layer. You can zap a note instead of (or in addition to) liking it. It's a way to directly support creators on the network.
+
+## Wallet Connect — Your Wallet, Any Client
+
+[NIP-47](/nip-47/) (Wallet Connect) solves a practical problem: what if your favorite Nostr client doesn't have a built-in wallet? Wallet Connect lets you connect any Lightning wallet to any Nostr client. Once connected, your client can pay invoices, check your balance, and handle zaps — all without needing the wallet built in. It's like OAuth for Lightning wallets on Nostr.
+
+The typical payment flow looks like this: your client creates a zap request, talks to your wallet via NIP-47, the wallet pays the Lightning invoice on the network, and then the zap receipt lands on relays. Seamless.
+
+## Ecash — Private Digital Cash
+
+The newest addition to Nostr payments is ecash. [NIP-60](/nip-60/) defines a Cashu wallet integration for Nostr — letting you store and spend digital cash tokens that are private by default. Unlike Lightning payments, ecash tokens are bearer instruments: whoever holds the token can spend it, and the mint can't trace who paid whom.
+
+[NIP-61](/nip-61/) adds Nut Zaps, which are ecash-based zaps. Instead of routing through Lightning, these zaps send ecash tokens directly. This gives you a privacy-preserving alternative to regular Lightning zaps — the recipient gets ecash tokens they can redeem at a mint.
+
+## The Big Picture
+
+Nostr's payment stack is pretty straightforward: Lightning for fast, cheap payments. Wallet Connect so you're not locked into any single client. And ecash for when you want more privacy. All of it works without creating a new cryptocurrency or requiring users to understand anything beyond "send sats."
+
+## Related NIPs
+
+- [NIP-47](/nip-47/) — Wallet Connect
+- [NIP-57](/nip-57/) — Zaps
+- [NIP-60](/nip-60/) — Cashu ecash wallet
+- [NIP-61](/nip-61/) — Nut Zaps (ecash zaps)

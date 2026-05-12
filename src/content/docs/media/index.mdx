@@ -1,0 +1,34 @@
+---
+title: Media and Storage
+description: "File uploads, image attachments, and Blossom servers"
+---
+
+Here's something that surprises people: Nostr relays don't store files. They store events, which are text. If you want to post a photo, a video, or any file, you upload it to a storage server first, then put the URL in your event. The relay never sees the file itself — just the reference.
+
+This separation is by design. It keeps relays lightweight and focused on event routing, and it means you can use any storage backend you want. Let's look at how the different pieces fit together.
+
+## Attaching Media to Notes
+
+[NIP-92](/nip-92/) defines how to attach images and videos to regular text notes. It uses `imeta` tags that include metadata about the media: dimensions, a blurhash for showing a placeholder before the image loads, the MIME type, and a preview URL. Clients use this metadata to render media properly — showing the right aspect ratio, displaying a blur preview, and choosing the right player for video.
+
+For more structured file metadata, [NIP-94](/nip-94/) defines dedicated file metadata events. These include the file's SHA-256 hash, the download URL, the MIME type, and other optional fields. It's a more formal way to track files on Nostr, and it's useful when you need verifiable file integrity.
+
+## HTTP File Storage
+
+[NIP-96](/nip-96/) standardizes the upload and download protocol for file storage servers. It defines a common HTTP API that storage servers can implement, making it possible for clients to upload files to any compatible server without hardcoded integrations. The flow is straightforward: authenticate with a signed Nostr event, upload the file, and get back a URL you can use in your events.
+
+## Blossom Servers
+
+Blossom builds on the concepts from NIP-96 and takes them further. A Blossom server is an HTTP file storage server that uses Nostr authentication for uploads, but with a twist: it's content-addressed.
+
+Here's how it works. You take your file, compute its SHA-256 hash, sign an authentication event, and upload the file to the Blossom server. The server stores the file and serves it at a predictable URL pattern: `<server>/<sha256>`. Because the URL is derived from the content hash, the same file always ends up at the same URL — no matter who uploads it or when.
+
+This has some great properties. Deduplication is automatic: if someone already uploaded the same file, the server doesn't need to store it again. Integrity is verifiable: anyone can hash the downloaded file and compare it to the URL. And there's no namespace collision — content is its own identifier.
+
+The full flow looks like this: create your file → compute the SHA-256 hash → sign an auth event → upload to a Blossom server → get back a URL → put that URL in your note or event. Clean and simple.
+
+## Related NIPs
+
+- [NIP-92](/nip-92/) — Media attachments (imeta tags)
+- [NIP-94](/nip-94/) — File metadata events
+- [NIP-96](/nip-96/) — HTTP file storage

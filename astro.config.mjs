@@ -37,6 +37,42 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Social',
+          items: [
+            { label: 'Social', link: '/social/' },
+          ],
+        },
+        {
+          label: 'Messaging',
+          items: [
+            { label: 'Messaging', link: '/messaging/' },
+          ],
+        },
+        {
+          label: 'Payments',
+          items: [
+            { label: 'Payments', link: '/payments/' },
+          ],
+        },
+        {
+          label: 'Identity',
+          items: [
+            { label: 'Identity', link: '/identity/' },
+          ],
+        },
+        {
+          label: 'Media & Storage',
+          items: [
+            { label: 'Media', link: '/media/' },
+          ],
+        },
+        {
+          label: 'Infrastructure',
+          items: [
+            { label: 'Infrastructure', link: '/infrastructure/' },
+          ],
+        },
+        {
           label: 'Reference',
           items: [
             { label: '🗺️ NIP Dependency Graph', link: '/nip-graph/' },
