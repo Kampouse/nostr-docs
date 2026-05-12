@@ -17,6 +17,14 @@
       "description": "Follow lists and pet names - the social graph"
     },
     {
+      "id": "nip-03",
+      "label": "NIP-03",
+      "title": "OpenTimestamps Attestations",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Timestamp events using the Bitcoin blockchain via OpenTimestamps for proof of existence"
+    },
+    {
       "id": "nip-04",
       "label": "NIP-04",
       "title": "Encrypted Direct Messages",
@@ -81,6 +89,46 @@
       "description": "Relay metadata and capability discovery via HTTP endpoint"
     },
     {
+      "id": "nip-12",
+      "label": "NIP-12",
+      "title": "Generic Tag Queries",
+      "layer": "infrastructure",
+      "status": "final",
+      "description": "Query relays by arbitrary tag values, not just kind and author"
+    },
+    {
+      "id": "nip-13",
+      "label": "NIP-13",
+      "title": "Proof of Work",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Attach proof-of-work to events as an anti-spam mechanism"
+    },
+    {
+      "id": "nip-14",
+      "label": "NIP-14",
+      "title": "Subject Tag",
+      "layer": "social",
+      "status": "draft",
+      "description": "Add subject lines to text notes for forum-style threading"
+    },
+    {
+      "id": "nip-15",
+      "label": "NIP-15",
+      "title": "Nostr Marketplace",
+      "layer": "payments",
+      "status": "draft",
+      "description": "Decentralized marketplace with stall listings, product events, and buyer/seller interactions"
+    },
+    {
+      "id": "nip-16",
+      "label": "NIP-16",
+      "title": "Event Treatment",
+      "layer": "infrastructure",
+      "status": "final",
+      "description": "Defines regular, replaceable, and ephemeral event handling by kind range"
+    },
+    {
       "id": "nip-17",
       "label": "NIP-17",
       "title": "Private Direct Messages",
@@ -105,6 +153,30 @@
       "description": "Human-readable bech32-encoded entities (npub, nsec, note, nprofile, nevent)"
     },
     {
+      "id": "nip-20",
+      "label": "NIP-20",
+      "title": "Command Results",
+      "layer": "infrastructure",
+      "status": "final",
+      "description": "Relay feedback on command success or failure with machine-readable error codes"
+    },
+    {
+      "id": "nip-21",
+      "label": "NIP-21",
+      "title": "nostr: URI Scheme",
+      "layer": "identity",
+      "status": "draft",
+      "description": "Standard URI scheme for deep linking to Nostr entities (nostr:npub1..., nostr:note1...)"
+    },
+    {
+      "id": "nip-22",
+      "label": "NIP-22",
+      "title": "Comments",
+      "layer": "social",
+      "status": "draft",
+      "description": "Structured comment threads on any event kind, extending NIP-10 threading"
+    },
+    {
       "id": "nip-23",
       "label": "NIP-23",
       "title": "Long-form Content",
@@ -113,12 +185,36 @@
       "description": "Blog posts and long-form articles using addressable kind 30023"
     },
     {
+      "id": "nip-24",
+      "label": "NIP-24",
+      "title": "Extra Metadata",
+      "layer": "social",
+      "status": "draft",
+      "description": "Additional profile metadata fields and tags for richer user profiles"
+    },
+    {
       "id": "nip-25",
       "label": "NIP-25",
       "title": "Reactions",
       "layer": "social",
       "status": "final",
       "description": "Emoji reactions to events using kind 7"
+    },
+    {
+      "id": "nip-26",
+      "label": "NIP-26",
+      "title": "Delegated Event Signing",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Allow another key to sign events on your behalf using delegation tags"
+    },
+    {
+      "id": "nip-27",
+      "label": "NIP-27",
+      "title": "Text Note References",
+      "layer": "social",
+      "status": "draft",
+      "description": "Conventions for referencing nostr entities inline in text note content using nostr: URIs"
     },
     {
       "id": "nip-28",
@@ -145,12 +241,44 @@
       "description": "Custom emoji support using shortcodes and image URLs"
     },
     {
+      "id": "nip-31",
+      "label": "NIP-31",
+      "title": "Unknown Event Kinds",
+      "layer": "social",
+      "status": "draft",
+      "description": "How relays and clients should handle event kinds they don't understand"
+    },
+    {
       "id": "nip-32",
       "label": "NIP-32",
       "title": "Labeling",
       "layer": "social",
       "status": "draft",
       "description": "Labeling and categorization of events using kind 1985"
+    },
+    {
+      "id": "nip-33",
+      "label": "NIP-33",
+      "title": "Parameterized Replaceable Events",
+      "layer": "infrastructure",
+      "status": "final",
+      "description": "Replaceable events parameterized by d-tag, enabling multiple replaceable slots per kind"
+    },
+    {
+      "id": "nip-34",
+      "label": "NIP-34",
+      "title": "Git Integration",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Publish and discover git repositories and patches via Nostr events"
+    },
+    {
+      "id": "nip-35",
+      "label": "NIP-35",
+      "title": "Torrents",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Share and discover BitTorrent torrents via Nostr events"
     },
     {
       "id": "nip-36",
@@ -161,12 +289,36 @@
       "description": "Content warning tags for sensitive or NSFW content"
     },
     {
+      "id": "nip-37",
+      "label": "NIP-37",
+      "title": "Draft Events",
+      "layer": "messaging",
+      "status": "draft",
+      "description": "Save and share draft events before publishing, with password-based access"
+    },
+    {
+      "id": "nip-38",
+      "label": "NIP-38",
+      "title": "User Statuses",
+      "layer": "social",
+      "status": "draft",
+      "description": "Share general availability and status updates (general, music, travel)"
+    },
+    {
       "id": "nip-39",
       "label": "NIP-39",
       "title": "External Identities",
       "layer": "identity",
       "status": "final",
       "description": "Linking external identity providers (GitHub, Twitter, Telegram, etc.)"
+    },
+    {
+      "id": "nip-40",
+      "label": "NIP-40",
+      "title": "Expiration Timestamp",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Tag events with an expiration time so relays can automatically prune them"
     },
     {
       "id": "nip-42",
@@ -177,12 +329,28 @@
       "description": "Client-to-relay authentication using signed challenges"
     },
     {
+      "id": "nip-43",
+      "label": "NIP-43",
+      "title": "Relay Access Metadata",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Fine-grained relay access control lists and permission requests"
+    },
+    {
       "id": "nip-44",
       "label": "NIP-44",
       "title": "Versioned Encryption",
       "layer": "messaging",
       "status": "final",
       "description": "Modern encryption scheme replacing NIP-04 with versioned payloads"
+    },
+    {
+      "id": "nip-45",
+      "label": "NIP-45",
+      "title": "Event Counts",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Count events matching filters without downloading them all"
     },
     {
       "id": "nip-46",
@@ -201,12 +369,76 @@
       "description": "Lightning wallet integration for payments from any client"
     },
     {
+      "id": "nip-48",
+      "label": "NIP-48",
+      "title": "Proxy Tags",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Link Nostr identities to external platform accounts (ActivityPub, AtProtocol)"
+    },
+    {
+      "id": "nip-49",
+      "label": "NIP-49",
+      "title": "Private Key Encryption",
+      "layer": "identity",
+      "status": "draft",
+      "description": "Encrypt nsec private keys with a password for safer storage and backup"
+    },
+    {
+      "id": "nip-50",
+      "label": "NIP-50",
+      "title": "Search",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Full-text search capability for relays to find events by content"
+    },
+    {
+      "id": "nip-51",
+      "label": "NIP-51",
+      "title": "Lists",
+      "layer": "social",
+      "status": "deprecated",
+      "description": "Curated lists of pubkeys, events, or relays using parameterized replaceable events"
+    },
+    {
+      "id": "nip-52",
+      "label": "NIP-52",
+      "title": "Calendar Events",
+      "layer": "social",
+      "status": "draft",
+      "description": "Calendar events and time-based scheduling using date-based replaceable events"
+    },
+    {
+      "id": "nip-53",
+      "label": "NIP-53",
+      "title": "Live Activities",
+      "layer": "social",
+      "status": "draft",
+      "description": "Live audio/video rooms and streaming events with host and speaker coordination"
+    },
+    {
+      "id": "nip-54",
+      "label": "NIP-54",
+      "title": "Wiki",
+      "layer": "social",
+      "status": "draft",
+      "description": "Collaborative wiki pages with revision history using parameterized replaceable events"
+    },
+    {
       "id": "nip-55",
       "label": "NIP-55",
       "title": "Android Signer",
       "layer": "identity",
       "status": "draft",
       "description": "Android intent-based signing for nostr apps"
+    },
+    {
+      "id": "nip-56",
+      "label": "NIP-56",
+      "title": "Reporting",
+      "layer": "infrastructure",
+      "status": "unknown",
+      "description": "Report events and users for spam, illegal content, or policy violations"
     },
     {
       "id": "nip-57",
@@ -217,12 +449,28 @@
       "description": "Lightning zaps - sending sats as reactions using LNURL and kind 9734/9735"
     },
     {
+      "id": "nip-58",
+      "label": "NIP-58",
+      "title": "Badges",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Define and award profile badges for achievements, community membership, etc."
+    },
+    {
       "id": "nip-59",
       "label": "NIP-59",
       "title": "Gift Wrap",
       "layer": "messaging",
       "status": "final",
       "description": "Gift wrap and seal pattern for private message routing and metadata protection"
+    },
+    {
+      "id": "nip-5a",
+      "label": "NIP-5A",
+      "title": "Static Websites",
+      "layer": "media",
+      "status": "draft",
+      "description": "Host static websites (nsites) using Blossom file storage and Nostr events"
     },
     {
       "id": "nip-60",
@@ -241,6 +489,22 @@
       "description": "Cashu-based zaps using ecash tokens as an alternative to Lightning"
     },
     {
+      "id": "nip-62",
+      "label": "NIP-62",
+      "title": "Request to Vanish",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Request all relays to delete all events from a given pubkey"
+    },
+    {
+      "id": "nip-64",
+      "label": "NIP-64",
+      "title": "Chess (PGN)",
+      "layer": "social",
+      "status": "draft",
+      "description": "Chess games encoded as Portable Game Notation events for play and analysis"
+    },
+    {
       "id": "nip-65",
       "label": "NIP-65",
       "title": "Relay List Metadata",
@@ -257,6 +521,22 @@
       "description": "Relay monitoring and discovery for network resilience"
     },
     {
+      "id": "nip-68",
+      "label": "NIP-68",
+      "title": "Picture-first Feeds",
+      "layer": "social",
+      "status": "draft",
+      "description": "Feed-oriented events for photo and image-centric social experiences"
+    },
+    {
+      "id": "nip-69",
+      "label": "NIP-69",
+      "title": "Peer-to-peer Orders",
+      "layer": "payments",
+      "status": "draft",
+      "description": "Decentralized order book for peer-to-peer trading of Bitcoin and stablecoins"
+    },
+    {
       "id": "nip-70",
       "label": "NIP-70",
       "title": "Protected Events",
@@ -265,12 +545,108 @@
       "description": "Events that can only be published by the author's designated relay"
     },
     {
+      "id": "nip-71",
+      "label": "NIP-71",
+      "title": "Video Events",
+      "layer": "media",
+      "status": "draft",
+      "description": "Video content events for short-form and long-form video publishing"
+    },
+    {
+      "id": "nip-72",
+      "label": "NIP-72",
+      "title": "Moderated Communities",
+      "layer": "social",
+      "status": "draft",
+      "description": "Reddit-style communities with moderators, rules, and membership controls"
+    },
+    {
+      "id": "nip-73",
+      "label": "NIP-73",
+      "title": "External Content IDs",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Reference external content like ISBNs, DOIs, podcasts, and movies by standard IDs"
+    },
+    {
+      "id": "nip-75",
+      "label": "NIP-75",
+      "title": "Zap Goals",
+      "layer": "payments",
+      "status": "draft",
+      "description": "Crowdfunding goals that track progress via zap receipts toward a target amount"
+    },
+    {
       "id": "nip-77",
       "label": "NIP-77",
       "title": "Well-Known Outbox Model",
       "layer": "infrastructure",
       "status": "draft",
       "description": "Enhanced relay routing using outbox model for better event distribution"
+    },
+    {
+      "id": "nip-78",
+      "label": "NIP-78",
+      "title": "Custom App Data",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Store arbitrary application data on relays using parameterized replaceable events"
+    },
+    {
+      "id": "nip-7d",
+      "label": "NIP-7D",
+      "title": "Threads",
+      "layer": "social",
+      "status": "draft",
+      "description": "Thread root events that group replies together for better conversation structure"
+    },
+    {
+      "id": "nip-84",
+      "label": "NIP-84",
+      "title": "Highlights",
+      "layer": "social",
+      "status": "draft",
+      "description": "Highlight and annotate text selections from any event, like a highlighter pen"
+    },
+    {
+      "id": "nip-85",
+      "label": "NIP-85",
+      "title": "Trusted Assertions",
+      "layer": "identity",
+      "status": "draft",
+      "description": "Make and verify trust assertions about other pubkeys and services"
+    },
+    {
+      "id": "nip-86",
+      "label": "NIP-86",
+      "title": "Relay Management API",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "HTTP API for managing relay configuration, users, and events"
+    },
+    {
+      "id": "nip-87",
+      "label": "NIP-87",
+      "title": "Ecash Mint Discovery",
+      "layer": "payments",
+      "status": "draft",
+      "description": "Discover and advertise Cashu mint operators for ecash token ecosystems"
+    },
+    {
+      "id": "nip-88",
+      "label": "NIP-88",
+      "title": "Polls",
+      "layer": "social",
+      "status": "draft",
+      "description": "Create and vote in polls with multiple choice options and response tracking"
+    },
+    {
+      "id": "nip-89",
+      "label": "NIP-89",
+      "title": "App Handlers",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Register and discover apps that handle specific event kinds or nostr: URIs"
     },
     {
       "id": "nip-90",
@@ -303,148 +679,1011 @@
       "layer": "media",
       "status": "final",
       "description": "HTTP-based file upload and storage server protocol"
+    },
+    {
+      "id": "nip-98",
+      "label": "NIP-98",
+      "title": "HTTP Auth",
+      "layer": "infrastructure",
+      "status": "draft",
+      "description": "Authenticate to HTTP services using Nostr event signatures"
+    },
+    {
+      "id": "nip-99",
+      "label": "NIP-99",
+      "title": "Classified Listings",
+      "layer": "payments",
+      "status": "draft",
+      "description": "Buy/sell classified ads for goods, services, housing, and jobs"
     }
   ],
   "edges": [
-    { "source": "nip-02", "target": "nip-01", "type": "depends" },
-    { "source": "nip-04", "target": "nip-01", "type": "depends" },
-    { "source": "nip-05", "target": "nip-01", "type": "depends" },
-    { "source": "nip-06", "target": "nip-01", "type": "depends" },
-    { "source": "nip-07", "target": "nip-01", "type": "depends" },
-    { "source": "nip-07", "target": "nip-19", "type": "depends" },
-    { "source": "nip-08", "target": "nip-01", "type": "depends" },
-    { "source": "nip-08", "target": "nip-02", "type": "depends" },
-    { "source": "nip-09", "target": "nip-01", "type": "depends" },
-    { "source": "nip-10", "target": "nip-01", "type": "depends" },
-    { "source": "nip-11", "target": "nip-01", "type": "depends" },
-    { "source": "nip-17", "target": "nip-01", "type": "depends" },
-    { "source": "nip-17", "target": "nip-44", "type": "depends" },
-    { "source": "nip-17", "target": "nip-59", "type": "depends" },
-    { "source": "nip-18", "target": "nip-01", "type": "depends" },
-    { "source": "nip-18", "target": "nip-19", "type": "depends" },
-    { "source": "nip-19", "target": "nip-01", "type": "depends" },
-    { "source": "nip-23", "target": "nip-01", "type": "depends" },
-    { "source": "nip-25", "target": "nip-01", "type": "depends" },
-    { "source": "nip-28", "target": "nip-01", "type": "depends" },
-    { "source": "nip-29", "target": "nip-28", "type": "depends" },
-    { "source": "nip-30", "target": "nip-01", "type": "depends" },
-    { "source": "nip-32", "target": "nip-01", "type": "depends" },
-    { "source": "nip-36", "target": "nip-01", "type": "depends" },
-    { "source": "nip-39", "target": "nip-01", "type": "depends" },
-    { "source": "nip-42", "target": "nip-01", "type": "depends" },
-    { "source": "nip-44", "target": "nip-01", "type": "depends" },
-    { "source": "nip-46", "target": "nip-01", "type": "depends" },
-    { "source": "nip-47", "target": "nip-01", "type": "depends" },
-    { "source": "nip-55", "target": "nip-01", "type": "depends" },
-    { "source": "nip-57", "target": "nip-01", "type": "depends" },
-    { "source": "nip-57", "target": "nip-47", "type": "depends" },
-    { "source": "nip-59", "target": "nip-01", "type": "depends" },
-    { "source": "nip-59", "target": "nip-44", "type": "depends" },
-    { "source": "nip-60", "target": "nip-01", "type": "depends" },
-    { "source": "nip-61", "target": "nip-60", "type": "depends" },
-    { "source": "nip-65", "target": "nip-01", "type": "depends" },
-    { "source": "nip-66", "target": "nip-01", "type": "depends" },
-    { "source": "nip-66", "target": "nip-11", "type": "depends" },
-    { "source": "nip-70", "target": "nip-01", "type": "depends" },
-    { "source": "nip-77", "target": "nip-01", "type": "depends" },
-    { "source": "nip-90", "target": "nip-01", "type": "depends" },
-    { "source": "nip-92", "target": "nip-01", "type": "depends" },
-    { "source": "nip-94", "target": "nip-01", "type": "depends" },
-    { "source": "nip-96", "target": "nip-01", "type": "depends" }
+    {
+      "source": "nip-02",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-03",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-04",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-05",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-06",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-07",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-07",
+      "target": "nip-19",
+      "type": "depends"
+    },
+    {
+      "source": "nip-08",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-08",
+      "target": "nip-02",
+      "type": "depends"
+    },
+    {
+      "source": "nip-09",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-10",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-11",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-12",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-13",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-14",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-15",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-16",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-17",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-17",
+      "target": "nip-44",
+      "type": "depends"
+    },
+    {
+      "source": "nip-17",
+      "target": "nip-59",
+      "type": "depends"
+    },
+    {
+      "source": "nip-18",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-18",
+      "target": "nip-19",
+      "type": "depends"
+    },
+    {
+      "source": "nip-19",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-20",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-21",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-21",
+      "target": "nip-19",
+      "type": "depends"
+    },
+    {
+      "source": "nip-22",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-22",
+      "target": "nip-10",
+      "type": "depends"
+    },
+    {
+      "source": "nip-23",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-24",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-25",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-26",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-27",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-27",
+      "target": "nip-08",
+      "type": "depends"
+    },
+    {
+      "source": "nip-28",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-29",
+      "target": "nip-28",
+      "type": "depends"
+    },
+    {
+      "source": "nip-30",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-31",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-32",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-33",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-34",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-35",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-36",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-37",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-38",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-39",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-40",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-42",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-43",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-43",
+      "target": "nip-42",
+      "type": "depends"
+    },
+    {
+      "source": "nip-44",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-45",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-46",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-47",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-48",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-49",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-50",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-51",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-52",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-53",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-54",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-55",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-56",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-57",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-57",
+      "target": "nip-47",
+      "type": "depends"
+    },
+    {
+      "source": "nip-58",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-59",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-59",
+      "target": "nip-44",
+      "type": "depends"
+    },
+    {
+      "source": "nip-5a",
+      "target": "nip-96",
+      "type": "depends"
+    },
+    {
+      "source": "nip-60",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-61",
+      "target": "nip-60",
+      "type": "depends"
+    },
+    {
+      "source": "nip-62",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-64",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-65",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-66",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-66",
+      "target": "nip-11",
+      "type": "depends"
+    },
+    {
+      "source": "nip-68",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-68",
+      "target": "nip-92",
+      "type": "depends"
+    },
+    {
+      "source": "nip-69",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-70",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-71",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-71",
+      "target": "nip-92",
+      "type": "depends"
+    },
+    {
+      "source": "nip-72",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-72",
+      "target": "nip-28",
+      "type": "depends"
+    },
+    {
+      "source": "nip-73",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-75",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-75",
+      "target": "nip-57",
+      "type": "depends"
+    },
+    {
+      "source": "nip-77",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-78",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-7d",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-7d",
+      "target": "nip-10",
+      "type": "depends"
+    },
+    {
+      "source": "nip-84",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-85",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-86",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-87",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-87",
+      "target": "nip-60",
+      "type": "depends"
+    },
+    {
+      "source": "nip-88",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-89",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-90",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-92",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-94",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-96",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-98",
+      "target": "nip-01",
+      "type": "depends"
+    },
+    {
+      "source": "nip-99",
+      "target": "nip-01",
+      "type": "depends"
+    }
   ],
   "eventKinds": [
-    { "kind": 0, "name": "User Metadata", "nip": "nip-01" },
-    { "kind": 1, "name": "Short Text Note", "nip": "nip-01" },
-    { "kind": 2, "name": "Recommend Relay", "nip": "nip-01" },
-    { "kind": 3, "name": "Follows", "nip": "nip-02" },
-    { "kind": 4, "name": "Encrypted Direct Messages", "nip": "nip-04" },
-    { "kind": 5, "name": "Event Deletion Request", "nip": "nip-09" },
-    { "kind": 6, "name": "Repost", "nip": "nip-18" },
-    { "kind": 7, "name": "Reaction", "nip": "nip-25" },
-    { "kind": 8, "name": "Badge Award", "nip": "nip-58" },
-    { "kind": 10, "name": "Group Chat Threaded Reply", "nip": "nip-29" },
-    { "kind": 12, "name": "Group Thread Reply", "nip": "nip-29" },
-    { "kind": 13, "name": "Seal", "nip": "nip-59" },
-    { "kind": 14, "name": "Direct Message", "nip": "nip-17" },
-    { "kind": 15, "name": "File Message", "nip": "nip-17" },
-    { "kind": 16, "name": "Generic Repost", "nip": "nip-18" },
-    { "kind": 17, "name": "Reaction to a website", "nip": "nip-25" },
-    { "kind": 40, "name": "Channel Creation", "nip": "nip-28" },
-    { "kind": 41, "name": "Channel Metadata", "nip": "nip-28" },
-    { "kind": 42, "name": "Channel Message", "nip": "nip-28" },
-    { "kind": 43, "name": "Channel Hide Message", "nip": "nip-28" },
-    { "kind": 44, "name": "Channel Mute User", "nip": "nip-28" },
-    { "kind": 1984, "name": "Reporting", "nip": "nip-56" },
-    { "kind": 1985, "name": "Label", "nip": "nip-32" },
-    { "kind": 1059, "name": "Gift Wrap", "nip": "nip-59" },
-    { "kind": 1063, "name": "File Metadata", "nip": "nip-94" },
-    { "kind": 4550, "name": "Community Post Approval", "nip": "nip-72" },
-    { "kind": 5000, "name": "Job Request (DVM)", "nip": "nip-90" },
-    { "kind": 5001, "name": "Job Request (DVM)", "nip": "nip-90" },
-    { "kind": 5050, "name": "Job Request (DVM)", "nip": "nip-90" },
-    { "kind": 5100, "name": "Job Request (DVM)", "nip": "nip-90" },
-    { "kind": 5999, "name": "Job Request (DVM)", "nip": "nip-90" },
-    { "kind": 6000, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6001, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6002, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6003, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6004, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6005, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6006, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6007, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6008, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6009, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 6906, "name": "Job Result (DVM)", "nip": "nip-90" },
-    { "kind": 7000, "name": "Job Feedback (DVM)", "nip": "nip-90" },
-    { "kind": 7334, "name": "Reserved Cashu Wallet Tokens", "nip": "nip-60" },
-    { "kind": 7341, "name": "Cashu Wallet Tokens", "nip": "nip-60" },
-    { "kind": 7342, "name": "Cashu Wallet Tokens", "nip": "nip-60" },
-    { "kind": 7374, "name": "Reserved Cashu Wallet Tokens", "nip": "nip-60" },
-    { "kind": 7375, "name": "Cashu Wallet Tokens", "nip": "nip-60" },
-    { "kind": 7376, "name": "Cashu Wallet History", "nip": "nip-60" },
-    { "kind": 9000, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9001, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9002, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9003, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9004, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9005, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9006, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9007, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9021, "name": "Group Control Event", "nip": "nip-29" },
-    { "kind": 9321, "name": "Nutzap", "nip": "nip-61" },
-    { "kind": 9734, "name": "Zap Request", "nip": "nip-57" },
-    { "kind": 9735, "name": "Zap", "nip": "nip-57" },
-    { "kind": 9802, "name": "Highlights", "nip": "nip-84" },
-    { "kind": 10000, "name": "Mute List", "nip": "nip-51" },
-    { "kind": 10001, "name": "Pin List", "nip": "nip-51" },
-    { "kind": 10002, "name": "Relay List Metadata", "nip": "nip-65" },
-    { "kind": 10003, "name": "Bookmark List", "nip": "nip-51" },
-    { "kind": 10004, "name": "Communities List", "nip": "nip-51" },
-    { "kind": 10005, "name": "Public Chats List", "nip": "nip-51" },
-    { "kind": 10006, "name": "Blocked Relays List", "nip": "nip-51" },
-    { "kind": 10007, "name": "Search Relays List", "nip": "nip-51" },
-    { "kind": 10009, "name": "User Groups", "nip": "nip-29" },
-    { "kind": 10013, "name": "Private Event Relay List", "nip": "nip-37" },
-    { "kind": 10015, "name": "Interests List", "nip": "nip-51" },
-    { "kind": 10019, "name": "Nutzap Mint Recommendation", "nip": "nip-61" },
-    { "kind": 10030, "name": "User Emoji List", "nip": "nip-30" },
-    { "kind": 10031, "name": "Emoji Sets", "nip": "nip-30" },
-    { "kind": 10032, "name": "Emoji Sets", "nip": "nip-30" },
-    { "kind": 10050, "name": "Relay List to Receive DMs", "nip": "nip-17" },
-    { "kind": 10063, "name": "User Server List", "nip": "nip-96" },
-    { "kind": 10096, "name": "File Storage Server List", "nip": "nip-96" },
-    { "kind": 10166, "name": "Relay Monitor Announcement", "nip": "nip-66" },
-    { "kind": 1111, "name": "Comment", "nip": "nip-22" },
-    { "kind": 1112, "name": "Comment Reply", "nip": "nip-22" },
-    { "kind": 13194, "name": "Wallet Info", "nip": "nip-47" },
-    { "kind": 17375, "name": "Cashu Wallet Event", "nip": "nip-60" },
-    { "kind": 22242, "name": "Client Authentication", "nip": "nip-42" },
-    { "kind": 23194, "name": "Wallet Request", "nip": "nip-47" },
-    { "kind": 23195, "name": "Wallet Response", "nip": "nip-47" },
-    { "kind": 24133, "name": "Nostr Connect", "nip": "nip-46" },
-    { "kind": 30023, "name": "Long-form Content", "nip": "nip-23" },
-    { "kind": 30024, "name": "Draft Long-form Content", "nip": "nip-23" },
-    { "kind": 30030, "name": "Emoji Sets", "nip": "nip-30" },
-    { "kind": 10222, "name": "Coinjoin Pool", "nip": "nip-60" }
+    {
+      "kind": 0,
+      "name": "User Metadata",
+      "nip": "nip-01"
+    },
+    {
+      "kind": 1,
+      "name": "Short Text Note",
+      "nip": "nip-01"
+    },
+    {
+      "kind": 2,
+      "name": "Recommend Relay",
+      "nip": "nip-01"
+    },
+    {
+      "kind": 3,
+      "name": "Follows",
+      "nip": "nip-02"
+    },
+    {
+      "kind": 4,
+      "name": "Encrypted Direct Messages",
+      "nip": "nip-04"
+    },
+    {
+      "kind": 5,
+      "name": "Event Deletion Request",
+      "nip": "nip-09"
+    },
+    {
+      "kind": 6,
+      "name": "Repost",
+      "nip": "nip-18"
+    },
+    {
+      "kind": 7,
+      "name": "Reaction",
+      "nip": "nip-25"
+    },
+    {
+      "kind": 8,
+      "name": "Badge Award",
+      "nip": "nip-58"
+    },
+    {
+      "kind": 10,
+      "name": "Group Chat Threaded Reply",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 12,
+      "name": "Group Thread Reply",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 13,
+      "name": "Seal",
+      "nip": "nip-59"
+    },
+    {
+      "kind": 14,
+      "name": "Direct Message",
+      "nip": "nip-17"
+    },
+    {
+      "kind": 15,
+      "name": "File Message",
+      "nip": "nip-17"
+    },
+    {
+      "kind": 16,
+      "name": "Generic Repost",
+      "nip": "nip-18"
+    },
+    {
+      "kind": 17,
+      "name": "Reaction to a website",
+      "nip": "nip-25"
+    },
+    {
+      "kind": 40,
+      "name": "Channel Creation",
+      "nip": "nip-28"
+    },
+    {
+      "kind": 41,
+      "name": "Channel Metadata",
+      "nip": "nip-28"
+    },
+    {
+      "kind": 42,
+      "name": "Channel Message",
+      "nip": "nip-28"
+    },
+    {
+      "kind": 43,
+      "name": "Channel Hide Message",
+      "nip": "nip-28"
+    },
+    {
+      "kind": 44,
+      "name": "Channel Mute User",
+      "nip": "nip-28"
+    },
+    {
+      "kind": 1984,
+      "name": "Reporting",
+      "nip": "nip-56"
+    },
+    {
+      "kind": 1985,
+      "name": "Label",
+      "nip": "nip-32"
+    },
+    {
+      "kind": 1059,
+      "name": "Gift Wrap",
+      "nip": "nip-59"
+    },
+    {
+      "kind": 1063,
+      "name": "File Metadata",
+      "nip": "nip-94"
+    },
+    {
+      "kind": 4550,
+      "name": "Community Post Approval",
+      "nip": "nip-72"
+    },
+    {
+      "kind": 5000,
+      "name": "Job Request (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 5001,
+      "name": "Job Request (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 5050,
+      "name": "Job Request (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 5100,
+      "name": "Job Request (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 5999,
+      "name": "Job Request (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6000,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6001,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6002,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6003,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6004,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6005,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6006,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6007,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6008,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6009,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 6906,
+      "name": "Job Result (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 7000,
+      "name": "Job Feedback (DVM)",
+      "nip": "nip-90"
+    },
+    {
+      "kind": 7334,
+      "name": "Reserved Cashu Wallet Tokens",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 7341,
+      "name": "Cashu Wallet Tokens",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 7342,
+      "name": "Cashu Wallet Tokens",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 7374,
+      "name": "Reserved Cashu Wallet Tokens",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 7375,
+      "name": "Cashu Wallet Tokens",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 7376,
+      "name": "Cashu Wallet History",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 9000,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9001,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9002,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9003,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9004,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9005,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9006,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9007,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9021,
+      "name": "Group Control Event",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 9321,
+      "name": "Nutzap",
+      "nip": "nip-61"
+    },
+    {
+      "kind": 9734,
+      "name": "Zap Request",
+      "nip": "nip-57"
+    },
+    {
+      "kind": 9735,
+      "name": "Zap",
+      "nip": "nip-57"
+    },
+    {
+      "kind": 9802,
+      "name": "Highlights",
+      "nip": "nip-84"
+    },
+    {
+      "kind": 10000,
+      "name": "Mute List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10001,
+      "name": "Pin List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10002,
+      "name": "Relay List Metadata",
+      "nip": "nip-65"
+    },
+    {
+      "kind": 10003,
+      "name": "Bookmark List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10004,
+      "name": "Communities List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10005,
+      "name": "Public Chats List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10006,
+      "name": "Blocked Relays List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10007,
+      "name": "Search Relays List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10009,
+      "name": "User Groups",
+      "nip": "nip-29"
+    },
+    {
+      "kind": 10013,
+      "name": "Private Event Relay List",
+      "nip": "nip-37"
+    },
+    {
+      "kind": 10015,
+      "name": "Interests List",
+      "nip": "nip-51"
+    },
+    {
+      "kind": 10019,
+      "name": "Nutzap Mint Recommendation",
+      "nip": "nip-61"
+    },
+    {
+      "kind": 10030,
+      "name": "User Emoji List",
+      "nip": "nip-30"
+    },
+    {
+      "kind": 10031,
+      "name": "Emoji Sets",
+      "nip": "nip-30"
+    },
+    {
+      "kind": 10032,
+      "name": "Emoji Sets",
+      "nip": "nip-30"
+    },
+    {
+      "kind": 10050,
+      "name": "Relay List to Receive DMs",
+      "nip": "nip-17"
+    },
+    {
+      "kind": 10063,
+      "name": "User Server List",
+      "nip": "nip-96"
+    },
+    {
+      "kind": 10096,
+      "name": "File Storage Server List",
+      "nip": "nip-96"
+    },
+    {
+      "kind": 10166,
+      "name": "Relay Monitor Announcement",
+      "nip": "nip-66"
+    },
+    {
+      "kind": 1111,
+      "name": "Comment",
+      "nip": "nip-22"
+    },
+    {
+      "kind": 1112,
+      "name": "Comment Reply",
+      "nip": "nip-22"
+    },
+    {
+      "kind": 13194,
+      "name": "Wallet Info",
+      "nip": "nip-47"
+    },
+    {
+      "kind": 17375,
+      "name": "Cashu Wallet Event",
+      "nip": "nip-60"
+    },
+    {
+      "kind": 22242,
+      "name": "Client Authentication",
+      "nip": "nip-42"
+    },
+    {
+      "kind": 23194,
+      "name": "Wallet Request",
+      "nip": "nip-47"
+    },
+    {
+      "kind": 23195,
+      "name": "Wallet Response",
+      "nip": "nip-47"
+    },
+    {
+      "kind": 24133,
+      "name": "Nostr Connect",
+      "nip": "nip-46"
+    },
+    {
+      "kind": 30023,
+      "name": "Long-form Content",
+      "nip": "nip-23"
+    },
+    {
+      "kind": 30024,
+      "name": "Draft Long-form Content",
+      "nip": "nip-23"
+    },
+    {
+      "kind": 30030,
+      "name": "Emoji Sets",
+      "nip": "nip-30"
+    },
+    {
+      "kind": 10222,
+      "name": "Coinjoin Pool",
+      "nip": "nip-60"
+    }
   ]
 }
